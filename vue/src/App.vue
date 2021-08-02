@@ -7,3 +7,10 @@
     <router-view />
   </div>
 </template>
+
+<style>
+body{
+  text-align: center;
+  background-color:lightgreen;
+}
+</style>

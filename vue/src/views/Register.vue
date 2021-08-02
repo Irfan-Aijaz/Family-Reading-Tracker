@@ -90,4 +90,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+div{
+  background-color: lightgreen;
+  text-align: center;
+}
+</style>
