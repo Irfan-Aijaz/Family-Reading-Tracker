@@ -99,13 +99,37 @@ public class JdbcUserDao implements UserDao {
         return userCreated;
     }
 
+    @Override
+    public boolean create(String username, String password, String role, Long familyId) {
+        boolean userCreated = false;
+        // create user
+        String insertUser = "insert into users (username,password_hash,role,family_id) values(?,?,?,?)";
+        String password_hash = new BCryptPasswordEncoder().encode(password);
+        String ssRole = "ROLE_" + role.toUpperCase();
+
+        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+        String id_column = "user_id";
+        userCreated = jdbcTemplate.update(con -> {
+                    PreparedStatement ps = con.prepareStatement(insertUser, new String[]{id_column});
+                    ps.setString(1, username);
+                    ps.setString(2, password_hash);
+                    ps.setString(3, ssRole);
+                    ps.setLong(4, familyId);
+                    return ps;
+                }
+                , keyHolder) == 1;
+        int newUserId = (int) keyHolder.getKeys().get(id_column);
+
+        return userCreated;
+    }
+
     private User mapRowToUser(SqlRowSet rs) {
         User user = new User();
         user.setId(rs.getLong("user_id"));
         user.setUsername(rs.getString("username"));
         user.setPassword(rs.getString("password_hash"));
         user.setAuthorities(rs.getString("role"));
-        user.setFamilyId(rs.getInt("family_id"));
+        user.setFamilyId(rs.getLong("family_id"));
         user.setActivated(true);
         return user;
     }

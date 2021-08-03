@@ -16,7 +16,7 @@
         autofocus
       />
       <br>
-      <div v-if='this.$store.state.user.length == 0'>
+      <div v-if='this.$store.state.token == ""'>
       <label for="family" class="sr-only">Family Name: </label>
       <input
         type="family"
@@ -47,10 +47,12 @@
         required
       />
       <br>
-      <!-- <input type="radio" id="Parent" value="admin" name="role" v-model="user.role">
+      <div v-if='this.$store.state.token != ""'>
+        <input type="radio" id="Parent" value="admin" name="role" v-model="user.role">
         <label for="one">Parent</label>
         <input type="radio" id="Child" value="user" name="role" v-model="user.role">
-      <label for="two">Child</label> -->
+        <label for="two">Child</label>
+      </div>
       <br>
       <router-link :to="{ name: 'login' }">Have an account?</router-link>
       <button class="btn btn-lg btn-primary btn-block" type="submit">
@@ -74,8 +76,8 @@ export default {
         password: "",
         confirmPassword: "",
         familyName: "",
-        familyID: "",
-        role: "admin"
+        familyId: "",
+        role: ""
       },
       registrationErrors: false,
       registrationErrorMsg: "There were problems registering this user.",
@@ -86,13 +88,14 @@ export default {
       if (this.user.password != this.user.confirmPassword) {
         this.registrationErrors = true;
         this.registrationErrorMsg = "Password & Confirm Password do not match.";
-      } else if (this.$store.state.user.length == 0) {
+      } else if (this.$store.state.token != '') {
+        this.user.familyId = this.$store.state.user.familyId;
         authService
           .adminRegister(this.user)
           .then((response) => {
             if (response.status == 201) {
               this.$router.push({
-                path: "/register_as_admin",
+                path: "/",
                 query: { registration: "success" },
               });
             }
@@ -106,6 +109,7 @@ export default {
           });
       } 
       else {
+        this.user.role = "admin";
         authService
           .register(this.user)
           .then((response) => {

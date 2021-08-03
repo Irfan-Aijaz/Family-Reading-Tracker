@@ -8,15 +8,13 @@ public class AdminRegisterUserDTO {
     @NotEmpty
     private String username;
     @NotEmpty
-    private String familyName;
-    @NotEmpty
     private String password;
     @NotEmpty
     private String confirmPassword;
     @NotEmpty(message = "Please select a role for this user.")
     private String role;
-    @NotEmpty
-    private long familyId;
+
+    private Long familyId;
 
 
     public String getUsername() {
@@ -27,15 +25,7 @@ public class AdminRegisterUserDTO {
         this.username = username;
     }
 
-    public String getFamilyName() {
-        return familyName;
-    }
-
-    public void setFamilyName(String familyName) {
-        this.familyName = familyName;
-    }
-
-    public long getFamilyID() {return familyId; }
+    public Long getFamilyID() {return familyId; }
 
     public void setFamilyId(long familyId) { this.familyId = familyId; }
 
