@@ -1,9 +1,10 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <div v-if="this.$store.state.user.username == 'temp'" id="register-family" class="text-center">
+    <div v-if="this.$store.state.user.authorities[0].name == 'ROLE_ADMIN'" id="register-family" class="text-center">
       <h3 class="h3 mb-3 font-weight-normal">{{ this.$store.state.user.username }}</h3>
       <label for="family-name" class="sr-only">Family name: </label>
+      <register />
       <!-- <input
         type="text"
         id="username"
@@ -21,6 +22,8 @@
 </template>
 
 <script>
+import Register from '../views/Register.vue'
+
 export default {
   name: "home",
   data() {
@@ -30,6 +33,9 @@ export default {
         id: ""
       }
     };
+  },
+  components: {
+    Register
   }
 };
 </script>

@@ -16,6 +16,7 @@
         autofocus
       />
       <br>
+      <div v-if='this.$store.state.user.length == 0'>
       <label for="family" class="sr-only">Family Name: </label>
       <input
         type="family"
@@ -25,6 +26,7 @@
         v-model="user.familyName"
         required
       />
+      </div>
       <br>
       <label for="password" class="sr-only">Password: </label>
       <input
@@ -72,6 +74,7 @@ export default {
         password: "",
         confirmPassword: "",
         familyName: "",
+        familyID: "",
         role: "admin"
       },
       registrationErrors: false,

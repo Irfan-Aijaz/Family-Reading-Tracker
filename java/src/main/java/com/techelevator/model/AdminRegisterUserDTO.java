@@ -1,0 +1,65 @@
+package com.techelevator.model;
+
+
+import javax.validation.constraints.NotEmpty;
+
+public class AdminRegisterUserDTO {
+
+    @NotEmpty
+    private String username;
+    @NotEmpty
+    private String familyName;
+    @NotEmpty
+    private String password;
+    @NotEmpty
+    private String confirmPassword;
+    @NotEmpty(message = "Please select a role for this user.")
+    private String role;
+    @NotEmpty
+    private long familyId;
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getFamilyName() {
+        return familyName;
+    }
+
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
+    }
+
+    public long getFamilyID() {return familyId; }
+
+    public void setFamilyId(long familyId) { this.familyId = familyId; }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+}
