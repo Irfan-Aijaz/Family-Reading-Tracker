@@ -10,6 +10,7 @@ public class User {
 
    private Long id;
    private String username;
+   private int familyId;
    @JsonIgnore
    private String password;
    @JsonIgnore
@@ -39,6 +40,14 @@ public class User {
 
    public void setUsername(String username) {
       this.username = username;
+   }
+
+   public int getFamilyId() {
+      return familyId;
+   }
+
+   public void setFamilyId(int familyId) {
+      this.familyId = familyId;
    }
 
    public String getPassword() {

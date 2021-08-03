@@ -1,21 +1,34 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users, books, user_book, sessions;
-DROP SEQUENCE IF EXISTS seq_user_id;
+DROP TABLE IF EXISTS users, books, user_book, sessions, family;
+DROP SEQUENCE IF EXISTS seq_user_id, seq_family_id;
 
 CREATE SEQUENCE seq_user_id
   INCREMENT BY 1
   NO MAXVALUE
   NO MINVALUE
   CACHE 1;
+  
+CREATE SEQUENCE seq_family_id
+  INCREMENT BY 1
+  NO MAXVALUE
+  NO MINVALUE
+  CACHE 1;
 
+CREATE TABLE family (
+        family_id int DEFAULT nextval('seq_family_id'::regclass) NOT NULL,
+        family_name varchar(15) NOT NULL,
+        CONSTRAINT PK_family_id PRIMARY KEY (family_id)
+);
 
 CREATE TABLE users (
 	user_id int DEFAULT nextval('seq_user_id'::regclass) NOT NULL,
 	username varchar(50) NOT NULL,
 	password_hash varchar(200) NOT NULL,
 	role varchar(50) NOT NULL,
-	CONSTRAINT PK_user PRIMARY KEY (user_id)
+	family_id int,
+	CONSTRAINT PK_user PRIMARY KEY (user_id),
+	CONSTRAINT FK_family_id FOREIGN KEY (family_id) REFERENCES family (family_id)
 );
 
 CREATE TABLE books (
@@ -48,6 +61,7 @@ CREATE TABLE sessions (
         CONSTRAINT FK_session_user FOREIGN KEY (user_id) REFERENCES users (user_id),
         CONSTRAINT FK_session_isbn FOREIGN KEY (isbn) REFERENCES books (isbn)
 );
+
 
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');

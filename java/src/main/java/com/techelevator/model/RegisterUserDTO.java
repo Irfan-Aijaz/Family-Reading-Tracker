@@ -7,11 +7,14 @@ public class RegisterUserDTO {
     @NotEmpty
     private String username;
     @NotEmpty
+    private String familyName;
+    @NotEmpty
     private String password;
     @NotEmpty
     private String confirmPassword;
     @NotEmpty(message = "Please select a role for this user.")
     private String role;
+
 
     public String getUsername() {
         return username;
@@ -19,6 +22,14 @@ public class RegisterUserDTO {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getFamilyName() {
+        return familyName;
+    }
+
+    public void setFamilyName(String familyName) {
+        this.familyName = familyName;
     }
 
     public String getPassword() {

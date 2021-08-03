@@ -16,6 +16,16 @@
         autofocus
       />
       <br>
+      <label for="family" class="sr-only">Family Name: </label>
+      <input
+        type="family"
+        id="family"
+        class="form-control"
+        placeholder="family-name"
+        v-model="user.familyName"
+        required
+      />
+      <br>
       <label for="password" class="sr-only">Password: </label>
       <input
         type="password"
@@ -35,10 +45,10 @@
         required
       />
       <br>
-      <input type="radio" id="Parent" value="admin" name="role" v-model="user.role">
+      <!-- <input type="radio" id="Parent" value="admin" name="role" v-model="user.role">
         <label for="one">Parent</label>
         <input type="radio" id="Child" value="user" name="role" v-model="user.role">
-      <label for="two">Child</label>
+      <label for="two">Child</label> -->
       <br>
       <router-link :to="{ name: 'login' }">Have an account?</router-link>
       <button class="btn btn-lg btn-primary btn-block" type="submit">
@@ -61,8 +71,8 @@ export default {
         username: "",
         password: "",
         confirmPassword: "",
-        role: "user",
-        familyStatus: ""
+        familyName: "",
+        role: "admin"
       },
       registrationErrors: false,
       registrationErrorMsg: "There were problems registering this user.",

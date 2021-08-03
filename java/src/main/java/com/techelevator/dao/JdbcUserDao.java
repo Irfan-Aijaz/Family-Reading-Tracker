@@ -63,11 +63,23 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public boolean create(String username, String password, String role) {
-        boolean userCreated = false;
+    public Integer createFamily(String familyName) {
+        String insertFamily = "INSERT into family (family_name) values (?);";
+        jdbcTemplate.update(insertFamily, familyName);
+        String familyIdSelect = "SELECT family_id FROM family WHERE family_name = ?;";
+        SqlRowSet results1 = jdbcTemplate.queryForRowSet(familyIdSelect, familyName);
+        if (results1.next()) {
+            return results1.getInt("family_id");
+        }
+        return 0;
+    }
 
+    @Override
+    public boolean create(String username, String password, String role, String familyName) {
+        boolean userCreated = false;
+        int createdFamily = createFamily(familyName);
         // create user
-        String insertUser = "insert into users (username,password_hash,role) values(?,?,?)";
+        String insertUser = "insert into users (username,password_hash,role,family_id) values(?,?,?,?)";
         String password_hash = new BCryptPasswordEncoder().encode(password);
         String ssRole = "ROLE_" + role.toUpperCase();
 
@@ -78,6 +90,7 @@ public class JdbcUserDao implements UserDao {
                     ps.setString(1, username);
                     ps.setString(2, password_hash);
                     ps.setString(3, ssRole);
+                    ps.setInt(4, createdFamily);
                     return ps;
                 }
                 , keyHolder) == 1;
@@ -92,6 +105,7 @@ public class JdbcUserDao implements UserDao {
         user.setUsername(rs.getString("username"));
         user.setPassword(rs.getString("password_hash"));
         user.setAuthorities(rs.getString("role"));
+        user.setFamilyId(rs.getInt("family_id"));
         user.setActivated(true);
         return user;
     }
