@@ -1,8 +1,8 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <div id="register-family" class="text-center">
-      <h3 class="h3 mb-3 font-weight-normal">Register Family</h3>
+    <div v-if="this.$store.state.user.username == 'temp'" id="register-family" class="text-center">
+      <h3 class="h3 mb-3 font-weight-normal">{{ this.$store.state.user.username }}</h3>
       <label for="family-name" class="sr-only">Family name: </label>
       <!-- <input
         type="text"

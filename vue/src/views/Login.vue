@@ -47,7 +47,9 @@ export default {
     return {
       user: {
         username: "",
-        password: ""
+        password: "",
+        familyName: "",
+        role: ""
       },
       invalidCredentials: false
     };
