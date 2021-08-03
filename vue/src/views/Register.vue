@@ -86,7 +86,26 @@ export default {
       if (this.user.password != this.user.confirmPassword) {
         this.registrationErrors = true;
         this.registrationErrorMsg = "Password & Confirm Password do not match.";
-      } else {
+      } else if (this.$store.state.user.length == 0) {
+        authService
+          .adminRegister(this.user)
+          .then((response) => {
+            if (response.status == 201) {
+              this.$router.push({
+                path: "/register_as_admin",
+                query: { registration: "success" },
+              });
+            }
+          })
+          .catch((error) => {
+            const response = error.response;
+            this.registrationErrors = true;
+            if (response.status === 400) {
+              this.registrationErrorMsg = "Bad Request: Validation Errors";
+            }
+          });
+      } 
+      else {
         authService
           .register(this.user)
           .then((response) => {
