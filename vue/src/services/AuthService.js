@@ -12,6 +12,10 @@ export default {
 
   adminRegister(user) {
     return axios.post('/register_as_admin', user)
+  },
+
+  setFamily(user) {
+    return axios.get('/retrieve_family', user)
   }
 
 }

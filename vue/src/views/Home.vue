@@ -14,7 +14,11 @@
         </li>
         <!-- <register/> -->
         <!-- Add list of family member usernames here -->
-
+        <li>
+          <label for="family-members" class="sr-only"
+            >Family members: {{ this.$store.state.user.userName }}
+          </label>
+        </li>
         <li>
           <button v-on:click="$router.push({ name: 'register' })">
             Add Family Member
@@ -43,3 +47,8 @@ export default {
   // },
 };
 </script>
+<style scoped>
+.familyName {
+  text-decoration-color: blanchedalmond;
+}
+</style>
