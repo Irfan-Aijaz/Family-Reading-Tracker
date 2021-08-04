@@ -15,8 +15,8 @@
         <!-- <register/> -->
         <!-- Add list of family member usernames here -->
         <li>
-          <label for="family-members" class="sr-only"
-            >Family members: {{ this.$store.state.user.userName }}
+          <label for="family-members" class="sr-only" v-for="name in updatedFamilyMembers" v-bind:key="name"
+            >Family members: {{ name }}
           </label>
         </li>
         <li>
@@ -30,18 +30,35 @@
 </template>
 
 <script>
+import authService from '../services/AuthService';
 // import Register from "../views/Register.vue";
 
 export default {
   name: "home",
   data() {
     return {
-      family: {
-        familyid: "",
-        familyName: "",
-      },
+      familyMembers: []
     };
   },
+  computed: {
+    updatedFamilyMembers() {
+      return this.family;
+    }
+  },
+  methods: {
+    family() {
+      authService
+        .getFamily(this.$store.state.user.familyId)
+        .catch((error) => {
+          const response = error.response;
+
+          if (response.status === 401) {
+            // this.invalidCredentials = true;
+          }
+        });
+    }
+
+  }
   // components: {
   //   Register,
   // },

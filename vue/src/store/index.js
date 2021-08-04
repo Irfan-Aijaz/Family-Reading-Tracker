@@ -11,7 +11,7 @@ Vue.use(Vuex)
  */
 const currentToken = localStorage.getItem('token')
 const currentUser = JSON.parse(localStorage.getItem('user'));
-const currentFamily = JSON.parse(localStorage.getItem('family'));
+// const currentFamily = JSON.parse(localStorage.getItem('family'));
 
 if (currentToken != null) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${currentToken}`;
@@ -21,7 +21,7 @@ export default new Vuex.Store({
   state: {
     token: currentToken || '',
     user: currentUser || {},
-    family: currentFamily || {},
+    // family: currentFamily || {},
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -33,10 +33,10 @@ export default new Vuex.Store({
       state.user = user;
       localStorage.setItem('user', JSON.stringify(user));
     },
-    SET_FAMILY(state, family) {
-      state.family = family;
-      localStorage.setItem('family', JSON.stringify(family));
-    },
+    // GET_FAMILY(state, family) {
+    //   state.family = family;
+    //   localStorage.setItem('family', JSON.stringify(family));
+    // },
     LOGOUT(state) {
       localStorage.removeItem('token');
       localStorage.removeItem('user');

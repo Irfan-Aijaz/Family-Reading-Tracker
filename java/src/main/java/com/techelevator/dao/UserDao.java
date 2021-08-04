@@ -21,4 +21,6 @@ public interface UserDao {
     Integer createFamily(String familyName);
 
     String getFamilyNameById(Long familyId);
+
+    List<String> getUsernamesByFamilyId(Long familyId);
 }

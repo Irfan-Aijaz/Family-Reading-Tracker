@@ -79,12 +79,7 @@ export default {
             this.$router.push("/");
           }
         })
-        .setFamily(this.user)
-        .then((response) => {
-          if (response.status == 200) {
-            this.$store.commit("SET_FAMILY", response.data.user);
-          }
-        })
+        
         .catch((error) => {
           const response = error.response;
 

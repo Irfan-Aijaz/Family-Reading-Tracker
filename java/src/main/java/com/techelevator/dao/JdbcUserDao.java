@@ -50,6 +50,21 @@ public class JdbcUserDao implements UserDao {
             throw new RuntimeException("userId "+familyId+" was not found.");
         }
     }
+
+    @Override
+    public List<String> getUsernamesByFamilyId(Long familyId) {
+        List<String> listOfUsernames = new ArrayList<>();
+        String sql = "SELECT username " +
+                "FROM users " +
+                "WHERE family_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, familyId);
+        while(results.next()) {
+            listOfUsernames.add(results.getString("username"));
+        }
+
+        return listOfUsernames;
+    }
+
     @Override
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
@@ -85,6 +100,8 @@ public class JdbcUserDao implements UserDao {
         }
         return 0;
     }
+
+
 
     @Override
     public boolean create(String username, String password, String role, String familyName) {

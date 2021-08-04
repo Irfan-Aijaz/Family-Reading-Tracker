@@ -14,8 +14,8 @@ export default {
     return axios.post('/register_as_admin', user)
   },
 
-  setFamily(user) {
-    return axios.get('/retrieve_family', user)
+  getFamily(familyId) {
+    return axios.get('/retrieve_family', familyId)
   }
 
 }
