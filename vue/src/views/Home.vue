@@ -6,13 +6,21 @@
       id="register-family"
       class="text-center"
     >
-      <label for="family-name" class="sr-only"
-        >Family name: {{ this.$store.state.user.familyName }}
-      </label>
-     <!-- <register/> -->
-      <button v-on:click="$router.push({ name: 'register' })">
-        Add Family Member
-      </button>
+      <ul>
+        <li>
+          <label for="family-name" class="sr-only"
+            >Family name: {{ this.$store.state.user.familyName }}
+          </label>
+        </li>
+        <!-- <register/> -->
+        <!-- Add list of family member usernames here -->
+
+        <li>
+          <button v-on:click="$router.push({ name: 'register' })">
+            Add Family Member
+          </button>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -25,8 +33,8 @@ export default {
   data() {
     return {
       family: {
+        familyid: "",
         familyName: "",
-        id: "",
       },
     };
   },

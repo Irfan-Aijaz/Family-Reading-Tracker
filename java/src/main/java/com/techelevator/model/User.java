@@ -20,11 +20,12 @@ public class User {
 
    public User() { }
 
-   public User(Long id, String username, String password, String authorities) {
+   public User(Long id, String username, String password, String authorities, String familyName) {
       this.id = id;
       this.username = username;
       this.password = password;
       this.activated = true;
+      this.familyName = familyName;
    }
 
    public Long getId() {
@@ -49,6 +50,14 @@ public class User {
 
    public void setFamilyId(Long familyId) {
       this.familyId = familyId;
+   }
+
+   public String getFamilyName() {
+      return familyName;
+   }
+
+   public void setFamilyName(String familyName) {
+      this.familyName = familyName;
    }
 
    public String getPassword() {

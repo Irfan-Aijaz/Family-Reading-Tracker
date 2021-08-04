@@ -29,7 +29,7 @@ public class JdbcUserDao implements UserDao {
 
 	@Override
 	public User getUserById(Long userId) {
-		String sql = "SELECT * FROM users WHERE user_id = ?";
+		String sql = "SELECT * FROM users WHERE user_id = ?;";
 		SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
 		if(results.next()) {
 			return mapRowToUser(results);
@@ -38,6 +38,18 @@ public class JdbcUserDao implements UserDao {
 		}
 	}
 
+	@Override
+    public String getFamilyNameById(Long familyId){
+        String sql = "SELECT family_name" +
+                " FROM family " +
+                "WHERE family_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, familyId);
+        if(results.next()) {
+            return results.getString("family_name");
+        } else {
+            throw new RuntimeException("userId "+familyId+" was not found.");
+        }
+    }
     @Override
     public List<User> findAll() {
         List<User> users = new ArrayList<>();
