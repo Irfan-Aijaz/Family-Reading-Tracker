@@ -1,7 +1,9 @@
 <template>
   <div id="login" class="text-center">
     <form class="form-signin" @submit.prevent="login">
-      <h1 class="h3 mb-3 font-weight-normal">Please Sign In</h1>
+       <ul>
+         <li>
+      <h2 class="h3 mb-3 font-weight-normal">Please Sign In</h2>
       <div
         class="alert alert-danger"
         role="alert"
@@ -12,7 +14,9 @@
         role="alert"
         v-if="this.$route.query.registration"
       >Thank you for registering, please sign in.</div>
-      <label for="username" class="sr-only">Username</label>
+      </li>  
+        <li>
+      <label for="username" class="sr-only">Username:  </label>
       <input
         type="text"
         id="username"
@@ -22,7 +26,9 @@
         required
         autofocus
       />
-      <label for="password" class="sr-only">Password</label>
+        </li>
+        <li>
+      <label for="password" class="sr-only">Password:  </label>
       <input
         type="password"
         id="password"
@@ -31,8 +37,16 @@
         v-model="user.password"
         required
       />
-      <router-link :to="{ name: 'register' }">Need an account?</router-link>
+      </li>
+      <li>
       <button type="submit">Sign in</button>
+      </li>
+      <li>
+      <router-link :to="{ name: 'register' }">Need an account?</router-link>
+      </li>
+      
+
+      </ul>
     </form>
   </div>
 </template>
@@ -75,3 +89,22 @@ export default {
 };
 </script>
 
+<style>
+.login{
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+  background-color:lightgreen;
+}
+h2{
+  color:black;
+}
+ul {
+  list-style-type: none;
+ }
+li{
+  margin-top: 10px;
+} 
+</style>

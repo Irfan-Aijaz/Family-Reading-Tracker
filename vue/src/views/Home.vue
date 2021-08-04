@@ -1,41 +1,37 @@
 <template>
   <div class="home">
     <h1>Home</h1>
-    <div v-if="this.$store.state.user.authorities[0].name == 'ROLE_ADMIN'" id="register-family" class="text-center">
-      <h3 class="h3 mb-3 font-weight-normal">{{ this.$store.state.user.username }}</h3>
-      <label for="family-name" class="sr-only">Family name: </label>
-      <register />
-      <!-- <input
-        type="text"
-        id="username"
-        class="form-control"
-        placeholder="Username"
-        v-model="user.username"
-        required
-        autofocus
-      /> -->
+    <div
+      v-if="this.$store.state.user.authorities[0].name == 'ROLE_ADMIN'"
+      id="register-family"
+      class="text-center"
+    >
+      <label for="family-name" class="sr-only"
+        >Family name: {{ this.$store.state.user.familyName }}
+      </label>
+     <!-- <register/> -->
+      <button v-on:click="$router.push({ name: 'register' })">
+        Add Family Member
+      </button>
     </div>
-
-
-    <!-- <p>You must be authenticated to see this</p> -->
   </div>
 </template>
 
 <script>
-import Register from '../views/Register.vue'
+// import Register from "../views/Register.vue";
 
 export default {
   name: "home",
   data() {
     return {
       family: {
-        family_name: "",
-        id: ""
-      }
+        familyName: "",
+        id: "",
+      },
     };
   },
-  components: {
-    Register
-  }
+  // components: {
+  //   Register,
+  // },
 };
 </script>
