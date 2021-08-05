@@ -1,6 +1,11 @@
 <template>
   <div class="home">
     <h1>Home</h1>
+        <div
+        class="alert alert-success"
+        role="alert"
+        v-if="this.$route.query.bookregistration"
+      >Book added successfully</div>
     <!--code for parent account starts here -->
     <div
       v-if="this.$store.state.user.authorities[0].name == 'ROLE_ADMIN'"
