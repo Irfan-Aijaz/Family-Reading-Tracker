@@ -1,8 +1,7 @@
 <template>
   <div id="register" class="text-center">
     <form class="form-register" @submit.prevent="register">
-      <ul>
-        <li>
+      
           <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
           <div
             class="alert alert-danger"
@@ -11,8 +10,7 @@
           >
             {{ registrationErrorMsg }}
           </div>
-        </li>
-        <li>
+       
           <label for="username" class="sr-only">Username: </label>
           <input
             type="text"
@@ -23,8 +21,7 @@
             required
             autofocus
           />
-        </li>
-        <li>
+        
           <div v-if="this.$store.state.token == ''">
             <label for="family" class="sr-only">Family Name: </label>
             <input
@@ -36,8 +33,7 @@
               required
             />
           </div>
-        </li>
-        <li>
+      
           <label for="password" class="sr-only">Password: </label>
           <input
             type="password"
@@ -47,8 +43,7 @@
             v-model="user.password"
             required
           />
-        </li>
-        <li>
+       
           <input
             type="password"
             id="confirmPassword"
@@ -57,8 +52,7 @@
             v-model="user.confirmPassword"
             required
           />
-        </li>
-        <li>
+       
           <div v-if="this.$store.state.token != ''">
             <input
               type="radio"
@@ -77,16 +71,13 @@
             />
             <label for="two">Child</label>
           </div>
-        </li>
-        <li>
+        
           <button class="btn btn-lg btn-primary btn-block" type="submit">
             Create Account
           </button>
-        </li>
-        <li>
+       
           <router-link :to="{ name: 'login' }" v-if="this.$store.state.token == ''">Have an account?</router-link>
-        </li>
-      </ul>
+       
     </form>
   </div>
 </template>
@@ -164,6 +155,13 @@ export default {
 </script>
 
 <style>
+.form-register {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px;
+  justify-items: center;
+}
+
 div {
   background-color: lightgreen;
   text-align: center;

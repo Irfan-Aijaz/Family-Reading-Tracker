@@ -6,25 +6,22 @@
       id="register-family"
       class="text-center"
     >
-      <ul>
-        <li>
+      
           <label for="family-name" class="sr-only"
             >Family name: {{ this.$store.state.user.familyName }}
           </label>
-        </li>
+       
         <!-- <register/> -->
         <!-- Add list of family member usernames here -->
-        <li>
+        
           <label for="family-members" class="sr-only" v-for="name in updatedFamilyMembers" v-bind:key="name"
             >Family members: {{ name }}
           </label>
-        </li>
-        <li>
+        
           <button v-on:click="$router.push({ name: 'register' })">
             Add Family Member
           </button>
-        </li>
-      </ul>
+       
     </div>
   </div>
 </template>
@@ -65,6 +62,12 @@ export default {
 };
 </script>
 <style scoped>
+.text-center {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px;
+  justify-items: center;
+}
 .familyName {
   text-decoration-color: blanchedalmond;
 }

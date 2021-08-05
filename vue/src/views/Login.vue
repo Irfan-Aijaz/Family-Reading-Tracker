@@ -1,8 +1,7 @@
 <template>
   <div id="login" class="text-center">
     <form class="form-signin" @submit.prevent="login">
-      <ul>
-        <li>
+    
           <h2 class="h3 mb-3 font-weight-normal">Please Sign In</h2>
           <div
             class="alert alert-danger"
@@ -18,8 +17,7 @@
           >
             Thank you for registering, please sign in.
           </div>
-        </li>
-        <li>
+       
           <label for="username" class="sr-only">Username: </label>
           <input
             type="text"
@@ -30,8 +28,7 @@
             required
             autofocus
           />
-        </li>
-        <li>
+     
           <label for="password" class="sr-only">Password: </label>
           <input
             type="password"
@@ -41,14 +38,11 @@
             v-model="user.password"
             required
           />
-        </li>
-        <li>
+       
           <button type="submit">Sign in</button>
-        </li>
-        <li>
+        
           <router-link :to="{ name: 'register' }">Need an account?</router-link>
-        </li>
-      </ul>
+        
     </form>
   </div>
 </template>
@@ -93,11 +87,11 @@ export default {
 </script>
 
 <style>
-.login {
-  display: flex;
-  justify-content: center;
+.form-signin {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px;
   justify-items: center;
-  align-items: center;
   text-align: center;
   background-color: lightgreen;
 }
