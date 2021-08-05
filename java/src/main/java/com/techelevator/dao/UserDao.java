@@ -18,7 +18,7 @@ public interface UserDao {
 
     boolean create(String username, String password, String role, Long familyId);
 
-    Integer createFamily(String familyName);
+    Long createFamily(String familyName);
 
     String getFamilyNameById(Long familyId);
 

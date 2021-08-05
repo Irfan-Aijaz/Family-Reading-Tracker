@@ -90,15 +90,15 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
-    public Integer createFamily(String familyName) {
+    public Long createFamily(String familyName) {
         String insertFamily = "INSERT into family (family_name) values (?);";
         jdbcTemplate.update(insertFamily, familyName);
         String familyIdSelect = "SELECT family_id FROM family WHERE family_name = ?;";
         SqlRowSet results1 = jdbcTemplate.queryForRowSet(familyIdSelect, familyName);
         if (results1.next()) {
-            return results1.getInt("family_id");
+            return results1.getLong("family_id");
         }
-        return 0;
+        return Long.parseLong("0") ;
     }
 
 
@@ -106,7 +106,7 @@ public class JdbcUserDao implements UserDao {
     @Override
     public boolean create(String username, String password, String role, String familyName) {
         boolean userCreated = false;
-        int createdFamily = createFamily(familyName);
+        Long createdFamilyId = createFamily(familyName);
         // create user
         String insertUser = "insert into users (username,password_hash,role,family_id) values(?,?,?,?)";
         String password_hash = new BCryptPasswordEncoder().encode(password);
@@ -119,7 +119,7 @@ public class JdbcUserDao implements UserDao {
                     ps.setString(1, username);
                     ps.setString(2, password_hash);
                     ps.setString(3, ssRole);
-                    ps.setInt(4, createdFamily);
+                    ps.setLong(4, createdFamilyId);
                     return ps;
                 }
                 , keyHolder) == 1;
