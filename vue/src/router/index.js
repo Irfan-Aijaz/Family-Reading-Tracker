@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
+import NewBook from '../views/NewBook.vue'
 
 Vue.use(Router)
 
@@ -58,7 +59,15 @@ const router = new Router({
       name: "register as admin",
       component: Register,
       meta: {
-        requiresAuth: false
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/new_book",
+      name: "newBook",
+      component: NewBook,
+      meta: {
+        requiresAuth: true
       }
     }
   ]

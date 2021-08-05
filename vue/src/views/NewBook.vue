@@ -1,6 +1,43 @@
 <template>
   <div class="books">
-    <h2 class="book-title">{{ book.title }}</h2>
+    
+    <form class="form-register-new-book" @submit.prevent="create">
+    <h2 class="book-title">Add Book to Library</h2>
+      <label for="title" class="sr-only">Title: </label>
+      <input
+        type="text"
+        id="title"
+        class="form-control"
+        placeholder="Title"
+        v-model="book.title"
+        required
+        autofocus
+        />
+      <label for="author" class="sr-only">Author: </label>
+      <input
+        type="text"
+        id="author"
+        class="form-control"
+        placeholder="Author"
+        v-model="book.author"
+        required
+        autofocus
+        />
+      <label for="isbn" class="sr-only">ISBN: </label>
+      <input
+        type="text"
+        id="isbn"
+        class="form-control"
+        placeholder="ISBN"
+        v-model="book.isbn"
+        required
+        autofocus
+        />
+        <button class="btn btn-lg btn-primary btn-block" type="submit">
+          Add Book
+        </button>
+    </form>
+
 
     <img
       v-if="book.isbn"
@@ -20,13 +57,45 @@
 </template>
 
 <script>
+import authService from "../services/AuthService";
+
 export default {
   name: "newBook",
-  props: ["book"],
+  data() {
+    return {
+      book: {
+        isbn: "",
+        title: "",
+        author: ""
+      }
+    };
+  },
+  // props: ["book"],
   methods: {
     toggleBookRead(book) {
       this.$store.commit("toggleBookRead", book);
     },
+    create() {
+      authService
+      .createBook(this.book)
+      .then((response) => {
+        if (response.status == 201) {
+          this.$router.push({
+            path: "/",
+            // query: 
+          });
+        }
+      })
+      .catch((error) => {
+            const response = error.response;
+            this.registrationErrors = true;
+            if (response.status === 400) {
+              this.registrationErrorMsg = "Bad Request: Validation Errors";
+            }
+          });
+
+      
+    }
   },
 };
 </script>

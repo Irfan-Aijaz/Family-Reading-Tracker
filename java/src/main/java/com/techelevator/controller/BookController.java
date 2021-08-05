@@ -19,7 +19,7 @@ public class BookController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(value = "/add_book", method = RequestMethod.POST)
+    @RequestMapping(value = "/create_book", method = RequestMethod.POST)
     public void createBook(@Valid @RequestBody Book newBook) {
         try {
             Book book = bookDao.findByIsbn(newBook.getIsbn());

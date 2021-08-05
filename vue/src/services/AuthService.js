@@ -18,8 +18,8 @@ export default {
     return axios.get('/retrieve_family/' + familyId)
   },
 
-  createBook() {
-    return axios.post('/create_book')
+  createBook(book) {
+    return axios.post('/create_book', book)
   }
 
 }
