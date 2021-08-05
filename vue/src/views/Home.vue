@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <h1>Home</h1>
+    <!--code for parent account starts here -->
     <div
       v-if="this.$store.state.user.authorities[0].name == 'ROLE_ADMIN'"
       id="register-family"
@@ -9,10 +10,7 @@
       <label for="family-name" class="sr-only"
         >Family name: {{ this.$store.state.user.familyName }}
       </label>
-
-      <!-- <register/> -->
       <!-- Add list of family member usernames here -->
-
       <label
         for="family-members"
         class="sr-only"
@@ -20,7 +18,7 @@
         v-bind:key="name"
         >Family members: {{ name }}
       </label>
-      <div class="options">
+      <div class="parentOptions">
         <button v-on:click="$router.push({ name: 'register' })">
           Add Family Member
         </button>
@@ -33,6 +31,22 @@
         </button>
         <button v-on:click="$router.push({ name: 'trackFamilyProgress' })">
           Track Family Progress
+        </button>
+        <button v-on:click="$router.push({ name: 'prizes' })">Prizes</button>
+      </div>
+    </div>
+    <!--End parent/admin code, start child user code -->
+    <div
+      v-if="this.$store.state.user.authorities[0].name == 'ROLE_USER'"
+      class="text-center"
+    >
+      <div class="childOptions">
+        <button v-on:click="$router.push({ name: 'newBook' })">Add Book</button>
+        <button v-on:click="$router.push({ name: 'inProgress' })">
+          In Progress
+        </button>
+        <button v-on:click="$router.push({ name: 'completed' })">
+          Completed
         </button>
         <button v-on:click="$router.push({ name: 'prizes' })">Prizes</button>
       </div>
@@ -80,7 +94,17 @@ export default {
   justify-items: center;
   align-items: start;
 }
-.options {
+.parentOptions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  justify-items: center;
+  align-items: start;
+  position: absolute;
+  top: 20px;
+  left: 10px;
+}
+.childOptions {
   display: grid;
   grid-template-columns: 1fr;
   gap: 10px;
