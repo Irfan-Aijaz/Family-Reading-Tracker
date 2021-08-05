@@ -34,8 +34,8 @@ CREATE TABLE users (
 CREATE TABLE books (
 	isbn varchar(20) NOT NULL,
 	title varchar(50) NOT NULL,
-	genre varchar(15) NOT NULL,
-	summary text NOT NULL,
+	genre varchar(15),
+	summary text,
 	author varchar(30) NOT NULL,
 	CONSTRAINT PK_isbn PRIMARY KEY (isbn)
 );
@@ -66,6 +66,9 @@ CREATE TABLE sessions (
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
+
+
+INSERT INTO books (isbn,title,author) VALUES ('9780060254926','Where the Wild Things Are','Maurice Sendak');
 
 
 COMMIT TRANSACTION;
