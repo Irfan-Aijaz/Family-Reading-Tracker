@@ -6,56 +6,67 @@
       id="register-family"
       class="text-center"
     >
-      
-          <label for="family-name" class="sr-only"
-            >Family name: {{ this.$store.state.user.familyName }}
-          </label>
-       
-        <!-- <register/> -->
-        <!-- Add list of family member usernames here -->
-        
-          <label for="family-members" class="sr-only" v-for="name in updatedFamilyMembers" v-bind:key="name"
-            >Family members: {{ name }}
-          </label>
-        
-          <button v-on:click="$router.push({ name: 'register' })">
-            Add Family Member
-          </button>
-       
+      <label for="family-name" class="sr-only"
+        >Family name: {{ this.$store.state.user.familyName }}
+      </label>
+
+      <!-- <register/> -->
+      <!-- Add list of family member usernames here -->
+
+      <label
+        for="family-members"
+        class="sr-only"
+        v-for="name in updatedFamilyMembers"
+        v-bind:key="name"
+        >Family members: {{ name }}
+      </label>
+      <div class="options">
+        <button v-on:click="$router.push({ name: 'register' })">
+          Add Family Member
+        </button>
+        <button v-on:click="$router.push({ name: 'newBook' })">Add Book</button>
+        <button v-on:click="$router.push({ name: 'inProgress' })">
+          In Progress
+        </button>
+        <button v-on:click="$router.push({ name: 'completed' })">
+          Completed
+        </button>
+        <button v-on:click="$router.push({ name: 'trackFamilyProgress' })">
+          Track Family Progress
+        </button>
+        <button v-on:click="$router.push({ name: 'prizes' })">Prizes</button>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import authService from '../services/AuthService';
+import authService from "../services/AuthService";
 // import Register from "../views/Register.vue";
 
 export default {
   name: "home",
   data() {
     return {
-      familyMembers: []
+      familyMembers: [],
     };
   },
   computed: {
     updatedFamilyMembers() {
       return this.family;
-    }
+    },
   },
   methods: {
     family() {
-      authService
-        .getFamily(this.$store.state.user.familyId)
-        .catch((error) => {
-          const response = error.response;
+      authService.getFamily(this.$store.state.user.familyId).catch((error) => {
+        const response = error.response;
 
-          if (response.status === 401) {
-            // this.invalidCredentials = true;
-          }
-        });
-    }
-
-  }
+        if (response.status === 401) {
+          // this.invalidCredentials = true;
+        }
+      });
+    },
+  },
   // components: {
   //   Register,
   // },
@@ -65,8 +76,19 @@ export default {
 .text-center {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 5px;
+  gap: 10px;
   justify-items: center;
+  align-items: start;
+}
+.options {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  justify-items: center;
+  align-items: start;
+  position: absolute;
+  top: 20px;
+  left: 10px;
 }
 .familyName {
   text-decoration-color: blanchedalmond;
