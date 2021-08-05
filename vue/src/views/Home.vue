@@ -14,7 +14,7 @@
         <!-- <register/> -->
         <!-- Add list of family member usernames here -->
         
-          <label for="family-members" class="sr-only" v-for="name in updatedFamilyMembers" v-bind:key="name"
+          <label for="family-members" class="sr-only" v-for="name in familyMembers" v-bind:key="name"
             >Family members: {{ name }}
           </label>
         
@@ -37,15 +37,15 @@ export default {
       familyMembers: []
     };
   },
-  computed: {
-    updatedFamilyMembers() {
-      return this.family;
-    }
-  },
   methods: {
     family() {
       authService
         .getFamily(this.$store.state.user.familyId)
+        .then((response) => {
+          if (response.status == 200) {
+            this.familyMembers = response.data;
+          }
+        })
         .catch((error) => {
           const response = error.response;
 
@@ -55,6 +55,9 @@ export default {
         });
     }
 
+  },
+  created(){
+    this.family()
   }
   // components: {
   //   Register,
