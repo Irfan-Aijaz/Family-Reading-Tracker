@@ -16,6 +16,10 @@ export default {
 
   getFamily(familyId) {
     return axios.get('/retrieve_family/' + familyId)
+  },
+
+  createBook() {
+    return axios.post('/create_book')
   }
 
 }
