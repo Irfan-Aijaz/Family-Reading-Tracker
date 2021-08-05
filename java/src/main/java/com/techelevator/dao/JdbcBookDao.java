@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Book;
+import com.techelevator.model.BookAlreadyExistsException;
 import com.techelevator.model.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -29,7 +30,7 @@ public class JdbcBookDao implements BookDao {
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         String id_column = "isbn";
         bookCreated = jdbcTemplate.update(con -> {
-            PreparedStatement ps = con.prepareStatement(insertBook, new String[]{isbn});
+            PreparedStatement ps = con.prepareStatement(insertBook, new String[]{id_column});
             ps.setString(1, title);
             ps.setString(2, author);
             ps.setString(3, isbn);
@@ -55,13 +56,13 @@ public class JdbcBookDao implements BookDao {
     }
 
     @Override
-    public Book findByIsbn(String isbn) throws UsernameNotFoundException {
+    public Book findByIsbn(String isbn) throws BookAlreadyExistsException {
         for (Book book : this.findAll()) {
             if( book.getIsbn().equals(isbn)) {
                 return book;
             }
         }
-        throw new UsernameNotFoundException("Book " + isbn + " was not found.");
+        throw new BookAlreadyExistsException("Book " + isbn + " already exists.");
     }
 
     private Book mapRowToBook(SqlRowSet bk) {

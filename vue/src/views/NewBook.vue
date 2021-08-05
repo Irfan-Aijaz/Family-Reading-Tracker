@@ -67,7 +67,9 @@ export default {
         isbn: "",
         title: "",
         author: ""
-      }
+      },
+      bookCreationErrors: false,
+      bookCreationErrorMsg: "There was a problem adding a book."
     };
   },
   // props: ["book"],
@@ -88,9 +90,9 @@ export default {
       })
       .catch((error) => {
             const response = error.response;
-            this.registrationErrors = true;
+            this.bookCreationErrors = true;
             if (response.status === 400) {
-              this.registrationErrorMsg = "Bad Request: Validation Errors";
+              this.bookCreationErrorMsg = "Bad Request: Validation Errors";
             }
           });
 
