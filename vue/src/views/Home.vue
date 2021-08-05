@@ -14,7 +14,7 @@
       <label
         for="family-members"
         class="sr-only"
-        v-for="name in updatedFamilyMembers"
+        v-for="name in familyMembers"
         v-bind:key="name"
         >Family members: {{ name }}
       </label>
@@ -65,14 +65,15 @@ export default {
       familyMembers: [],
     };
   },
-  computed: {
-    updatedFamilyMembers() {
-      return this.family;
-    },
-  },
   methods: {
     family() {
-      authService.getFamily(this.$store.state.user.familyId).catch((error) => {
+      authService.getFamily(this.$store.state.user.familyId)
+      .then((response)=>{
+        if(response.status==200) {
+          this.familyMembers = response.data;
+        }
+      })
+      .catch((error) => {
         const response = error.response;
 
         if (response.status === 401) {
@@ -81,9 +82,9 @@ export default {
       });
     },
   },
-  // components: {
-  //   Register,
-  // },
+  created() {
+    this.family();
+  }
 };
 </script>
 <style scoped>
