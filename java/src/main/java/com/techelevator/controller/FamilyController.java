@@ -19,9 +19,9 @@ public class FamilyController {
         this.userDao = userDao;
     }
 
-    @RequestMapping(value = "/retrieve_family", method = RequestMethod.GET)
-        public List<String> users(@Valid @RequestBody FamilyDTO loginInUser) {
-            return userDao.getUsernamesByFamilyId(loginInUser.getFamilyId());
+    @RequestMapping(value = "/retrieve_family/{id}", method = RequestMethod.GET)
+        public List<String> users(@PathVariable Long id) {
+            return userDao.getUsernamesByFamilyId(id);
 
     }
 }

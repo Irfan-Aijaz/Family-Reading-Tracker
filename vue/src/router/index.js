@@ -53,14 +53,14 @@ const router = new Router({
         requiresAuth: false
       },
     },
-    // {
-    //   path: "/register_as_admin",
-    //   name: "register as admin",
-    //   component: Register,
-    //   meta: {
-    //     requiresAuth: false
-    //   }
-    // }
+    {
+      path: "/register_as_admin",
+      name: "register as admin",
+      component: Register,
+      meta: {
+        requiresAuth: false
+      }
+    }
   ]
 })
 
