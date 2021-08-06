@@ -6,6 +6,7 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import NewBook from '../views/NewBook.vue'
+import Session from '../views/Session.vue'
 
 Vue.use(Router)
 
@@ -69,7 +70,15 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
-    }
+    },
+    {
+      path:"/session",
+      name: "session",
+      component: Session,
+      meta: {
+        requiresAuth: true
+      }
+    },
   ]
 })
 
