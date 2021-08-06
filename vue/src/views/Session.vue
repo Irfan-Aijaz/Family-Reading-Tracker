@@ -1,6 +1,6 @@
 <template>
   <div id="session" class="text-center">
-      <form class="form-session" @submit.prevent="startSession">
+      <form class="form-session" @submit.prevent="newSession">
 
            <h1 class="h3 mb-3 font-weight-normal">New Session</h1>
           <div
@@ -29,7 +29,7 @@
             id="date"
             class="form-control"
             placeholder="Date"
-            v-model="session.date"
+            v-model="session.daySession"
             required
             autofocus
           />
@@ -41,7 +41,7 @@
             id="time_start"
             class="form-control"
             placeholder="Time Start"
-            v-model="session.time_start"
+            v-model="session.timeStart"
             required
             autofocus
           />
@@ -53,7 +53,7 @@
             id="time_end"
             class="form-control"
             placeholder="Time End"
-            v-model="session.time_end"
+            v-model="session.timeEnd"
             required
             autofocus
           />
@@ -111,8 +111,8 @@ export default {
         };
     },
     methods:{
-        startSession() {
-            this.session.userId = this.$store.state.user.userId;
+        newSession() {
+            this.session.userId = this.$store.state.user.id;
             authService
               .createSession(this.session)
               .then((response) => {
