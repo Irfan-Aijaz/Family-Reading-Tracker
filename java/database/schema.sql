@@ -1,7 +1,7 @@
 BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS users, books, user_book, sessions, family;
-DROP SEQUENCE IF EXISTS seq_user_id, seq_family_id;
+DROP SEQUENCE IF EXISTS seq_user_id, seq_family_id, seq_session_id;
 
 CREATE SEQUENCE seq_user_id
   INCREMENT BY 1
@@ -10,6 +10,12 @@ CREATE SEQUENCE seq_user_id
   CACHE 1;
   
 CREATE SEQUENCE seq_family_id
+  INCREMENT BY 1
+  NO MAXVALUE
+  NO MINVALUE
+  CACHE 1;
+  
+CREATE SEQUENCE seq_session_id
   INCREMENT BY 1
   NO MAXVALUE
   NO MINVALUE
@@ -43,13 +49,15 @@ CREATE TABLE books (
 CREATE TABLE user_book (
 	user_id int NOT NULL,
 	isbn varchar(20) NOT NULL,
+	pages_read int,
+	completed boolean,
 	CONSTRAINT PK_user_book PRIMARY KEY (user_id, isbn),
 	CONSTRAINT FK_user_book_user FOREIGN KEY (user_id) REFERENCES users (user_id),
 	CONSTRAINT FK_user_book_book FOREIGN KEY (isbn) REFERENCES books (isbn)
 );
 
 CREATE TABLE sessions (
-        session_id int NOT NULL,
+        session_id int DEFAULT nextval('seq_session_id'::regclass) NOT NULL,
         user_id int NOT NULL,
         isbn varchar(20) NOT NULL,
         day_session date NOT NULL,
