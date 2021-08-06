@@ -1,7 +1,9 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.Session;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Service;
 
 import java.sql.Date;
@@ -9,13 +11,31 @@ import java.sql.PreparedStatement;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class JdbcSessionDao implements SessionDao {
 
-    private JdbcTemplate jdbcTemplate;
+    private final JdbcTemplate jdbcTemplate;
 
     public JdbcSessionDao(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate;}
+
+    @Override
+    public List<Session> findAllSessionsInFamily(Long familyId) {
+        List<Session> sessions = new ArrayList<>();
+        String sql = "SELECT * FROM sessions " +
+                     "INNER JOIN users ON users.user_id = sessions.user_id" +
+                     "WHERE users.family_id = ?;";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, familyId);
+        while (results.next()) {
+            sessions.add(mapRowToSession(results));
+        }
+        return sessions;
+    }
+
+
 
     @Override
     public boolean createSession(String isbn, Long userId, LocalDate dayOfSession, LocalTime startTime, LocalTime endTime, String format, String notes) {
@@ -39,5 +59,19 @@ public class JdbcSessionDao implements SessionDao {
         , keyHolder)==1;
 
         return sessionCreated;
+    }
+
+    private Session mapRowToSession(SqlRowSet rowSet) {
+        Session session = new Session();
+        session.setSessionId(rowSet.getLong("session_id"));
+        session.setUserId(rowSet.getLong("user_id"));
+        session.setIsbn(rowSet.getString("isbn"));
+        session.setDaySession(rowSet.getDate("day_session").toLocalDate());
+        session.setStartTime(rowSet.getTime("time_start").toLocalTime());
+        session.setStartTime(rowSet.getTime("time_end").toLocalTime());
+        session.setFormat(rowSet.getString("format"));
+        session.setNotes(rowSet.getString("notes"));
+
+        return session;
     }
 }
