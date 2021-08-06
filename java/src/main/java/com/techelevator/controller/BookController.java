@@ -31,7 +31,7 @@ public class BookController {
     }
 
 //    @RequestMapping(value = "/retrieve_books_progress/{id}", method = RequestMethod.GET)
-//    public List<String> userBooks(@PathVariable Long id) {
+//    public List<Book> userBooks(@PathVariable Long id) {
 //        return userDao.getUsernamesByFamilyId(id);
 //
 //    }

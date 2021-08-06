@@ -38,7 +38,7 @@ public class JdbcSessionDao implements SessionDao {
 
 
     @Override
-    public boolean createSession(String isbn, Long userId, LocalDate dayOfSession, LocalTime startTime, LocalTime endTime, String format, String notes) {
+    public boolean createSession(String isbn, Long userId, LocalDate daySession, LocalTime timeStart, LocalTime timeEnd, String format, String notes) {
         boolean sessionCreated = false;
 
         String insertSession = "insert into sessions (isbn, user_id, day_session, time_start, time_end, format, notes) values (?, ?, ?, ?, ?, ?, ?);";
@@ -49,9 +49,9 @@ public class JdbcSessionDao implements SessionDao {
             PreparedStatement ps = con.prepareStatement(insertSession, new String[]{id_column});
             ps.setString(1, isbn);
             ps.setLong(2, userId);
-            ps.setDate(3, Date.valueOf(dayOfSession));
-            ps.setTime(4, Time.valueOf(startTime));
-            ps.setTime(5, Time.valueOf(endTime));
+            ps.setDate(3, Date.valueOf(daySession));
+            ps.setTime(4, Time.valueOf(timeStart));
+            ps.setTime(5, Time.valueOf(timeEnd));
             ps.setString(6, format);
             ps.setString(7, notes);
             return ps;
@@ -67,8 +67,8 @@ public class JdbcSessionDao implements SessionDao {
         session.setUserId(rowSet.getLong("user_id"));
         session.setIsbn(rowSet.getString("isbn"));
         session.setDaySession(rowSet.getDate("day_session").toLocalDate());
-        session.setStartTime(rowSet.getTime("time_start").toLocalTime());
-        session.setStartTime(rowSet.getTime("time_end").toLocalTime());
+        session.setTimeStart(rowSet.getTime("time_start").toLocalTime());
+        session.setTimeEnd(rowSet.getTime("time_end").toLocalTime());
         session.setFormat(rowSet.getString("format"));
         session.setNotes(rowSet.getString("notes"));
 

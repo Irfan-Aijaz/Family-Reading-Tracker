@@ -2,7 +2,7 @@
   <div id="session" class="text-center">
       <form class="form-session" @submit.prevent="newSession">
 
-           <h1 class="h3 mb-3 font-weight-normal">New Session</h1>
+           <h1 class="h3 mb-3 font-weight-normal">New Session For: {{ this.$store.state.user.username}}</h1>
           <div
             class="alert alert-danger"
             role="alert"
@@ -11,6 +11,7 @@
             {{ sessionErrorMsg }}
           </div>
           <div>
+            <!--The form inputs for recording a session -->
           <label for="isbn" class="sr-only">ISBN: </label>
           <input
             type="text"
@@ -64,7 +65,7 @@
             type="text"
             id="format"
             class="form-control"
-            placeholder="Format"
+            placeholder="Paper, digital, etc."
             v-model="session.format"
             required
             autofocus
@@ -94,6 +95,7 @@
 import authService from "../services/AuthService";
 
 export default {
+  // Saving a session object
     name: "session",
     data(){
         return{
@@ -111,6 +113,7 @@ export default {
         };
     },
     methods:{
+      //Calls the createSession service to send the session object to the server
         newSession() {
             this.session.userId = this.$store.state.user.id;
             authService

@@ -1,5 +1,6 @@
 <template>
   <div class="books">
+    <!-- The form labels for adding a new book-->
     <form class="form-register-new-book" @submit.prevent="create">
       <h2 class="book-title">Add Book to Library</h2>
       <label for="title" class="sr-only">Title: </label>

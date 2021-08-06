@@ -2,27 +2,26 @@ package com.techelevator.model;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 
 public class Session {
     private Long sessionId;
     private Long userId;
     private String isbn;
     private LocalDate daySession;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private LocalTime timeStart;
+    private LocalTime timeEnd;
     private String format;
     private String notes;
 
     public Session(){};
 
-    public Session(Long sessionId, Long userId, String isbn, LocalDate daySession, LocalTime startTime, LocalTime endTime, String format, String notes) {
+    public Session(Long sessionId, Long userId, String isbn, LocalDate daySession, LocalTime timeStart, LocalTime timeEnd, String format, String notes) {
         this.sessionId = sessionId;
         this.userId = userId;
         this.isbn = isbn;
         this.daySession = daySession;
-        this.startTime = startTime;
-        this.endTime = endTime;
+        this.timeStart = timeStart;
+        this.timeEnd = timeEnd;
         this.format = format;
         this.notes = notes;
     }
@@ -59,20 +58,20 @@ public class Session {
         this.daySession = daySession;
     }
 
-    public LocalTime getStartTime() {
-        return startTime;
+    public LocalTime getTimeStart() {
+        return timeStart;
     }
 
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
+    public void setTimeStart(LocalTime timeStart) {
+        this.timeStart = timeStart;
     }
 
-    public LocalTime getEndTime() {
-        return endTime;
+    public LocalTime getTimeEnd() {
+        return timeEnd;
     }
 
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
+    public void setTimeEnd(LocalTime timeEnd) {
+        this.timeEnd = timeEnd;
     }
 
     public String getFormat() {
