@@ -1,7 +1,7 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.SessionDao;
-import com.techelevator.model.Session;
+import com.techelevator.model.SessionDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +17,7 @@ public class SessionController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/create_session", method = RequestMethod.POST)
-    public void createSession(@Valid @RequestBody Session newSession) {
+    public void createSession(@Valid @RequestBody SessionDTO newSession) {
             sessionDao.createSession(newSession.getIsbn(), newSession.getUserId(), newSession.getDaySession(), newSession.getStartTime(), newSession.getEndTime(), newSession.getFormat(), newSession.getNotes());
     }
 }
