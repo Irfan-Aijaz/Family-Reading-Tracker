@@ -1,8 +1,7 @@
 <template>
   <div class="books">
-    
     <form class="form-register-new-book" @submit.prevent="create">
-    <h2 class="book-title">Add Book to Library</h2>
+      <h2 class="book-title">Add Book to Library</h2>
       <label for="title" class="sr-only">Title: </label>
       <input
         type="text"
@@ -12,7 +11,7 @@
         v-model="book.title"
         required
         autofocus
-        />
+      />
       <label for="author" class="sr-only">Author: </label>
       <input
         type="text"
@@ -22,7 +21,7 @@
         v-model="book.author"
         required
         autofocus
-        />
+      />
       <label for="isbn" class="sr-only">ISBN: </label>
       <input
         type="text"
@@ -32,12 +31,12 @@
         v-model="book.isbn"
         required
         autofocus
-        />
-        <button class="btn btn-lg btn-primary btn-block" type="submit">
-          Add Book
-        </button>
-    </form>
+      />
 
+      <button class="btn btn-lg btn-primary btn-block" type="submit">
+          Add Book
+      </button>
+    </form>
 
     <img
       v-if="book.isbn"
@@ -46,18 +45,15 @@
       "
     />
 
-    <h3 class="book-author">{{ book.author }}</h3>
-    <button
-      v-on:click="toggleBookRead(book)"
-      v-bind:class="book.read ? 'mark-unread' : 'mark-read'"
-    >
-      Mark {{ book.read !== true ? "Read" : "Unread" }}
-    </button>
+ 
   </div>
 </template>
 
+
+
 <script>
 import authService from "../services/AuthService";
+
 
 export default {
   name: "newBook",
@@ -66,12 +62,13 @@ export default {
       book: {
         isbn: "",
         title: "",
-        author: ""
+        author: "",
       },
       bookCreationErrors: false,
-      bookCreationErrorMsg: "There was a problem adding a book."
+      bookCreationErrorMsg: "There was a problem adding a book.",
     };
   },
+
   // props: ["book"],
   methods: {
     toggleBookRead(book) {
@@ -79,47 +76,50 @@ export default {
     },
     create() {
       authService
-      .createBook(this.book)
-      .then((response) => {
-        if (response.status == 201) {
-          this.$router.push({
-            path: "/",
-            query: {bookregistration: "success"}
-          });
-        }
-      })
-      .catch((error) => {
-            const response = error.response;
-            this.bookCreationErrors = true;
-            if (response.status === 400) {
-              this.bookCreationErrorMsg = "Bad Request: Validation Errors";
-            }
-          });
-
-      
-    }
+        .createBook(this.book)
+        .then((response) => {
+          if (response.status == 201) {
+            this.$router.push({
+              path: "/",
+              query: { bookregistration: "success" },
+            });
+          }
+        })
+        .catch((error) => {
+          const response = error.response;
+          this.bookCreationErrors = true;
+          if (response.status === 400) {
+            this.bookCreationErrorMsg = "Bad Request: Validation Errors";
+          }
+        });
+    },
   },
 };
 </script>
 
 <style>
 .books {
-    border: 2px solid black;
-    border-radius: 10px;
-    width: 250px;
-    height: 550px;
-    margin: 20px;
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 800px;
+  height: 150px;
+  margin: 30px;
+  position: absolute;
+  right: 225px;
+  text-align: center;
+
 }
 
 .books.read {
-    background-color: lightgray;
+  background-color: lightgray;
 }
 
 .books .book-title {
-    font-size: 1.5rem;
+  font-size: 1.5rem;
 }
 
 .books .book-author {
-    font-size: 1rem;
+  font-size: 1rem;
 }
+
 </style>

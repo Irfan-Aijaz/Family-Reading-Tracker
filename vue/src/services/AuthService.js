@@ -22,4 +22,5 @@ export default {
     return axios.post('/create_book', book)
   }
 
+
 }
