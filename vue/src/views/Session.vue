@@ -25,7 +25,7 @@
           <div>
           <label for="date" class="sr-only">Date: </label>
           <input
-            type="text"
+            type="date"
             id="date"
             class="form-control"
             placeholder="Date"
@@ -37,7 +37,7 @@
           <div>
           <label for="time_start" class="sr-only">Time Start: </label>
           <input
-            type="text"
+            type="time"
             id="time_start"
             class="form-control"
             placeholder="Time Start"
@@ -49,7 +49,7 @@
           <div>
           <label for="time_end" class="sr-only">Time End: </label>
           <input
-            type="text"
+            type="time"
             id="time_end"
             class="form-control"
             placeholder="Time End"
