@@ -66,7 +66,6 @@
 
 <script>
 import authService from "../services/AuthService";
-// import Register from "../views/Register.vue";
 
 export default {
   name: "home",

@@ -20,6 +20,10 @@ export default {
 
   createBook(book) {
     return axios.post('/create_book', book)
+  },
+
+  createSession(session) {
+    return axios.post('/create_session', session)
   }
 
 

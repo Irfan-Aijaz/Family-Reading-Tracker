@@ -69,7 +69,6 @@ export default {
     };
   },
 
-  // props: ["book"],
   methods: {
     toggleBookRead(book) {
       this.$store.commit("toggleBookRead", book);

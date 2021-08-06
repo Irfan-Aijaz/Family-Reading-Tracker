@@ -2,8 +2,6 @@ package com.techelevator.controller;
 
 
 import com.techelevator.dao.UserDao;
-import com.techelevator.model.FamilyDTO;
-import com.techelevator.model.RegisterUserDTO;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
