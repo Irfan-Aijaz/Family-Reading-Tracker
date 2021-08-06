@@ -10,26 +10,33 @@
           >
             {{ sessionErrorMsg }}
           </div>
-          <label for="isbn" class="sr-only">ISBN: </label>
+          <Dropdown
+            :options="[{ id: 1, name: ''}, { id: 2, name: 'Option 2'}]"
+            v-on:selected="validateSelection"
+             v-on:filter="getDropdownValues"
+            :disabled="false"
+            name="zipcode"
+            :maxItem="10"
+            placeholder="Please select an option">
+            </Dropdown>
+          <label for="format" class="sr-only">Format: </label>
           <input
             type="text"
-            id="isbn"
+            id="format"
             class="form-control"
-            placeholder="isbn"
-            v-model="session.isbn"
+            placeholder="format"
+            v-model="session.format"
             required
             autofocus
           />
+
           </div>
 
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
 <style>
-
 </style>
