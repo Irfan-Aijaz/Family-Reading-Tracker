@@ -1,5 +1,7 @@
 <template>
-  <div class="books">
+
+  <div>
+    <div class="books" >
     <form class="form-register-new-book" @submit.prevent="create">
       <h2 class="book-title">Add Book to Library</h2>
       <label for="title" class="sr-only">Title: </label>
@@ -44,12 +46,11 @@
         'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'
       "
     />
+    </div>
 
- 
+
   </div>
 </template>
-
-
 
 <script>
 import authService from "../services/AuthService";
@@ -68,6 +69,7 @@ export default {
       bookCreationErrorMsg: "There was a problem adding a book.",
     };
   },
+
 
   methods: {
     toggleBookRead(book) {
@@ -100,12 +102,10 @@ export default {
 .books {
   border: 2px solid black;
   border-radius: 10px;
-  width: 800px;
-  height: 150px;
+  width: 250px;
+  height: 500px;
   margin: 30px;
-  position: absolute;
-  right: 225px;
-  text-align: center;
+  align-content: center;
 
 }
 
@@ -120,5 +120,9 @@ export default {
 .books .book-author {
   font-size: 1rem;
 }
+
+
+
+
 
 </style>

@@ -24,7 +24,8 @@ export default {
 
   createSession(session) {
     return axios.post('/create_session', session)
-  }
+  },
+
 
 
 }
