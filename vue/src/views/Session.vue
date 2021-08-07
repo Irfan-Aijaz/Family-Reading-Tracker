@@ -1,8 +1,8 @@
 <template>
   <div id="session" class="text-center">
-      <form class="form-session" @submit.prevent="startSession">
+      <form class="form-session" @submit.prevent="newSession">
 
-           <h1 class="h3 mb-3 font-weight-normal">New Session</h1>
+           <h1 class="h3 mb-3 font-weight-normal">New Session For: {{ this.$store.state.user.username}}</h1>
           <div
             class="alert alert-danger"
             role="alert"
@@ -11,6 +11,7 @@
             {{ sessionErrorMsg }}
           </div>
           <div>
+            <!--The form inputs for recording a session -->
           <label for="isbn" class="sr-only">ISBN: </label>
           <input
             type="text"
@@ -25,11 +26,11 @@
           <div>
           <label for="date" class="sr-only">Date: </label>
           <input
-            type="text"
+            type="date"
             id="date"
             class="form-control"
             placeholder="Date"
-            v-model="session.date"
+            v-model="session.daySession"
             required
             autofocus
           />
@@ -37,11 +38,11 @@
           <div>
           <label for="time_start" class="sr-only">Time Start: </label>
           <input
-            type="text"
+            type="time"
             id="time_start"
             class="form-control"
             placeholder="Time Start"
-            v-model="session.time_start"
+            v-model="session.timeStart"
             required
             autofocus
           />
@@ -49,11 +50,11 @@
           <div>
           <label for="time_end" class="sr-only">Time End: </label>
           <input
-            type="text"
+            type="time"
             id="time_end"
             class="form-control"
             placeholder="Time End"
-            v-model="session.time_end"
+            v-model="session.timeEnd"
             required
             autofocus
           />
@@ -64,7 +65,7 @@
             type="text"
             id="format"
             class="form-control"
-            placeholder="Format"
+            placeholder="Paper, digital, etc."
             v-model="session.format"
             required
             autofocus
@@ -94,6 +95,7 @@
 import authService from "../services/AuthService";
 
 export default {
+  // Saving a session object
     name: "session",
     data(){
         return{
@@ -111,8 +113,9 @@ export default {
         };
     },
     methods:{
-        startSession() {
-            this.session.userId = this.$store.state.user.userId;
+      //Calls the createSession service to send the session object to the server
+        newSession() {
+            this.session.userId = this.$store.state.user.id;
             authService
               .createSession(this.session)
               .then((response) => {

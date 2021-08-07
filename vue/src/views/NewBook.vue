@@ -1,60 +1,56 @@
 <template>
-
   <div>
-    <div class="books" >
-    <form class="form-register-new-book" @submit.prevent="create">
-      <h2 class="book-title">Add Book to Library</h2>
-      <label for="title" class="sr-only">Title: </label>
-      <input
-        type="text"
-        id="title"
-        class="form-control"
-        placeholder="Title"
-        v-model="book.title"
-        required
-        autofocus
-      />
-      <label for="author" class="sr-only">Author: </label>
-      <input
-        type="text"
-        id="author"
-        class="form-control"
-        placeholder="Author"
-        v-model="book.author"
-        required
-        autofocus
-      />
-      <label for="isbn" class="sr-only">ISBN: </label>
-      <input
-        type="text"
-        id="isbn"
-        class="form-control"
-        placeholder="ISBN"
-        v-model="book.isbn"
-        required
-        autofocus
-      />
+    <div class="books">
+      <form class="form-register-new-book" @submit.prevent="create">
+        <h2 class="book-title">Add Book to Library</h2>
+        <label for="title" class="sr-only">Title: </label>
+        <input
+          type="text"
+          id="title"
+          class="form-control"
+          placeholder="Title"
+          v-model="book.title"
+          required
+          autofocus
+        />
+        <label for="author" class="sr-only">Author: </label>
+        <input
+          type="text"
+          id="author"
+          class="form-control"
+          placeholder="Author"
+          v-model="book.author"
+          required
+          autofocus
+        />
+        <label for="isbn" class="sr-only">ISBN: </label>
+        <input
+          type="text"
+          id="isbn"
+          class="form-control"
+          placeholder="ISBN"
+          v-model="book.isbn"
+          required
+          autofocus
+        />
 
-      <button class="btn btn-lg btn-primary btn-block" type="submit">
+        <button class="btn btn-lg btn-primary btn-block" type="submit">
           Add Book
-      </button>
-    </form>
+        </button>
+      </form>
 
-    <img
-      v-if="book.isbn"
-      v-bind:src="
-        'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'
-      "
-    />
+      <img
+        v-if="book.isbn"
+        v-bind:src="
+          'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'
+        "
+      />
     </div>
-
-
   </div>
 </template>
 
 <script>
 import authService from "../services/AuthService";
-
 
 export default {
   name: "newBook",
@@ -69,7 +65,6 @@ export default {
       bookCreationErrorMsg: "There was a problem adding a book.",
     };
   },
-
 
   methods: {
     toggleBookRead(book) {
@@ -106,7 +101,6 @@ export default {
   height: 500px;
   margin: 30px;
   align-content: center;
-
 }
 
 .books.read {
@@ -120,9 +114,4 @@ export default {
 .books .book-author {
   font-size: 1rem;
 }
-
-
-
-
-
 </style>

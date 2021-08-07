@@ -8,8 +8,8 @@ public class SessionDTO {
     private Long userId;
     private String isbn;
     private LocalDate daySession;
-    private LocalTime startTime;
-    private LocalTime endTime;
+    private LocalTime timeStart;
+    private LocalTime timeEnd;
     private String format;
     private String notes;
 
@@ -37,20 +37,20 @@ public class SessionDTO {
         this.daySession = daySession;
     }
 
-    public LocalTime getStartTime() {
-        return startTime;
+    public LocalTime getTimeStart() {
+        return timeStart;
     }
 
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
+    public void setTimeStart(LocalTime timeStart) {
+        this.timeStart = timeStart;
     }
 
-    public LocalTime getEndTime() {
-        return endTime;
+    public LocalTime getTimeEnd() {
+        return timeEnd;
     }
 
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
+    public void setTimeEnd(LocalTime timeEnd) {
+        this.timeEnd = timeEnd;
     }
 
     public String getFormat() {

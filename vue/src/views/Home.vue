@@ -15,7 +15,7 @@
       class="text-center"
     >
       <label for="family-name" class="sr-only"
-        >Family name: {{ this.$store.state.user.familyName }}
+        >Family Name: {{ this.$store.state.user.familyName }}
       </label>
       <!-- Add list of family member usernames here -->
       <label
@@ -23,7 +23,7 @@
         class="sr-only"
         v-for="name in familyMembers"
         v-bind:key="name"
-        >Family members: {{ name }}
+        >Family Members: {{ name }}
       </label>
       <div class="parentOptions">
         <button v-on:click="$router.push({ name: 'register' })">
