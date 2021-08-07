@@ -38,10 +38,10 @@ public class JdbcSessionDao implements SessionDao {
 
 
     @Override
-    public boolean createSession(String isbn, Long userId, LocalDate daySession, LocalTime timeStart, LocalTime timeEnd, String format, String notes) {
+    public boolean createSession(String isbn, Long userId, LocalDate daySession, LocalTime timeStart, LocalTime timeEnd, Long pagesRead, String format, String notes) {
         boolean sessionCreated = false;
 
-        String insertSession = "insert into sessions (isbn, user_id, day_session, time_start, time_end, format, notes) values (?, ?, ?, ?, ?, ?, ?);";
+        String insertSession = "insert into sessions (isbn, user_id, day_session, time_start, time_end, pages_read, format, notes) values (?, ?, ?, ?, ?, ?, ?, ?);";
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         String id_column = "session_id";
@@ -52,8 +52,9 @@ public class JdbcSessionDao implements SessionDao {
             ps.setDate(3, Date.valueOf(daySession));
             ps.setTime(4, Time.valueOf(timeStart));
             ps.setTime(5, Time.valueOf(timeEnd));
-            ps.setString(6, format);
-            ps.setString(7, notes);
+            ps.setLong(6, pagesRead);
+            ps.setString(7, format);
+            ps.setString(8, notes);
             return ps;
         }
         , keyHolder)==1;
@@ -69,6 +70,7 @@ public class JdbcSessionDao implements SessionDao {
         session.setDaySession(rowSet.getDate("day_session").toLocalDate());
         session.setTimeStart(rowSet.getTime("time_start").toLocalTime());
         session.setTimeEnd(rowSet.getTime("time_end").toLocalTime());
+        session.setPagesRead(rowSet.getLong("pages_read"));
         session.setFormat(rowSet.getString("format"));
         session.setNotes(rowSet.getString("notes"));
 

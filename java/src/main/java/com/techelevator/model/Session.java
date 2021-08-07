@@ -10,18 +10,20 @@ public class Session {
     private LocalDate daySession;
     private LocalTime timeStart;
     private LocalTime timeEnd;
+    private Long pagesRead;
     private String format;
     private String notes;
 
     public Session(){};
 
-    public Session(Long sessionId, Long userId, String isbn, LocalDate daySession, LocalTime timeStart, LocalTime timeEnd, String format, String notes) {
+    public Session(Long sessionId, Long userId, String isbn, LocalDate daySession, LocalTime timeStart, LocalTime timeEnd, Long pagesRead, String format, String notes) {
         this.sessionId = sessionId;
         this.userId = userId;
         this.isbn = isbn;
         this.daySession = daySession;
         this.timeStart = timeStart;
         this.timeEnd = timeEnd;
+        this.pagesRead = pagesRead;
         this.format = format;
         this.notes = notes;
     }
@@ -72,6 +74,14 @@ public class Session {
 
     public void setTimeEnd(LocalTime timeEnd) {
         this.timeEnd = timeEnd;
+    }
+
+    public Long getPagesRead() {
+        return pagesRead;
+    }
+
+    public void setPagesRead(Long pagesRead) {
+        this.pagesRead = pagesRead;
     }
 
     public String getFormat() {

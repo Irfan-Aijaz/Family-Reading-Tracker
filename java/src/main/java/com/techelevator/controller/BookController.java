@@ -26,7 +26,7 @@ public class BookController {
             Book book = bookDao.findByIsbn(newBook.getIsbn());
             throw new BookAlreadyExistsException();
         } catch (BookAlreadyExistsException e) {
-            bookDao.createBook(newBook.getTitle(),newBook.getAuthor(),newBook.getIsbn());
+            bookDao.createBook(newBook.getTitle(),newBook.getAuthor(),newBook.getIsbn(), newBook.getPagesTotal());
         }
     }
 

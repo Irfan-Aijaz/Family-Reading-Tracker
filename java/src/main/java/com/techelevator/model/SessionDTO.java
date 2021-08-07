@@ -10,6 +10,7 @@ public class SessionDTO {
     private LocalDate daySession;
     private LocalTime timeStart;
     private LocalTime timeEnd;
+    private Long pagesRead;
     private String format;
     private String notes;
 
@@ -51,6 +52,14 @@ public class SessionDTO {
 
     public void setTimeEnd(LocalTime timeEnd) {
         this.timeEnd = timeEnd;
+    }
+
+    public Long getPagesRead() {
+        return pagesRead;
+    }
+
+    public void setPagesRead(Long pagesRead) {
+        this.pagesRead = pagesRead;
     }
 
     public String getFormat() {

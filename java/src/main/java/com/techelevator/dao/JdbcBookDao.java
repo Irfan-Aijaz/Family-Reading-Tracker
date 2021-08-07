@@ -22,10 +22,10 @@ public class JdbcBookDao implements BookDao {
     public JdbcBookDao(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate; }
 
     @Override
-    public boolean createBook(String title, String author, String isbn) {
+    public boolean createBook(String title, String author, String isbn, Long pagesTotal) {
         boolean bookCreated = false;
 
-        String insertBook = "insert into books (title, author, isbn) values (?,?,?);";
+        String insertBook = "insert into books (title, author, isbn, pages_total) values (?,?,?,?);";
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         String id_column = "isbn";
@@ -34,6 +34,7 @@ public class JdbcBookDao implements BookDao {
             ps.setString(1, title);
             ps.setString(2, author);
             ps.setString(3, isbn);
+            ps.setLong(4,pagesTotal);
             return ps;
         }
         , keyHolder) == 1;
@@ -70,6 +71,7 @@ public class JdbcBookDao implements BookDao {
         book.setIsbn(bk.getString("isbn"));
         book.setTitle(bk.getString("title"));
         book.setAuthor(bk.getString("author"));
+        book.setPagesTotal(bk.getLong("pages_total"));
 
         return book;
     }

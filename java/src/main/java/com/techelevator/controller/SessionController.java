@@ -18,6 +18,6 @@ public class SessionController {
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/create_session", method = RequestMethod.POST)
     public void createSession(@Valid @RequestBody SessionDTO newSession) {
-            sessionDao.createSession(newSession.getIsbn(), newSession.getUserId(), newSession.getDaySession(), newSession.getTimeStart(), newSession.getTimeEnd(), newSession.getFormat(), newSession.getNotes());
+            sessionDao.createSession(newSession.getIsbn(), newSession.getUserId(), newSession.getDaySession(), newSession.getTimeStart(), newSession.getTimeEnd(), newSession.getPagesRead(), newSession.getFormat(), newSession.getNotes());
     }
 }

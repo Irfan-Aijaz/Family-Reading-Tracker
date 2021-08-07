@@ -6,14 +6,16 @@ public class Book {
     private String author;
     private String summary;
     private String genre;
+    private Long pagesTotal;
 
 
     public Book() {}
 
-    public Book(String isbn, String title, String author) {
+    public Book(String isbn, String title, String author, Long pagesTotal) {
         this.isbn = isbn;
         this.title = title;
         this.author = author;
+        this.pagesTotal = pagesTotal;
     }
 
     public String getIsbn() {
@@ -54,5 +56,13 @@ public class Book {
 
     public void setGenre(String genre) {
         this.genre = genre;
+    }
+
+    public Long getPagesTotal() {
+        return pagesTotal;
+    }
+
+    public void setPagesTotal(Long pagesTotal) {
+        this.pagesTotal = pagesTotal;
     }
 }

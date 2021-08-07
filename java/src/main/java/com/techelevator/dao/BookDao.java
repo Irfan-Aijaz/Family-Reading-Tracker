@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface BookDao {
 
-    boolean createBook(String title, String author, String isbn);
+    boolean createBook(String title, String author, String isbn, Long pagesTotal);
 
     Book findByIsbn(String isbn);
 
