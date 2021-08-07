@@ -43,51 +43,7 @@
         required
         autofocus
       />
-    </form>
-    <div class="books">
-      <form class="form-register-new-book" @submit.prevent="create">
-        <h2 class="book-title">Add Book to Library</h2>
-        <label for="title" class="sr-only">Title: </label>
-        <input
-          type="text"
-          id="title"
-          class="form-control"
-          placeholder="Title"
-          v-model="book.title"
-          required
-          autofocus
-        />
-        <label for="author" class="sr-only">Author: </label>
-        <input
-          type="text"
-          id="author"
-          class="form-control"
-          placeholder="Author"
-          v-model="book.author"
-          required
-          autofocus
-        />
-        <label for="isbn" class="sr-only">ISBN: </label>
-        <input
-          type="text"
-          id="isbn"
-          class="form-control"
-          placeholder="ISBN"
-          v-model="book.isbn"
-          required
-          autofocus
-        />
-        <label for="pages_total" class="sr-only">Total Pages: </label>
-      <input
-        type="text"
-        id="pages_total"
-        class="form-control"
-        placeholder="20, 300, etc."
-        v-model="book.pagesTotal"
-        required
-        autofocus
-      />
-
+    
         <button class="btn btn-lg btn-primary btn-block" type="submit">
           Add Book
         </button>
@@ -99,7 +55,13 @@
           'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'
         "
       />
+      <div>
     </div>
+    <!-- 
+      *add a way to display book cards of the books added
+      *each book card should have button options to "remove" book from libray and a button to
+       mark book "start reading" to move it into the "in progress status"
+    -->   
   </div>
 </template>
 
@@ -114,7 +76,7 @@ export default {
         isbn: "",
         title: "",
         author: "",
-        pagesTotal: ""
+        pagesTotal: "",
       },
       bookCreationErrors: false,
       bookCreationErrorMsg: "There was a problem adding a book.",
