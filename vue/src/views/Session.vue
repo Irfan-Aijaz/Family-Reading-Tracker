@@ -36,6 +36,18 @@
           />
           </div>
           <div>
+          <label for="pages" class="sr-only">Pages Read: </label>
+          <input
+            type="text"
+            id="pages"
+            class="form-control"
+            placeholder="Pages Read"
+            v-model="session.pagesRead"
+            required
+            autofocus
+          />
+          </div>
+          <div>
           <label for="time_start" class="sr-only">Time Start: </label>
           <input
             type="time"
@@ -105,6 +117,7 @@ export default {
                 daySession:"",
                 timeStart:"",
                 timeEnd:"",
+                pagesRead:"",
                 format:"",
                 notes:"",
             },
