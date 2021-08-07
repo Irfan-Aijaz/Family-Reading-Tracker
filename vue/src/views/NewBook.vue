@@ -43,7 +43,7 @@
         required
         autofocus
       />
-  <div>
+    </form>
     <div class="books">
       <form class="form-register-new-book" @submit.prevent="create">
         <h2 class="book-title">Add Book to Library</h2>
