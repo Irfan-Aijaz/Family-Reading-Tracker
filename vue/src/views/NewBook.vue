@@ -77,6 +77,16 @@
           required
           autofocus
         />
+        <label for="pages_total" class="sr-only">Total Pages: </label>
+      <input
+        type="text"
+        id="pages_total"
+        class="form-control"
+        placeholder="20, 300, etc."
+        v-model="book.pagesTotal"
+        required
+        autofocus
+      />
 
         <button class="btn btn-lg btn-primary btn-block" type="submit">
           Add Book
