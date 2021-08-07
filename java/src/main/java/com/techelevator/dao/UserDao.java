@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.User;
+import com.techelevator.model.UserDTO;
 
 import java.util.List;
 
@@ -23,4 +24,8 @@ public interface UserDao {
     String getFamilyNameById(Long familyId);
 
     List<String> getUsernamesByFamilyId(Long familyId);
+
+    List<Long> getUserIdsByFamilyId(Long familyId);
+
+    List<UserDTO> getUserDTOsByFamilyId(Long familyId);
 }

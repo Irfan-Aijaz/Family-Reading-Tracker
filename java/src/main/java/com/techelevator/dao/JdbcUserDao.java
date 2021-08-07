@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.techelevator.model.UserDTO;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -52,6 +53,22 @@ public class JdbcUserDao implements UserDao {
     }
 
     @Override
+    public List<UserDTO> getUserDTOsByFamilyId(Long familyId) {
+        List<UserDTO> listOfUserDTOs = new ArrayList<>();
+        String sql = "SELECT username, user_id, family_id FROM users WHERE family_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, familyId);
+        while (results.next()) {
+            UserDTO userDTO = new UserDTO();
+            userDTO.setUserId(results.getLong("user_id"));
+            userDTO.setFamilyId(results.getLong("family_id"));
+            userDTO.setUsername(results.getString("username"));
+            listOfUserDTOs.add(userDTO);
+
+        }
+        return listOfUserDTOs;
+    }
+
+    @Override
     public List<String> getUsernamesByFamilyId(Long familyId) {
         List<String> listOfUsernames = new ArrayList<>();
         String sql = "SELECT username " +
@@ -77,6 +94,18 @@ public class JdbcUserDao implements UserDao {
         }
 
         return users;
+    }
+
+    @Override
+    public List<Long> getUserIdsByFamilyId(Long familyId) {
+        List<Long> userIds = new ArrayList<>();
+        String sql = "SELECT user_id FROM users WHERE family_id = ?;";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, familyId);
+        while(results.next()) {
+            userIds.add(results.getLong("user_id"));
+        }
+        return userIds;
     }
 
     @Override

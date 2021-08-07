@@ -30,7 +30,9 @@
           Add Family Member
         </button>
         <button v-on:click="$router.push({ name: 'newBook' })">Add Book</button>
-        <button v-on:click="$router.push({name: 'session'})">Record Session</button>
+        <button v-on:click="$router.push({ name: 'session' })">
+          Record Session
+        </button>
         <button v-on:click="$router.push({ name: 'inProgress' })">
           In Progress
         </button>
@@ -55,6 +57,9 @@
         <button v-on:click="$router.push({ name: 'newBook' })">Add Book</button>
         <button v-on:click="$router.push({ name: 'inProgress' })">
           In Progress
+        </button>
+        <button v-on:click="$router.push({ name: 'session' })">
+          Record Session
         </button>
         <button v-on:click="$router.push({ name: 'completed' })">
           Completed

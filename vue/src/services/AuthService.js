@@ -26,6 +26,13 @@ export default {
     return axios.post('/create_session', session)
   },
 
+  getUserIdsByFamilyId(familyId) {
+    return axios.get('/retrieve_user_ids/' + familyId)
+  },
+  getUserDTOsByFamilyId(familyId) {
+    return axios.get('/retrieve_user_dtos/' + familyId)
+  }
+
 
 
 }
