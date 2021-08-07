@@ -3,7 +3,7 @@
     <!-- The form labels for adding a new book-->
     <form class="form-register-new-book" @submit.prevent="create">
       <h2 class="book-title">Add Book to Library</h2>
-      <label for="title" class="sr-only">Title: </label>
+      <label for="title" class="sr-only"> Title: </label>
       <input
         type="text"
         id="title"
@@ -13,7 +13,7 @@
         required
         autofocus
       />
-      <label for="author" class="sr-only">Author: </label>
+      <label for="author" class="sr-only"> Author: </label>
       <input
         type="text"
         id="author"
@@ -23,7 +23,7 @@
         required
         autofocus
       />
-      <label for="isbn" class="sr-only">ISBN: </label>
+      <label for="isbn" class="sr-only"> ISBN: </label>
       <input
         type="text"
         id="isbn"
@@ -33,7 +33,7 @@
         required
         autofocus
       />
-      <label for="pages_total" class="sr-only">Total Pages: </label>
+      <label for="pages_total" class="sr-only"> Total Pages: </label>
       <input
         type="text"
         id="pages_total"
@@ -45,7 +45,7 @@
       />
     
         <button class="btn btn-lg btn-primary btn-block" type="submit">
-          Add Book
+           Add Book
         </button>
       </form>
 
@@ -62,6 +62,7 @@
       *each book card should have button options to "remove" book from libray and a button to
        mark book "start reading" to move it into the "in progress status"
     -->   
+    
   </div>
 </template>
 
@@ -114,10 +115,13 @@ export default {
 .books {
   border: 2px solid black;
   border-radius: 10px;
-  width: 250px;
-  height: 500px;
+  width: 1100px;
+  height: 300px;
   margin: 30px;
   align-content: center;
+  position: absolute;
+  top: 15%;
+  left: 5%;
 }
 
 .books.read {

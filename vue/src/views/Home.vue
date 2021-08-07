@@ -23,8 +23,9 @@
         class="sr-only"
         v-for="name in familyMembers"
         v-bind:key="name"
-        >Family Members: {{ name }}
+        >Family Member: {{ name }}
       </label>
+      <!--start app button choices here -->
       <div class="parentOptions">
         <button v-on:click="$router.push({ name: 'register' })">
           Add Family Member
@@ -53,6 +54,7 @@
       <label for="family-name" class="sr-only"
         >Family name: {{ this.$store.state.user.familyName }}
       </label>
+      <!--start app button choices here -->
       <div class="childOptions">
         <button v-on:click="$router.push({ name: 'newBook' })">Add Book</button>
         <button v-on:click="$router.push({ name: 'inProgress' })">
@@ -153,5 +155,9 @@ export default {
 .familyName {
   text-decoration-color: blanchedalmond;
   font-size: 40px;
+}
+.sr-only{
+  text-decoration-color: cornsilk;
+  
 }
 </style>
