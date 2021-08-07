@@ -3,11 +3,16 @@ package com.techelevator.controller;
 import com.techelevator.dao.BookDao;
 import com.techelevator.model.Book;
 import com.techelevator.model.BookAlreadyExistsException;
+import com.techelevator.model.User;
 import org.springframework.http.HttpStatus;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
+import javax.sql.DataSource;
 
 @RestController
 @CrossOrigin
@@ -28,6 +33,12 @@ public class BookController {
         } catch (BookAlreadyExistsException e) {
             bookDao.createBook(newBook.getTitle(),newBook.getAuthor(),newBook.getIsbn(), newBook.getPagesTotal());
         }
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(value = "/get_all_books", method = RequestMethod.GET)
+    public List<Book> getAllBooks() {
+        return bookDao.findAll();
     }
 
 //    @RequestMapping(value = "/retrieve_books_progress/{id}", method = RequestMethod.GET)
