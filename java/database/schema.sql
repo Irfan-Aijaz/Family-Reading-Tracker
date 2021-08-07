@@ -50,7 +50,8 @@ CREATE TABLE books (
 CREATE TABLE user_book (
 	user_id int NOT NULL,
 	isbn varchar(20) NOT NULL,
-	pages_read int,
+	pages_read int NOT NULL,
+	minutes_read int NOT NULL,
 	completed boolean,
 	CONSTRAINT PK_user_book PRIMARY KEY (user_id, isbn),
 	CONSTRAINT FK_user_book_user FOREIGN KEY (user_id) REFERENCES users (user_id),

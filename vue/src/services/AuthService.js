@@ -26,6 +26,10 @@ export default {
     return axios.post('/create_session', session)
   },
 
+  updateUserBook(session) {
+    return axios.put('/update_user_book', session)
+  },
+
   getAllBooks(book) {
     return axios.get('/get_all_books', book)
   },
@@ -33,6 +37,7 @@ export default {
   getUserIdsByFamilyId(familyId) {
     return axios.get('/retrieve_user_ids/' + familyId)
   },
+
   getUserDTOsByFamilyId(familyId) {
     return axios.get('/retrieve_user_dtos/' + familyId)
   }

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.Time;
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -35,8 +36,6 @@ public class JdbcSessionDao implements SessionDao {
         return sessions;
     }
 
-
-
     @Override
     public boolean createSession(String isbn, Long userId, LocalDate daySession, LocalTime timeStart, LocalTime timeEnd, Long pagesRead, String format, String notes) {
         boolean sessionCreated = false;
@@ -60,6 +59,39 @@ public class JdbcSessionDao implements SessionDao {
         , keyHolder)==1;
 
         return sessionCreated;
+    }
+
+
+    @Override
+    public boolean updateUserBook(Long userId, String isbn, Long pagesRead, Long minutesRead) {
+        boolean updatedUserBook = false;
+        String checkReading = "SELECT user_id, isbn " +
+                "FROM user_book " +
+                "WHERE user_id = ? AND isbn = ?;";
+        SqlRowSet result = jdbcTemplate.queryForRowSet(checkReading, userId, isbn);
+
+        if (result.next()) {
+            String updateAUserBook = "UPDATE user_book SET pages_read = pages_read + ?, minutes_read = minutes_read + ? " +
+                    "WHERE user_id = ? AND isbn = ?";
+            jdbcTemplate.update(updateAUserBook, pagesRead, minutesRead, userId, isbn);
+            updatedUserBook = true;
+        } else {
+            String insertUserBook = "INSERT INTO user_book (user_id, isbn, pages_read, minutes_read, completed) values (?,?,?,?,?)";
+            String id_column = "user_id";
+            GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+            updatedUserBook = jdbcTemplate.update(con -> {
+                PreparedStatement ps = con.prepareStatement(insertUserBook, new String[]{id_column});
+                ps.setLong(1,userId);
+                ps.setString(2,isbn);
+                ps.setLong(3,pagesRead);
+                ps.setLong(4,minutesRead);
+                ps.setBoolean(5,false);
+                return ps;
+            }
+            , keyHolder) == 1;
+        }
+        return updatedUserBook;
+
     }
 
     private Session mapRowToSession(SqlRowSet rowSet) {

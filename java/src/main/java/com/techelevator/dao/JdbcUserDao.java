@@ -161,7 +161,7 @@ public class JdbcUserDao implements UserDao {
     public boolean create(String username, String password, String role, Long familyId) {
         boolean userCreated = false;
         // create user
-        String insertUser = "insert into users (username,password_hash,role,family_id) values(?,?,?,?)";
+        String insertUser = "INSERT INTO users (username,password_hash,role,family_id) values(?,?,?,?)";
         String password_hash = new BCryptPasswordEncoder().encode(password);
         String ssRole = "ROLE_" + role.toUpperCase();
 

@@ -169,6 +169,23 @@ export default {
             this.sessionErrorMsg = "Bad Request: Validation Errors";
           }
         });
+        authService
+        .updateUserBook(this.session)
+        .then((response) => {
+          if (response.status == 201) {
+            this.$router.push({
+              path: "/",
+              query: { createSession: "success" },
+            });
+          }
+        })
+        .catch((error) => {
+          const response = error.response;
+          this.sessionErrors = true;
+          if (response.status === 400) {
+            this.sessionErrorMsg = "Bad Request: Update User Book Errors";
+          }
+        });
     },
   },
   created() {
