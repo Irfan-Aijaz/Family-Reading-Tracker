@@ -7,6 +7,8 @@ import Register from '../views/Register.vue'
 import store from '../store/index'
 import NewBook from '../views/NewBook.vue'
 import Session from '../views/Session.vue'
+import SessionDetails from '../views/SessionDetails'
+import Sessions from '../views/Sessions'
 
 Vue.use(Router)
 
@@ -79,6 +81,22 @@ const router = new Router({
         requiresAuth: true
       }
     },
+    {
+      path: "/view_sessions/:id",
+      name: "session details",
+      component: SessionDetails,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/view_sessions",
+      name: "view completed sessions",
+      component: Sessions,
+      meta: {
+        requiresAuth: true
+      }
+    }
   ]
 })
 

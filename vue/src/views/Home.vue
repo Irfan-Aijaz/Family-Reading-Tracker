@@ -61,6 +61,9 @@
         <button v-on:click="$router.push({ name: 'session' })">
           Record Session
         </button>
+        <button v-on:click="$router.push({ name: 'view completed sessions'})">
+          View Reading Activity
+        </button>
         <button v-on:click="$router.push({ name: 'completed' })">
           Completed
         </button>
