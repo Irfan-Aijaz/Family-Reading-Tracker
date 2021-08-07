@@ -152,5 +152,11 @@ export default {
 </script>
 
 <style>
-
+.form-session {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 5px;
+  justify-items: center;
+  align-items: start;
+}
 </style>

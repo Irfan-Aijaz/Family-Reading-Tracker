@@ -111,14 +111,19 @@ export default {
 .parentOptions {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 10px;
+  gap: 0px;
   justify-items: center;
   align-items: start;
   position: absolute;
-  top: 20px;
-  left: 10px;
+  top: 10px;
+  left: 0px;
   font-size: 25px;
   text-decoration-color: cornsilk;
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 200px;
+  height: 300px;
+  margin: 10px;
 }
 .childOptions {
   display: grid;
@@ -131,6 +136,11 @@ export default {
   left: 10px;
   font-size: 25px;
   text-decoration-color: cornsilk;
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 250px;
+  height: 500px;
+  margin: 30px;
 }
 .familyName {
   text-decoration-color: blanchedalmond;
