@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Session;
+import com.techelevator.model.SessionListDTO;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -14,5 +15,7 @@ public interface SessionDao {
     List<Session> findAllSessionsInFamily(Long familyId);
 
     boolean updateUserBook(Long userId, String isbn, Long pagesRead, Long minutesRead);
+
+    List<SessionListDTO> getSessionsListByUserId(Long userId);
 
 }

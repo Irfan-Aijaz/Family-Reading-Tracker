@@ -9,15 +9,15 @@
               </tr>
           </thead>
           <tbody>
-              <tr v-for="session in sessions" v-bind:key="session.id" v-on:click="$router.push({ name: 'session details', params: {id: session.id } })"><!-- this should take a session id as a parameter-->
+              <tr v-for="session in sessions" v-bind:key="session.sessionId" v-on:click="$router.push({ name: 'session details', params: {id: session.sessionId } })"><!-- this should take a session id as a parameter-->
                   <td>
                       {{session.title}}
                   </td>
                   <td>
-                      {{session.time}}
+                      {{session.minutesRead}} minutes
                   </td>
                   <td>
-                      {{session.dayOfSession}}
+                      {{session.daySession}}
                   </td>
               </tr>
           </tbody>
@@ -26,26 +26,47 @@
 </template>
 
 <script>
+import authService from "../services/AuthService";
 export default {
   name: "sessions",
   data() {
     return {
       sessions: [
-          {
-              id: 1,
-              title: "harry potter",
-              time: 10,
-              dayOfSession: "8/7/2021"
-          },
-          {
-              id: 2,
-              title: "harry potter 2",
-              time: 11,
-              dayOfSession: "8/6/2021"
-          }
+        //   {
+        //       id: 1,
+        //       title: "harry potter",
+        //       time: 10,
+        //       dayOfSession: "8/7/2021"
+        //   },
+        //   {
+        //       id: 2,
+        //       title: "harry potter 2",
+        //       time: 11,
+        //       dayOfSession: "8/6/2021"
+        //   }
       ],
     };
   },
+  methods: {
+      loadSessionsByUserId() {
+          authService
+            .getSessionsByUserId(this.$store.state.user.id)
+            .then((response) => {
+                if (response.status == 200) {
+                    this.sessions = response.data;
+                }
+            })
+            .catch((error) => {
+                const response = error.response;
+                if (response.status === 401) {
+                    //
+                }
+            });
+      }
+  },
+  created() {
+      this.loadSessionsByUserId();
+  }
 };
 </script>
    

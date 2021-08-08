@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Session;
+import com.techelevator.model.SessionListDTO;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
@@ -14,6 +15,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.time.temporal.ChronoUnit.MINUTES;
 
 @Service
 public class JdbcSessionDao implements SessionDao {
@@ -32,6 +35,20 @@ public class JdbcSessionDao implements SessionDao {
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, familyId);
         while (results.next()) {
             sessions.add(mapRowToSession(results));
+        }
+        return sessions;
+    }
+    @Override
+    public List<SessionListDTO> getSessionsListByUserId(Long userId) {
+        List<SessionListDTO> sessions = new ArrayList<>();
+        String sql = "SELECT books.title, sessions.session_id, sessions.time_start, sessions.time_end, sessions.day_session " +
+                     "FROM sessions " +
+                     "INNER JOIN books ON books.isbn = sessions.isbn " +
+                     "WHERE sessions.user_id = ?;";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        while (results.next()) {
+            sessions.add(mapRowToSessionListDTO(results));
         }
         return sessions;
     }
@@ -92,6 +109,15 @@ public class JdbcSessionDao implements SessionDao {
         }
         return updatedUserBook;
 
+    }
+
+    private SessionListDTO mapRowToSessionListDTO(SqlRowSet rowSet) {
+        SessionListDTO sessionListDTO = new SessionListDTO();
+        sessionListDTO.setSessionId(rowSet.getLong("session_id"));
+        sessionListDTO.setMinutesRead(MINUTES.between(rowSet.getTime("time_start").toLocalTime(),rowSet.getTime("time_end").toLocalTime()));
+        sessionListDTO.setTitle(rowSet.getString("title"));
+        sessionListDTO.setDaySession(rowSet.getDate("day_session").toLocalDate());
+        return sessionListDTO;
     }
 
     private Session mapRowToSession(SqlRowSet rowSet) {

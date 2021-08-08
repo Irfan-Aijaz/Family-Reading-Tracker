@@ -40,6 +40,10 @@ export default {
 
   getUserDTOsByFamilyId(familyId) {
     return axios.get('/retrieve_user_dtos/' + familyId)
+  },
+
+  getSessionsByUserId(userId) {
+    return axios.get('/get_sessions_by_user_id/' + userId)
   }
 
 

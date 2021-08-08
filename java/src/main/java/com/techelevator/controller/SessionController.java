@@ -1,13 +1,16 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.SessionDao;
+import com.techelevator.model.Session;
 import com.techelevator.model.SessionDTO;
+import com.techelevator.model.SessionListDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.Duration;
 import java.time.LocalTime;
+import java.util.List;
 
 import static java.time.temporal.ChronoUnit.MINUTES;
 
@@ -30,5 +33,10 @@ public class SessionController {
         Long minutesRead = (MINUTES.between(newSession.getTimeStart(),newSession.getTimeEnd()));
 
         sessionDao.updateUserBook(newSession.getUserId(), newSession.getIsbn(), newSession.getPagesRead(), minutesRead);
+    }
+
+    @RequestMapping(value = "/get_sessions_by_user_id/{user_id}", method = RequestMethod.GET)
+    public List<SessionListDTO> getSessionsByUserId(@PathVariable("user_id") Long userId) {
+        return sessionDao.getSessionsListByUserId(userId);
     }
 }
