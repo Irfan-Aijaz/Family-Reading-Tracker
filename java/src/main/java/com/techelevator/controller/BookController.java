@@ -3,16 +3,12 @@ package com.techelevator.controller;
 import com.techelevator.dao.BookDao;
 import com.techelevator.model.Book;
 import com.techelevator.model.BookAlreadyExistsException;
-import com.techelevator.model.User;
+import com.techelevator.model.UserBook;
 import org.springframework.http.HttpStatus;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
-import javax.sql.DataSource;
 
 @RestController
 @CrossOrigin
@@ -41,15 +37,16 @@ public class BookController {
         return bookDao.findAll();
     }
 
-//    @RequestMapping(value = "/retrieve_books_progress/{id}", method = RequestMethod.GET)
-//<<<<<<< HEAD
-//    public List<String> userBooks(@PathVariable Long id) {
 
-//=======
-//    public List<Book> userBooks(@PathVariable Long id) {
-//>>>>>>> 9c230da5679e3af404b32b418a90d3ad9b0bcd92
-//        return userDao.getUsernamesByFamilyId(id);
-//
-//    }
+    @RequestMapping(value = "/delete_book", method = RequestMethod.DELETE)
+    public void deleteBook(@PathVariable String isbn) {
+
+    }
+
+
+    @RequestMapping(value = "/retrieve_books_progress/{user_id}", method = RequestMethod.GET)
+    public List<UserBook> userBooks(@PathVariable("user_id") Long userId) {
+        return bookDao.findAllUserBooksInProgress(userId);
+    }
 
 }

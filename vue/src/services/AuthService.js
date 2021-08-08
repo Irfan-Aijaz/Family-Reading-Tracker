@@ -48,6 +48,10 @@ export default {
 
   getSessionDetailsBySessionId(sessionId) {
     return axios.get('/get_session_details_by_session_id/' + sessionId)
+  },
+
+  getUserBooksProgress(userId) {
+    return axios.get('/retrieve_books_progress/' + userId)
   }
 
 

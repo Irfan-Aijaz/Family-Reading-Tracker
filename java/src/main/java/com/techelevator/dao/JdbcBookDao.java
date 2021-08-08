@@ -3,11 +3,10 @@ package com.techelevator.dao;
 import com.techelevator.model.Book;
 import com.techelevator.model.BookAlreadyExistsException;
 import com.techelevator.model.User;
+import com.techelevator.model.UserBook;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.sql.PreparedStatement;
@@ -43,9 +42,34 @@ public class JdbcBookDao implements BookDao {
     }
 
     @Override
+    public boolean deleteBook(String isbn) {
+        boolean delete = false;
+
+
+        return delete;
+    }
+
+    @Override
+    public List<UserBook> findAllUserBooksInProgress(Long userId) {
+        List<UserBook> listOfUserBooks = new ArrayList<>();
+        String sql = "SELECT books.title, user_id, user_book.isbn, pages_read, completed " +
+                "FROM user_book " +
+                "INNER JOIN books ON user_book.isbn = books.isbn " +
+                "WHERE user_id = ? AND completed = false";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        while(results.next()) {
+            UserBook userBook = mapRowToUserBook(results);
+            listOfUserBooks.add(userBook);
+        }
+
+
+        return listOfUserBooks;
+    }
+
+    @Override
     public List<Book> findAll() {
         List<Book> books = new ArrayList<>();
-        String sql = "select * from books";
+        String sql = "SELECT * FROM books";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while(results.next()) {
@@ -74,5 +98,16 @@ public class JdbcBookDao implements BookDao {
         book.setPagesTotal(bk.getLong("pages_total"));
 
         return book;
+    }
+
+    private UserBook mapRowToUserBook(SqlRowSet userBook) {
+        UserBook currentUserBook = new UserBook();
+        currentUserBook.setTitle(userBook.getString("title"));
+        currentUserBook.setUserId(userBook.getLong("user_id"));
+        currentUserBook.setIsbn(userBook.getString("isbn"));
+        currentUserBook.setPagesRead(userBook.getInt("pages_read"));
+        currentUserBook.setCompleted(userBook.getBoolean("completed"));
+
+        return currentUserBook;
     }
 }

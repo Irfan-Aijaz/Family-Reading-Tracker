@@ -9,6 +9,7 @@ import NewBook from '../views/NewBook.vue'
 import Session from '../views/Session.vue'
 import SessionDetails from '../views/SessionDetails'
 import Sessions from '../views/Sessions'
+import InProgress from '../views/InProgress'
 
 Vue.use(Router)
 
@@ -93,6 +94,14 @@ const router = new Router({
       path: "/view_sessions",
       name: "view completed sessions",
       component: Sessions,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/retrieve_books_progress/:id",
+      name: "inProgress",
+      component: InProgress,
       meta: {
         requiresAuth: true
       }
