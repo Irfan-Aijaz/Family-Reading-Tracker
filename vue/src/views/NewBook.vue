@@ -1,51 +1,52 @@
 <template>
-  <div class="books">
-    <!-- The form labels for adding a new book-->
-    <form class="form-register-new-book" @submit.prevent="create">
-      <h2 class="book-title">Add Book to Library</h2>
-      <label for="title" class="sr-only"> Title: </label>
-      <input
-        type="text"
-        id="title"
-        class="form-control"
-        placeholder="Title"
-        v-model="book.title"
-        required
-        autofocus
-      />
-      <label for="author" class="sr-only"> Author: </label>
-      <input
-        type="text"
-        id="author"
-        class="form-control"
-        placeholder="Author"
-        v-model="book.author"
-        required
-        autofocus
-      />
-      <label for="isbn" class="sr-only"> ISBN: </label>
-      <input
-        type="text"
-        id="isbn"
-        class="form-control"
-        placeholder="ISBN"
-        v-model="book.isbn"
-        required
-        autofocus
-      />
-      <label for="pages_total" class="sr-only"> Total Pages: </label>
-      <input
-        type="text"
-        id="pages_total"
-        class="form-control"
-        placeholder="20, 300, etc."
-        v-model="book.pagesTotal"
-        required
-        autofocus
-      />
-    
+  <div>
+    <div class="form">
+      <!-- The form labels for adding a new book-->
+      <form class="form-register-new-book" @submit.prevent="create">
+        <h2 class="book-title">Add Book to Library</h2>
+        <label for="title" class="sr-only"> Title: </label>
+        <input
+          type="text"
+          id="title"
+          class="form-control"
+          placeholder="Title"
+          v-model="book.title"
+          required
+          autofocus
+        />
+        <label for="author" class="sr-only"> Author: </label>
+        <input
+          type="text"
+          id="author"
+          class="form-control"
+          placeholder="Author"
+          v-model="book.author"
+          required
+          autofocus
+        />
+        <label for="isbn" class="sr-only"> ISBN: </label>
+        <input
+          type="text"
+          id="isbn"
+          class="form-control"
+          placeholder="ISBN"
+          v-model="book.isbn"
+          required
+          autofocus
+        />
+        <label for="pages_total" class="sr-only"> Total Pages: </label>
+        <input
+          type="text"
+          id="pages_total"
+          class="form-control"
+          placeholder="20, 300, etc."
+          v-model="book.pagesTotal"
+          required
+          autofocus
+        />
+
         <button class="btn btn-lg btn-primary btn-block" type="submit">
-           Add Book
+          Add Book
         </button>
       </form>
 
@@ -55,14 +56,14 @@
           'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'
         "
       />
-      <div>
+      <div></div>
     </div>
-    <!-- 
-      *add a way to display book cards of the books added
-      *each book card should have button options to "remove" book from libray and a button to
-       mark book "start reading" to move it into the "in progress status"
-    -->   
-    
+    <div class="books">
+      <div v-for="(book, index) in books" :key="index">
+        {{ book.title }}
+        {{book.author}}
+      </div>
+    </div>
   </div>
 </template>
 
@@ -79,11 +80,19 @@ export default {
         author: "",
         pagesTotal: "",
       },
+      books: [],
       bookCreationErrors: false,
       bookCreationErrorMsg: "There was a problem adding a book.",
     };
   },
+  mounted: function () {
+    authService.getAllBooks().then((response) => {
+      console.log(response);
+      this.books = response.data;
+    });
 
+    console.log("Hello!");
+  },
   methods: {
     toggleBookRead(book) {
       this.$store.commit("toggleBookRead", book);
@@ -112,27 +121,17 @@ export default {
 </script>
 
 <style>
-.books {
+.form {
   border: 2px solid black;
   border-radius: 10px;
-  width: 1100px;
-  height: 300px;
+  width: 95%;
+  height: 125px;
   margin: 30px;
   align-content: center;
-  position: absolute;
-  top: 15%;
-  left: 5%;
+  margin: 0 auto;
+  margin-bottom: 10px;
 }
-
-.books.read {
-  background-color: lightgray;
-}
-
-.books .book-title {
-  font-size: 1.5rem;
-}
-
-.books .book-author {
-  font-size: 1rem;
+.books{
+ align-content: center;
 }
 </style>

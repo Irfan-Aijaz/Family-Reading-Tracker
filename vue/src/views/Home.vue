@@ -117,6 +117,8 @@ export default {
   align-items: start;
   font-size: 25px;
   text-decoration-color: cornsilk;
+  margin-bottom: 10%;
+
 }
 .parentOptions {
   display: grid;
@@ -134,6 +136,7 @@ export default {
   width: 200px;
   height: 300px;
   margin: 10px;
+  margin-bottom: 10%;
 }
 .childOptions {
   display: grid;
@@ -151,6 +154,7 @@ export default {
   width: 250px;
   height: 500px;
   margin: 30px;
+  margin-bottom: 10%;
 }
 .familyName {
   text-decoration-color: blanchedalmond;
@@ -158,6 +162,6 @@ export default {
 }
 .sr-only{
   text-decoration-color: cornsilk;
-  
+  margin-bottom: 5%;
 }
 </style>
