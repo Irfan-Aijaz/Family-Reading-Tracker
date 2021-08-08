@@ -44,6 +44,10 @@ export default {
 
   getSessionsByUserId(userId) {
     return axios.get('/get_sessions_by_user_id/' + userId)
+  },
+
+  getSessionDetailsBySessionId(sessionId) {
+    return axios.get('/get_session_details_by_session_id/' + sessionId)
   }
 
 

@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.Session;
+import com.techelevator.model.SessionDetailsDTO;
 import com.techelevator.model.SessionListDTO;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -51,6 +52,20 @@ public class JdbcSessionDao implements SessionDao {
             sessions.add(mapRowToSessionListDTO(results));
         }
         return sessions;
+    }
+
+    @Override
+    public SessionDetailsDTO getSessionDetailsBySessionId(Long sessionId){
+        SessionDetailsDTO sessionDetailsDTO = new SessionDetailsDTO();
+        String sql = "SELECT books.title, sessions.user_id, sessions.session_id, sessions.isbn, sessions.day_session, sessions.time_start, sessions.time_end, sessions.pages_read, sessions.format, sessions.notes " +
+                     "FROM sessions " +
+                     "INNER JOIN books ON books.isbn = sessions.isbn " +
+                     "WHERE sessions.session_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, sessionId);
+        if (results.next()) {
+            sessionDetailsDTO = mapRowToSessionDetailsDTO(results);
+        }
+        return sessionDetailsDTO;
     }
 
     @Override
@@ -118,6 +133,23 @@ public class JdbcSessionDao implements SessionDao {
         sessionListDTO.setTitle(rowSet.getString("title"));
         sessionListDTO.setDaySession(rowSet.getDate("day_session").toLocalDate());
         return sessionListDTO;
+    }
+
+    private SessionDetailsDTO mapRowToSessionDetailsDTO(SqlRowSet rowSet) {
+        SessionDetailsDTO sessionDetailsDTO = new SessionDetailsDTO();
+        sessionDetailsDTO.setMinutesRead(MINUTES.between(rowSet.getTime("time_start").toLocalTime(),rowSet.getTime("time_end").toLocalTime()));
+        sessionDetailsDTO.setTitle(rowSet.getString("title"));
+        sessionDetailsDTO.setSessionId(rowSet.getLong("session_id"));
+        sessionDetailsDTO.setUserId(rowSet.getLong("user_id"));
+        sessionDetailsDTO.setIsbn(rowSet.getString("isbn"));
+        sessionDetailsDTO.setDaySession(rowSet.getDate("day_session").toLocalDate());
+        sessionDetailsDTO.setTimeStart(rowSet.getTime("time_start").toLocalTime());
+        sessionDetailsDTO.setTimeEnd(rowSet.getTime("time_end").toLocalTime());
+        sessionDetailsDTO.setPagesRead(rowSet.getLong("pages_read"));
+        sessionDetailsDTO.setFormat(rowSet.getString("format"));
+        sessionDetailsDTO.setNotes(rowSet.getString("notes"));
+
+        return sessionDetailsDTO;
     }
 
     private Session mapRowToSession(SqlRowSet rowSet) {
