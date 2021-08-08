@@ -14,17 +14,21 @@
       id="register-family"
       class="text-center"
     >
+    <div class="family-name">
       <label for="family-name" class="sr-only"
         >Family Name: {{ this.$store.state.user.familyName }}
       </label>
+      </div>
       <!-- Add list of family member usernames here -->
+      <div class="family-members">
       <label
         for="family-members"
-        class="sr-only"
+        class="sp-only"
         v-for="name in familyMembers"
         v-bind:key="name"
         >Family Member: {{ name }}
       </label>
+      </div>
       <!--start app button choices here -->
       <div class="parentOptions">
         <button v-on:click="$router.push({ name: 'register' })">
@@ -156,12 +160,13 @@ export default {
   margin: 30px;
   margin-bottom: 10%;
 }
-.familyName {
-  text-decoration-color: blanchedalmond;
-  font-size: 40px;
-}
 .sr-only{
   text-decoration-color: cornsilk;
   margin-bottom: 5%;
+
+}
+.sp-only{
+  text-decoration-color: cornsilk;
+
 }
 </style>

@@ -49,19 +49,25 @@
           Add Book
         </button>
       </form>
-
-      <img
-        v-if="book.isbn"
-        v-bind:src="
-          'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'
-        "
-      />
+      <!-- Display Added Books -->
       <div></div>
     </div>
     <div class="books">
       <div v-for="(book, index) in books" :key="index">
         {{ book.title }}
-        {{book.author}}
+        <img
+          v-if="book.isbn"
+          v-bind:src="
+            'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'
+          "
+        />
+        {{ book.author }}
+        <button>
+           Start Reading
+        </button>
+         <button>
+           Remove
+        </button>
       </div>
     </div>
   </div>
@@ -90,8 +96,6 @@ export default {
       console.log(response);
       this.books = response.data;
     });
-
-    console.log("Hello!");
   },
   methods: {
     toggleBookRead(book) {
@@ -131,7 +135,11 @@ export default {
   margin: 0 auto;
   margin-bottom: 10px;
 }
-.books{
- align-content: center;
+.books {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 14%;
+
 }
+
 </style>
