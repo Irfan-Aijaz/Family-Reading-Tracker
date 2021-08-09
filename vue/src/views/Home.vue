@@ -16,7 +16,7 @@
     >
     <div class="family-name">
       <label for="family-name" class="sr-only"
-        >Family Name: {{ this.$store.state.user.familyName }}
+        >Welcome {{ this.$store.state.user.familyName }} Family!
       </label>
       </div>
       <!-- Add list of family member usernames here -->
@@ -26,7 +26,7 @@
         class="sp-only"
         v-for="name in familyMembers"
         v-bind:key="name"
-        >Family Member: {{ name }}
+        >{{ name }}
       </label>
       </div>
       <!--start app button choices here -->
@@ -57,9 +57,11 @@
       v-if="this.$store.state.user.authorities[0].name == 'ROLE_USER'"
       class="text-center"
     >
+    <div class="child-welcome">
       <label for="family-name" class="sr-only"
-        >Family name: {{ this.$store.state.user.familyName }}
+        > Welcome {{ this.$store.state.user.username }}!
       </label>
+     </div> 
       <!--start app button choices here -->
       <div class="childOptions">
         <button v-on:click="$router.push({ name: 'newBook' })">
@@ -124,7 +126,7 @@ export default {
   justify-items: center;
   align-items: start;
   font-size: 25px;
-  text-decoration-color: cornsilk;
+  color: cornsilk;
   margin-bottom: 10%;
 
 }
@@ -138,39 +140,51 @@ export default {
   top: 10px;
   left: 0px;
   font-size: 25px;
-  text-decoration-color: cornsilk;
-  border: 2px solid black;
-  border-radius: 10px;
+  border: 2px solid rgb(139, 203, 232);;
+  border-radius: 15px;
+  padding-top:15px;
   width: 200px;
-  height: 300px;
+  height: 500px;
   margin: 10px;
   margin-bottom: 10%;
 }
 .childOptions {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 10px;
+  gap: 0px;
   justify-items: center;
   align-items: start;
   position: absolute;
-  top: 20px;
-  left: 10px;
+  top: 10px;
+  left: 0px;
   font-size: 25px;
-  text-decoration-color: cornsilk;
-  border: 2px solid black;
-  border-radius: 10px;
-  width: 250px;
-  height: 500px;
-  margin: 30px;
+  border: 2px solid rgb(139, 203, 232);;
+  border-radius: 15px;
+  padding-top:15px;
+  width: 200px;
+  height: 350px;
+  margin: 10px;
   margin-bottom: 10%;
 }
-.sr-only{
-  text-decoration-color: cornsilk;
+.family-name{
+  color: rgb(139, 187, 232);;
+  font-size: 50px;
   margin-bottom: 5%;
 
 }
-.sp-only{
-  text-decoration-color: cornsilk;
+.child-welcome{
+  color: rgb(139, 187, 232);;
+  font-size: 50px;
+  margin-bottom: 5%;
+
+}
+.family-members{
+  color: rgb(139, 182, 232);;
+  font-size: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
 
 }
 </style>

@@ -134,11 +134,14 @@ export default {
   align-content: center;
   margin: 0 auto;
   margin-bottom: 10px;
+
 }
 .books {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 14%;
+  gap: 15%;
+  padding-right: 25%;
+  padding-right: 25%;
 
 }
 

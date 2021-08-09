@@ -1,83 +1,79 @@
 <template>
   <div id="register" class="text-center">
     <form class="form-register" @submit.prevent="register">
-      
-          <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
-          <div
-            class="alert alert-danger"
-            role="alert"
-            v-if="registrationErrors"
-          >
-            {{ registrationErrorMsg }}
-          </div>
-       
-          <label for="username" class="sr-only">Username: </label>
-          <input
-            type="text"
-            id="username"
-            class="form-control"
-            placeholder="Username"
-            v-model="user.username"
-            required
-            autofocus
-          />
-        
-          <div v-if="this.$store.state.token == ''">
-            <label for="family" class="sr-only">Family Name: </label>
-            <input
-              type="family"
-              id="family"
-              class="form-control"
-              placeholder="family-name"
-              v-model="user.familyName"
-              required
-            />
-          </div>
-      
-          <label for="password" class="sr-only">Password: </label>
-          <input
-            type="password"
-            id="password"
-            class="form-control"
-            placeholder="Password"
-            v-model="user.password"
-            required
-          />
-       
-          <input
-            type="password"
-            id="confirmPassword"
-            class="form-control"
-            placeholder="Confirm Password"
-            v-model="user.confirmPassword"
-            required
-          />
-       
-          <div v-if="this.$store.state.token != ''">
-            <input
-              type="radio"
-              id="Parent"
-              value="admin"
-              name="role"
-              v-model="user.role"
-            />
-            <label for="one">Parent</label>
-            <input
-              type="radio"
-              id="Child"
-              value="user"
-              name="role"
-              v-model="user.role"
-            />
-            <label for="two">Child</label>
-          </div>
-        
-          <button class="btn btn-lg btn-primary btn-block" type="submit">
-            Create Account
-          </button>
-       
-          <router-link :to="{ name: 'login' }" v-if="this.$store.state.token == ''">Have an account?</router-link>
-       
+      <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
+      <div class="alert alert-danger" role="alert" v-if="registrationErrors">
+        {{ registrationErrorMsg }}
+      </div>
+
+      <div v-if="this.$store.state.token == ''">
+        <label for="family" class="sr-only"> Family Name: </label>
+        <input
+          type="family"
+          id="family"
+          class="form-control"
+          placeholder="family-name"
+          v-model="user.familyName"
+          required
+        />
+      </div>
+
+      <label for="username" class="sr-only">Username: </label>
+      <input
+        type="text"
+        id="username"
+        class="form-control"
+        placeholder="Username"
+        v-model="user.username"
+        required
+        autofocus
+      />
+
+      <label for="password" class="sr-only"> Password: </label>
+      <input
+        type="password"
+        id="password"
+        class="form-control"
+        placeholder="Password"
+        v-model="user.password"
+        required
+      />
+
+      <input
+        type="password"
+        id="confirmPassword"
+        class="form-control"
+        placeholder="Confirm Password"
+        v-model="user.confirmPassword"
+        required
+      />
+
+      <div v-if="this.$store.state.token != ''">
+        <input
+          type="radio"
+          id="Parent"
+          value="admin"
+          name="role"
+          v-model="user.role"
+        />
+        <label for="one">Parent</label>
+        <input
+          type="radio"
+          id="Child"
+          value="user"
+          name="role"
+          v-model="user.role"
+        />
+        <label for="two">Child</label>
+      </div>
+
+      <button class="btn btn-lg btn-primary btn-block" type="submit">
+        Create Account
+      </button>
+
+      <router-link :to="{ name: 'login' }" v-if="this.$store.state.token == ''"
+        >Have an account?</router-link
+      >
     </form>
   </div>
 </template>
@@ -156,17 +152,17 @@ export default {
 
 <style>
 .form-register {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 5px;
-  justify-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
 }
 
 div {
   background-color: lightgreen;
   text-align: center;
 }
-.confirmPassword{
+.confirmPassword {
   align-content: center;
 }
 </style>

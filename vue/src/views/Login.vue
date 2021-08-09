@@ -90,13 +90,13 @@ export default {
 .form-signin {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 5px;
+  gap: 7px;
   justify-items: center;
   text-align: center;
   background-color: lightgreen;
 }
 h2 {
-  color: black;
+  color: rgb(220, 242, 255);
 }
 ul {
   list-style-type: none;
