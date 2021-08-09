@@ -13,6 +13,10 @@ export default {
     getSessionsByUserId(userId) {
       return axios.get('/get_sessions_by_user_id/' + userId)
     },
+
+    getSessionsByFamilyId(familyId) {
+      return axios.get('/get_sessions_by_family_id/' + familyId)
+    }
     
 
 }

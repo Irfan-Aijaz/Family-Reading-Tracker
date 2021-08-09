@@ -45,7 +45,7 @@
         <button v-on:click="$router.push({ name: 'completed' })">
           Completed
         </button>
-        <button v-on:click="$router.push({ name: 'trackFamilyProgress' })">
+        <button v-on:click="$router.push({ name: 'viewSessionsHistory' })">
           Track Family Progress
         </button>
         <button v-on:click="$router.push({ name: 'prizes' })">

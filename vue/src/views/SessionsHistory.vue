@@ -6,6 +6,7 @@
                   <th>Title</th>
                   <th>Time Spent Reading</th>
                   <th>Day of Session</th>
+                  <th v-if='$store.state.user.authorities[0].name == "ROLE_ADMIN"'>User</th>
               </tr>
           </thead>
           <tbody>
@@ -19,6 +20,9 @@
                   <td>
                       {{session.daySession}}
                   </td>
+                  <td v-if='$store.state.user.authorities[0].name == "ROLE_ADMIN"'>
+                      {{session.username}}
+                      </td>
               </tr>
           </tbody>
       </table>
@@ -48,6 +52,21 @@ export default {
     };
   },
   methods: {
+      loadSessionsByFamilyId(){
+          sessionService
+            .getSessionsByFamilyId(this.$store.state.user.familyId)
+            .then((response) => {
+                if (response.status == 200) {
+                    this.sessions = response.data;
+                }
+            })
+            .catch((error) => {
+                const response = error.response;
+                if (response.status === 401) {
+                    //
+                }
+            });
+      },
       loadSessionsByUserId() {
           sessionService
             .getSessionsByUserId(this.$store.state.user.id)
@@ -65,7 +84,12 @@ export default {
       }
   },
   created() {
-      this.loadSessionsByUserId();
+      if (this.$store.state.user.authorities[0].name == 'ROLE_USER'){
+        this.loadSessionsByUserId();
+      } else {
+          this.loadSessionsByFamilyId()
+          //
+      }
   }
 };
 </script>

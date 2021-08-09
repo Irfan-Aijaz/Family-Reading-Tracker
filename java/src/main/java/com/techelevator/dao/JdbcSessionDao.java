@@ -42,9 +42,10 @@ public class JdbcSessionDao implements SessionDao {
     @Override
     public List<SessionListDTO> getSessionsListByUserId(Long userId) {
         List<SessionListDTO> sessions = new ArrayList<>();
-        String sql = "SELECT books.title, sessions.session_id, sessions.time_start, sessions.time_end, sessions.day_session " +
+        String sql = "SELECT books.title, sessions.session_id, sessions.time_start, sessions.time_end, sessions.day_session, users.username " +
                      "FROM sessions " +
                      "INNER JOIN books ON books.isbn = sessions.isbn " +
+                     "INNER JOIN users ON users.user_id = sessions.user_id " +
                      "WHERE sessions.user_id = ?;";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
@@ -66,6 +67,23 @@ public class JdbcSessionDao implements SessionDao {
             sessionDetailsDTO = mapRowToSessionDetailsDTO(results);
         }
         return sessionDetailsDTO;
+    }
+
+    @Override
+    public List<SessionListDTO> getSessionsListByFamilyId(Long familyId){
+        List<SessionListDTO> sessions = new ArrayList<>();
+        String sql = "SELECT books.title, sessions.session_id, sessions.time_start, sessions.time_end, sessions.day_session, users.username " +
+                     "FROM sessions " +
+                     "INNER JOIN books ON books.isbn = sessions.isbn " +
+                     "INNER JOIN users ON users.user_id = sessions.user_id " +
+                     "WHERE users.family_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, familyId);
+        while (results.next()) {
+            sessions.add(mapRowToSessionListDTO(results));
+        }
+        return sessions;
+
+
     }
 
     @Override
@@ -132,6 +150,7 @@ public class JdbcSessionDao implements SessionDao {
         sessionListDTO.setMinutesRead(MINUTES.between(rowSet.getTime("time_start").toLocalTime(),rowSet.getTime("time_end").toLocalTime()));
         sessionListDTO.setTitle(rowSet.getString("title"));
         sessionListDTO.setDaySession(rowSet.getDate("day_session").toLocalDate());
+        sessionListDTO.setUsername(rowSet.getString("username"));
         return sessionListDTO;
     }
 

@@ -9,15 +9,25 @@ public class SessionListDTO {
     private Long sessionId;
     private LocalDate daySession;
     private Long minutesRead;
+    private String username;
 
     public SessionListDTO() {
     }
 
-    public SessionListDTO(String title, Long sessionId, LocalDate daySession, Long minutesRead) {
+    public SessionListDTO(String title, Long sessionId, LocalDate daySession, Long minutesRead, String username) {
         this.title = title;
         this.sessionId = sessionId;
         this.daySession = daySession;
         this.minutesRead = minutesRead;
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getTitle() {
