@@ -39,7 +39,7 @@
         <button v-on:click="$router.push({ name: 'newSession' })">
           Record Session
         </button>
-        <button v-on:click="$router.push({ name: 'inProgress' })">
+        <button v-on:click="$router.push({ name: 'inProgress', params: {id: $store.state.user.id} })">
           In Progress
         </button>
         <button v-on:click="$router.push({ name: 'completed' })">

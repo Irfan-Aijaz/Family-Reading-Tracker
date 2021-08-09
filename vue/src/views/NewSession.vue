@@ -10,7 +10,7 @@
       <div v-if="this.$store.state.user.authorities[0].name == 'ROLE_ADMIN'">
         <label for="selected-child" class="sr-only">Choose a reader: </label>
         <select id="family-members" name="family-members" v-model="session.userId"> 
-          <option v-for="object in familyMembers" v-bind:key="object" v-bind:value="object.userId">
+          <option v-for="object in familyMembers" v-bind:key="object.username" v-bind:value="object.userId">
             {{object.username}}
             </option>
         </select>
