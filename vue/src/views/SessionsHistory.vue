@@ -9,7 +9,7 @@
               </tr>
           </thead>
           <tbody>
-              <tr v-for="session in sessions" v-bind:key="session.sessionId" v-on:click="$router.push({ name: 'session details', params: {id: session.sessionId } })"><!-- this should take a session id as a parameter-->
+              <tr v-for="session in sessions" v-bind:key="session.sessionId" v-on:click="$router.push({ name: 'sessionDetails', params: {id: session.sessionId } })"><!-- this should take a session id as a parameter-->
                   <td>
                       {{session.title}}
                   </td>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import authService from "../services/AuthService";
+import sessionService from "../services/SessionService";
 export default {
   name: "sessions",
   data() {
@@ -49,7 +49,7 @@ export default {
   },
   methods: {
       loadSessionsByUserId() {
-          authService
+          sessionService
             .getSessionsByUserId(this.$store.state.user.id)
             .then((response) => {
                 if (response.status == 200) {

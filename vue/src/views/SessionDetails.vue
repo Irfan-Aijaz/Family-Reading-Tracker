@@ -50,7 +50,8 @@ userId:4 -->
 </template>
 
 <script>
-import authService from "../services/AuthService";
+import sessionService from "../services/SessionService";
+
 export default {
     name: "sessionDetails",
     data() {
@@ -60,7 +61,7 @@ export default {
     },
     methods: {
         loadSessionDetailsBySessionId() {
-            authService
+            sessionService
                 .getSessionDetailsBySessionId(this.$route.params.id)
                 .then((response) => {
                     if (response.status == 200) {

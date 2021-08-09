@@ -34,8 +34,9 @@
         <button v-on:click="$router.push({ name: 'register' })">
           Add Family Member
         </button>
-        <button v-on:click="$router.push({ name: 'newBook' })">Add Book</button>
-        <button v-on:click="$router.push({ name: 'session' })">
+        <button v-on:click="$router.push({ name: 'newBook' })">
+          Add Book</button>
+        <button v-on:click="$router.push({ name: 'newSession' })">
           Record Session
         </button>
         <button v-on:click="$router.push({ name: 'inProgress' })">
@@ -47,7 +48,8 @@
         <button v-on:click="$router.push({ name: 'trackFamilyProgress' })">
           Track Family Progress
         </button>
-        <button v-on:click="$router.push({ name: 'prizes' })">Prizes</button>
+        <button v-on:click="$router.push({ name: 'prizes' })">
+          Prizes</button>
       </div>
     </div>
     <!--End parent/admin code, start child user code -->
@@ -60,20 +62,22 @@
       </label>
       <!--start app button choices here -->
       <div class="childOptions">
-        <button v-on:click="$router.push({ name: 'newBook' })">Add Book</button>
+        <button v-on:click="$router.push({ name: 'newBook' })">
+          Add Book</button>
         <button v-on:click="$router.push({ name: 'inProgress' })">
           In Progress
         </button>
-        <button v-on:click="$router.push({ name: 'session' })">
+        <button v-on:click="$router.push({ name: 'newSession' })">
           Record Session
         </button>
-        <button v-on:click="$router.push({ name: 'view completed sessions'})">
+        <button v-on:click="$router.push({ name: 'viewSessionsHistory'})">
           View Reading Activity
         </button>
         <button v-on:click="$router.push({ name: 'completed' })">
           Completed
         </button>
-        <button v-on:click="$router.push({ name: 'prizes' })">Prizes</button>
+        <button v-on:click="$router.push({ name: 'prizes' })">
+          Prizes</button>
       </div>
     </div>
   </div>

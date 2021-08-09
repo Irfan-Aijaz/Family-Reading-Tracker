@@ -8,14 +8,14 @@
           'http://covers.openlibrary.org/b/isbn/' + userBooks.isbn + '-M.jpg'
         "
       />
-      <div> {{ userBooks.pagesRead }} </div>
+      <div> {{ userBooks.pagesRead }} Pages Read </div>
       <button>Create New Session</button>
     </div>
   </div>
 </template>
 
 <script>
-import authService from "../services/AuthService";
+import bookService from "../services/BookService";
 
 export default {
     name: "userBook",
@@ -28,11 +28,11 @@ export default {
   },
   methods: {
       retrieveUserBooksProgress() {
-        authService
+        bookService
             .getUserBooksProgress(this.$store.state.user.id)
             .then((response) => {
             if (response.status == 200) {
-            this.userBooks = response.data;
+                this.userBooks = response.data;
             }
           
         })

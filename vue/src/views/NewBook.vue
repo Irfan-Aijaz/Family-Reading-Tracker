@@ -74,7 +74,7 @@
 </template>
 
 <script>
-import authService from "../services/AuthService";
+import bookService from "../services/BookService";
 
 export default {
   name: "newBook",
@@ -92,7 +92,7 @@ export default {
     };
   },
   mounted: function () {
-    authService.getAllBooks().then((response) => {
+    bookService.getAllBooks().then((response) => {
       console.log(response);
       this.books = response.data;
     });
@@ -102,7 +102,7 @@ export default {
       this.$store.commit("toggleBookRead", book);
     },
     create() {
-      authService
+      bookService
         .createBook(this.book)
         .then((response) => {
           if (response.status == 201) {

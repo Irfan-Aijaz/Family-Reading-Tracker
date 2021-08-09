@@ -6,9 +6,9 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import NewBook from '../views/NewBook.vue'
-import Session from '../views/Session.vue'
+import NewSession from '../views/NewSession.vue'
 import SessionDetails from '../views/SessionDetails'
-import Sessions from '../views/Sessions'
+import SessionsList from '../views/SessionsHistory'
 import InProgress from '../views/InProgress'
 
 Vue.use(Router)
@@ -60,7 +60,7 @@ const router = new Router({
     },
     {
       path: "/register_as_admin",
-      name: "register as admin",
+      name: "registerAsAdmin",
       component: Register,
       meta: {
         requiresAuth: true
@@ -75,16 +75,16 @@ const router = new Router({
       }
     },
     {
-      path:"/session",
-      name: "session",
-      component: Session,
+      path:"/new_session",
+      name: "newSession",
+      component: NewSession,
       meta: {
         requiresAuth: true
       }
     },
     {
       path: "/view_sessions/:id",
-      name: "session details",
+      name: "sessionDetails",
       component: SessionDetails,
       meta: {
         requiresAuth: true
@@ -92,8 +92,8 @@ const router = new Router({
     },
     {
       path: "/view_sessions",
-      name: "view completed sessions",
-      component: Sessions,
+      name: "viewSessionsHistory",
+      component: SessionsList,
       meta: {
         requiresAuth: true
       }

@@ -108,7 +108,9 @@
 </template>
 
 <script>
-import authService from "../services/AuthService";
+import authService from '../services/AuthService';
+import bookService from '../services/BookService';
+import sessionService from '../services/SessionService';
 
 export default {
   // Saving a session object
@@ -152,7 +154,7 @@ export default {
       if (this.$store.state.user.authorities[0].name == 'ROLE_USER') {
         this.session.userId = this.$store.state.user.id;
         }
-      authService
+      sessionService
         .createSession(this.session)
         .then((response) => {
           if (response.status == 201) {
@@ -169,7 +171,7 @@ export default {
             this.sessionErrorMsg = "Bad Request: Validation Errors";
           }
         });
-        authService
+        bookService
         .updateUserBook(this.session)
         .then((response) => {
           if (response.status == 201) {
