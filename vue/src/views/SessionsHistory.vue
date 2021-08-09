@@ -3,13 +3,25 @@
     <table id="tblSessions">
       <thead>
         <!--  -->
-        <select v-if="$store.state.user.authorities[0].name == 'ROLE_ADMIN'" id="family-members" name="family-members" v-model="filter.username"> 
-          <option disable value>Show All</option>
-          <option v-for="object in usersInFamily" v-bind:key="object.username" v-bind:value="object.username">
-            {{object.username}}
+        <div class="show-all">
+          <select
+            v-if="$store.state.user.authorities[0].name == 'ROLE_ADMIN'"
+            id="family-members"
+            name="family-members"
+            v-model="filter.username"
+          >
+            <option disable value>Show All</option>
+            <option
+              v-for="object in usersInFamily"
+              v-bind:key="object.username"
+              v-bind:value="object.username"
+            >
+              {{ object.username }}
             </option>
-        </select>
+          </select>
+        </div>
         <!--  -->
+
         <tr>
           <th>Title</th>
           <th>Time Spent Reading</th>
@@ -44,6 +56,63 @@
         </tr>
       </tbody>
     </table>
+          <div
+        v-if="this.$store.state.user.authorities[0].name == 'ROLE_ADMIN'"
+        id="register-family"
+        class="text-center"
+      >
+        <div class="parentOptions">
+          <button v-on:click="$router.push({ name: 'register' })">
+            Add Family Member
+          </button>
+          <button v-on:click="$router.push({ name: 'newBook' })">
+            Add Book
+          </button>
+          <button v-on:click="$router.push({ name: 'newSession' })">
+            Record Session
+          </button>
+          <button
+            v-on:click="
+              $router.push({
+                name: 'inProgress',
+                params: { id: $store.state.user.id },
+              })
+            "
+          >
+            In Progress
+          </button>
+          <button v-on:click="$router.push({ name: 'completed' })">
+            Completed
+          </button>
+          <button v-on:click="$router.push({ name: 'viewSessionsHistory' })">
+            Track Family Progress
+          </button>
+          <button v-on:click="$router.push({ name: 'prizes' })">Prizes</button>
+        </div>
+      </div>
+      <div
+        v-if="this.$store.state.user.authorities[0].name == 'ROLE_USER'"
+        class="text-center"
+      >
+        <div class="childOptions">
+          <button v-on:click="$router.push({ name: 'newBook' })">
+            Add Book
+          </button>
+          <button v-on:click="$router.push({ name: 'inProgress' })">
+            In Progress
+          </button>
+          <button v-on:click="$router.push({ name: 'newSession' })">
+            Record Session
+          </button>
+          <button v-on:click="$router.push({ name: 'viewSessionsHistory' })">
+            View Reading Activity
+          </button>
+          <button v-on:click="$router.push({ name: 'completed' })">
+            Completed
+          </button>
+          <button v-on:click="$router.push({ name: 'prizes' })">Prizes</button>
+        </div>
+      </div>
   </div>
 </template>
 
@@ -70,26 +139,28 @@ export default {
       ],
       usersInFamily: [],
 
-//      daySession:"2021-08-02"
-// minutesRead:180
-// sessionId:1
-// title:"test"
-// username:"test1child"
+      //      daySession:"2021-08-02"
+      // minutesRead:180
+      // sessionId:1
+      // title:"test"
+      // username:"test1child"
       filter: {
-         daySession: '',
-         minutesRead: '',
-         sessionId: '',
-         title: '',
-         username: ''
-      }
+        daySession: "",
+        minutesRead: "",
+        sessionId: "",
+        title: "",
+        username: "",
+      },
     };
   },
   computed: {
-      filteredSessions() {
-          return this.sessions.filter((session) => {
-              return session.username == this.filter.username || this.filter.username == '';
-          });
-      }
+    filteredSessions() {
+      return this.sessions.filter((session) => {
+        return (
+          session.username == this.filter.username || this.filter.username == ""
+        );
+      });
+    },
   },
   methods: {
     loadSessionsByFamilyId() {
@@ -107,7 +178,7 @@ export default {
           }
         });
     },
-    loadUsersByFamilyId(){
+    loadUsersByFamilyId() {
       authService
         .getUserDTOsByFamilyId(this.$store.state.user.familyId)
         .then((response) => {
@@ -150,9 +221,53 @@ export default {
 </script>
    
 <style>
-th, td {
+#tblSessions {
   padding: 15px;
   text-align: left;
-  
-} 
+  margin-left: 20%;
+
+}
+.show-all{
+  left: 5%;
+}
+tr:hover {
+  background-color: #f5f5f5;
+  cursor: pointer;
+}
+.parentOptions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0px;
+  justify-items: center;
+  align-items: start;
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  font-size: 25px;
+  border: 2px solid rgb(139, 203, 232);;
+  border-radius: 15px;
+  padding-top:15px;
+  width: 200px;
+  height: 500px;
+  margin: 10px;
+  margin-bottom: 10%;
+}
+.childOptions {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0px;
+  justify-items: center;
+  align-items: start;
+  position: absolute;
+  top: 10px;
+  left: 0px;
+  font-size: 25px;
+  border: 2px solid rgb(139, 203, 232);;
+  border-radius: 15px;
+  padding-top:15px;
+  width: 200px;
+  height: 500px;
+  margin: 10px;
+  margin-bottom: 10%;
+}
 </style>
