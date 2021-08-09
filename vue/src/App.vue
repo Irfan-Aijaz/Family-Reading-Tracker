@@ -22,7 +22,6 @@
 body {
   text-align: center;
   background-color: lightgreen;
-
 }
 h1 {
   color: white;
