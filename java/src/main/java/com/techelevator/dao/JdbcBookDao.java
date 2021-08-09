@@ -24,7 +24,7 @@ public class JdbcBookDao implements BookDao {
     public boolean createBook(String title, String author, String isbn, Long pagesTotal) {
         boolean bookCreated = false;
 
-        String insertBook = "insert into books (title, author, isbn, pages_total) values (?,?,?,?);";
+        String insertBook = "INSERT INTO books (title, author, isbn, pages_total) VALUES (?,?,?,?);";
 
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         String id_column = "isbn";

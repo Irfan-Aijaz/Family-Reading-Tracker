@@ -21,7 +21,9 @@ public class SessionController {
 
     private SessionDao sessionDao;
 
-    public SessionController (SessionDao sessionDao) {this.sessionDao = sessionDao;}
+    public SessionController (SessionDao sessionDao) {
+        this.sessionDao = sessionDao;
+    }
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/create_session", method = RequestMethod.POST)

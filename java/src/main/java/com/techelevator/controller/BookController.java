@@ -31,7 +31,7 @@ public class BookController {
         }
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
+
     @RequestMapping(value = "/get_all_books", method = RequestMethod.GET)
     public List<Book> getAllBooks() {
         return bookDao.findAll();

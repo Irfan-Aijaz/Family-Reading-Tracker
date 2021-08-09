@@ -1,7 +1,7 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users, books, user_book, sessions, family;
-DROP SEQUENCE IF EXISTS seq_user_id, seq_family_id, seq_session_id;
+DROP TABLE IF EXISTS users, books, user_book, sessions, family, prizes, user_prize;
+DROP SEQUENCE IF EXISTS seq_user_id, seq_family_id, seq_session_id, seq_prize_id;
 
 CREATE SEQUENCE seq_user_id
   INCREMENT BY 1
@@ -16,6 +16,12 @@ CREATE SEQUENCE seq_family_id
   CACHE 1;
   
 CREATE SEQUENCE seq_session_id
+  INCREMENT BY 1
+  NO MAXVALUE
+  NO MINVALUE
+  CACHE 1;
+  
+CREATE SEQUENCE seq_prize_id
   INCREMENT BY 1
   NO MAXVALUE
   NO MINVALUE
@@ -73,6 +79,28 @@ CREATE TABLE sessions (
         CONSTRAINT FK_session_isbn FOREIGN KEY (isbn) REFERENCES books (isbn)
 );
 
+CREATE TABLE prizes (
+	prize_id int DEFAULT nextval('seq_prize_id'::regclass) NOT NULL,
+	prize_name varchar(20) NOT NULL,
+	description text NOT NULL,
+	milestone_minutes int NOT NULL,
+	user_group varchar(10) NOT NULL,
+	max_prizes int NOT NULL,
+	date_start date NOT NULL,
+	date_end date NOT NULL,
+	CONSTRAINT PK_prize_id PRIMARY KEY (prize_id)
+	
+);
+
+CREATE TABLE user_prize (
+	user_id int NOT NULL,
+	prize_id int NOT NULL,
+	CONSTRAINT PK_user_prize PRIMARY KEY (user_id, prize_id),
+	CONSTRAINT FK_user_prize_user FOREIGN KEY (user_id) REFERENCES users (user_id),
+	CONSTRAINT FK_user_prize_prize FOREIGN KEY (prize_id) REFERENCES prizes (prize_id)
+
+
+);
 
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');

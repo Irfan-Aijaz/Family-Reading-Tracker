@@ -10,6 +10,8 @@ import NewSession from '../views/NewSession.vue'
 import SessionDetails from '../views/SessionDetails'
 import SessionsList from '../views/SessionsHistory'
 import InProgress from '../views/InProgress'
+import Prizes from '../views/Prizes'
+import CreatePrize from '../components/NewPrize'
 
 Vue.use(Router)
 
@@ -102,6 +104,22 @@ const router = new Router({
       path: "/retrieve_books_progress/:id",
       name: "inProgress",
       component: InProgress,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/prize",
+      name: "prizes",
+      component: Prizes,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/create_prize/",
+      name: "createPrize",
+      component: CreatePrize,
       meta: {
         requiresAuth: true
       }
