@@ -24,4 +24,9 @@ public class PrizeController {
     public void createPrize(@Valid @RequestBody Prize newPrize) {
         prizeDao.createPrize(newPrize.getPrizeName(), newPrize.getPrizeDescription(), newPrize.getMilestoneMinutes(), newPrize.getUserGroup(), newPrize.getMaxPrizes(), newPrize.getDateStart(), newPrize.getDateEnd());
     }
+
+    @RequestMapping(value = "/update_prize", method = RequestMethod.PUT)
+    public void editPrize(@Valid @RequestBody Prize prizeToUpdate) {
+        prizeDao.updatePrize(prizeToUpdate.getPrizeId(), prizeToUpdate.getPrizeName(), prizeToUpdate.getPrizeDescription(), prizeToUpdate.getMilestoneMinutes(), prizeToUpdate.getUserGroup(), prizeToUpdate.getMaxPrizes(), prizeToUpdate.getDateStart(), prizeToUpdate.getDateEnd());
+    }
 }

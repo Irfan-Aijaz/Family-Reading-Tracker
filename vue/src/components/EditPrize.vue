@@ -1,7 +1,7 @@
 <template>
     <div class="form">
         <!-- The form labels for adding a new book-->
-        <form class="form-add-prize" @submit.prevent="createPrize">
+        <form class="form-add-prize" @submit.prevent="updatePrize">
             <h2 class="new-prize-title">Add Prize to Prizes</h2>
             <div>
                 <label for="prize-name" class="sr-only">Prize Name: </label>
@@ -91,7 +91,7 @@
 import prizeService from "@/services/PrizeService";
 
 export default {
-    name: "new-prize",
+    name: "updated-prize",
     data() {
         return {
             prize: {
@@ -108,14 +108,14 @@ export default {
         };
     },
     methods: {
-        createPrize() {
+        updatePrize() {
             prizeService
-                .createPrize(this.prize)
+                .updatePrize(this.prize)
                 .then((response) => {
                     if (response.status == 201) {
                         this.$router.push({
                         path: "/prizes",
-                        query: { createPrize: "success" },
+                        query: { updatePrize: "success" },
                         });
                     }
                 })
@@ -128,7 +128,6 @@ export default {
                 });
         }
     }
-
 }
 </script>
 

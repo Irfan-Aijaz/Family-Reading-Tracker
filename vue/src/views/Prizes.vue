@@ -1,7 +1,12 @@
 <!--begin form here to add prizes for books read -->
 <template>
   <div class="prizes-view">
-    <new-prize></new-prize>
+    <button v-on:click="$router.push({ name: 'newPrize' })">
+            Create a New Prize
+    </button>
+    <button v-on:click="$router.push({ name: 'updatePrize' })">
+            Update Prize
+    </button>
     <div>
       <div
         v-if="this.$store.state.user.authorities[0].name == 'ROLE_ADMIN'"
@@ -65,11 +70,7 @@
 </template>
 
 <script>
-import NewPrize from "@/components/NewPrize";
-
 export default {
-  components: {
-    NewPrize,
-  },
+
 };
 </script>

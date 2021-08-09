@@ -39,4 +39,16 @@ public class JdbcPrizeDao implements PrizeDao {
 
         return prizeCreated;
     }
+
+    @Override
+    public boolean updatePrize(Long prizeId, String prizeName, String prizeDescription, Long milestoneMinutes, String userGroup, Long maxPrizes, LocalDate dateStart, LocalDate dateEnd) {
+        boolean prizeUpdated = false;
+
+        String sql = "UPDATE prizes SET prize_name = ?, description = ?, milestone_minutes = ?, user_group = ?, max_prizes = ?, date_start = ?, date_end = ? " +
+                "WHERE prize_id = ?;";
+        jdbcTemplate.update(sql, prizeName, prizeDescription, milestoneMinutes, userGroup, maxPrizes, dateStart, dateEnd, prizeId);
+        prizeUpdated = true;
+
+        return prizeUpdated;
+    }
 }

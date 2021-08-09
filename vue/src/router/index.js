@@ -12,6 +12,7 @@ import SessionsList from '../views/SessionsHistory'
 import InProgress from '../views/InProgress'
 import Prizes from '../views/Prizes'
 import CreatePrize from '../components/NewPrize'
+import UpdatePrize from '../components/EditPrize'
 
 Vue.use(Router)
 
@@ -109,7 +110,7 @@ const router = new Router({
       }
     },
     {
-      path: "/prize",
+      path: "/prizes",
       name: "prizes",
       component: Prizes,
       meta: {
@@ -117,9 +118,17 @@ const router = new Router({
       }
     },
     {
-      path: "/create_prize/",
-      name: "createPrize",
+      path: "/new_prize/",
+      name: "newPrize",
       component: CreatePrize,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/update_prize/",
+      name: "updatePrize",
+      component: UpdatePrize,
       meta: {
         requiresAuth: true
       }
