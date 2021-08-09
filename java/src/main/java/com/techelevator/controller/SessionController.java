@@ -45,4 +45,9 @@ public class SessionController {
     public SessionDetailsDTO getSessionDetailsBySessionId(@PathVariable("session_id") Long sessionId) {
         return sessionDao.getSessionDetailsBySessionId(sessionId);
     }
+
+    @RequestMapping(value = "/get_sessions_by_family_id/{family_id}", method=RequestMethod.GET)
+    public List<SessionListDTO> getSessionsByFamilyId(@PathVariable("family_id") Long familyId) {
+        return sessionDao.getSessionsListByFamilyId(familyId);
+    }
 }

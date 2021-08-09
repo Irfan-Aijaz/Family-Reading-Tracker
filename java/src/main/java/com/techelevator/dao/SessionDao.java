@@ -21,4 +21,6 @@ public interface SessionDao {
 
     SessionDetailsDTO getSessionDetailsBySessionId(Long sessionId);
 
+    List<SessionListDTO> getSessionsListByFamilyId(Long familyId);
+
 }
