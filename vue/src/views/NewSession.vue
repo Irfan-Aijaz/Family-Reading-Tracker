@@ -78,15 +78,14 @@
       </div>
       <div>
         <label for="format" class="sr-only">Format: </label>
-        <input
-          type="text"
-          id="format"
-          class="form-control"
-          placeholder="Paper, digital, etc."
-          v-model="session.format"
-          required
-          autofocus
-        />
+        <select id="format" name="format" v-model="session.format"> 
+          <option value="Paper">Paper</option>
+          <option value="Digital">Digital</option>
+          <option value="Audiobook">Audiobook</option>
+          <option value="Reader">Read-Aloud (Reader)</option>
+          <option value="Listener">Read-Aloud (Listener)</option>
+          <option value="Other">Other</option>
+        </select>
       </div>
       <div>
         <label for="notes" class="sr-only">Notes: </label>
