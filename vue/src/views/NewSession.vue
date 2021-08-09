@@ -9,25 +9,34 @@
       </div>
       <div v-if="this.$store.state.user.authorities[0].name == 'ROLE_ADMIN'">
         <label for="selected-child" class="sr-only">Choose a reader: </label>
-        <select id="family-members" name="family-members" v-model="session.userId"> 
-          <option v-for="object in familyMembers" v-bind:key="object.username" v-bind:value="object.userId">
-            {{object.username}}
-            </option>
+        <select
+          id="family-members"
+          name="family-members"
+          v-model="session.userId"
+        >
+          <option
+            v-for="object in familyMembers"
+            v-bind:key="object.username"
+            v-bind:value="object.userId"
+          >
+            {{ object.username }}
+          </option>
         </select>
       </div>
       <div>
         <!--The form inputs for recording a session -->
-        <label for="isbn" class="sr-only">ISBN: </label>
-        <input
-          type="text"
-          id="isbn"
-          class="form-control"
-          placeholder="ISBN"
-          v-model="session.isbn"
-          required
-          autofocus
-        />
+        <label for="isbn" class="sr-only">Title: </label>
+        <select id="isbn" name="isbn" v-model="session.isbn">
+          <option
+            v-for="book in library"
+            v-bind:key="book.isbn"
+            v-bind:value="book.isbn"
+          >
+            {{ book.title }}
+          </option>
+        </select>
       </div>
+
       <div>
         <label for="date" class="sr-only">Date: </label>
         <input
@@ -78,7 +87,7 @@
       </div>
       <div>
         <label for="format" class="sr-only">Format: </label>
-        <select id="format" name="format" v-model="session.format"> 
+        <select id="format" name="format" v-model="session.format">
           <option value="Paper">Paper</option>
           <option value="Digital">Digital</option>
           <option value="Audiobook">Audiobook</option>
@@ -107,9 +116,9 @@
 </template>
 
 <script>
-import authService from '../services/AuthService';
-import bookService from '../services/BookService';
-import sessionService from '../services/SessionService';
+import authService from "../services/AuthService";
+import bookService from "../services/BookService";
+import sessionService from "../services/SessionService";
 
 export default {
   // Saving a session object
@@ -127,10 +136,18 @@ export default {
         format: "",
         notes: "",
       },
+      library: [],
       sessionErrors: false,
       sessionErrorMsg: "There were problems creating this session.",
     };
   },
+  mounted: function () {
+    bookService.getAllBooks().then((response) => {
+      console.log(response);
+      this.library = response.data;
+    });
+  },
+
   methods: {
     family() {
       authService
@@ -150,9 +167,9 @@ export default {
     },
     //Calls the createSession service to send the session object to the server
     newSession() {
-      if (this.$store.state.user.authorities[0].name == 'ROLE_USER') {
+      if (this.$store.state.user.authorities[0].name == "ROLE_USER") {
         this.session.userId = this.$store.state.user.id;
-        }
+      }
       sessionService
         .createSession(this.session)
         .then((response) => {
@@ -170,7 +187,7 @@ export default {
             this.sessionErrorMsg = "Bad Request: Validation Errors";
           }
         });
-        bookService
+      bookService
         .updateUserBook(this.session)
         .then((response) => {
           if (response.status == 201) {
@@ -191,7 +208,7 @@ export default {
   },
   created() {
     this.family();
-  }
+  },
 };
 </script>
 

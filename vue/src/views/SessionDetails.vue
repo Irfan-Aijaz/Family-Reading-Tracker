@@ -84,5 +84,10 @@ export default {
 </script>
 
 <style>
+th, td {
+  padding: 15px;
+  text-align: left;
+  
+} 
 
 </style>

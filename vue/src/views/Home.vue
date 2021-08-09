@@ -162,7 +162,7 @@ export default {
   border-radius: 15px;
   padding-top:15px;
   width: 200px;
-  height: 350px;
+  height: 500px;
   margin: 10px;
   margin-bottom: 10%;
 }
