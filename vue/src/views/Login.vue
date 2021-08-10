@@ -93,10 +93,10 @@ export default {
   gap: 7px;
   justify-items: center;
   text-align: center;
-  background-color: lightgreen;
+  background-color: grey;
 }
 h2 {
-  color: rgb(220, 242, 255);
+  color: rgb(0, 0, 0);
 }
 ul {
   list-style-type: none;

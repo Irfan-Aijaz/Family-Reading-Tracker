@@ -53,89 +53,36 @@
     </div>
     <div class="books">
       <div v-for="(book, index) in books" :key="index">
-      
-            {{ book.title }}
-         
-            <img
-              v-if="book.isbn"
-              v-bind:src="
-                'http://covers.openlibrary.org/b/isbn/' + book.isbn + '-M.jpg'
-              "
-            />
-        
-            {{ book.author }}
-      
-            <button v-on:click="$router.push({ name: 'newSession' })">
-              Start Reading
-            </button>
-            <button>Remove</button>
-        
-      </div>
-    </div>
-    <!--Add navigation buttons -->
-    <!--Add parent navigation buttons -->
-    <div
-      v-if="this.$store.state.user.authorities[0].name == 'ROLE_ADMIN'"
-      id="register-family"
-      class="text-center"
-    >
-      <div class="parentOptions">
-        <button v-on:click="$router.push({ name: 'register' })">
-          Add Family Member
-        </button>
-        <button v-on:click="$router.push({ name: 'newBook' })">Add Book</button>
-        <button v-on:click="$router.push({ name: 'newSession' })">
-          Record Session
-        </button>
-        <button
-          v-on:click="
-            $router.push({
-              name: 'inProgress',
-              params: { id: $store.state.user.id },
-            })
+        {{ book.title }}
+
+        <img
+          v-if="book.title"
+          v-bind:src="
+            'http://covers.openlibrary.org/b/title/' + book.title + '-M.jpg'
           "
-        >
-          In Progress
-        </button>
-        <button v-on:click="$router.push({ name: 'completed' })">
-          Completed
-        </button>
-        <button v-on:click="$router.push({ name: 'viewSessionsHistory' })">
-          Track Family Progress
-        </button>
-        <button v-on:click="$router.push({ name: 'prizes' })">Prizes</button>
-      </div>
-    </div>
-    <!--Add child navigation buttons -->
-    <div
-      v-if="this.$store.state.user.authorities[0].name == 'ROLE_USER'"
-      class="text-center"
-    >
-      <div class="childOptions">
-        <button v-on:click="$router.push({ name: 'newBook' })">Add Book</button>
-        <button v-on:click="$router.push({ name: 'inProgress' })">
-          In Progress
-        </button>
+        />
+
+        {{ book.author }}
+
         <button v-on:click="$router.push({ name: 'newSession' })">
-          Record Session
+          Start Reading
         </button>
-        <button v-on:click="$router.push({ name: 'viewSessionsHistory' })">
-          View Reading Activity
-        </button>
-        <button v-on:click="$router.push({ name: 'completed' })">
-          Completed
-        </button>
-        <button v-on:click="$router.push({ name: 'prizes' })">Prizes</button>
+        <button>Remove</button>
       </div>
     </div>
+    <navigation></navigation>
   </div>
 </template>
 
 <script>
 import bookService from "../services/BookService";
+import Navigation from "../components/Navigation.vue";
 
 export default {
   name: "newBook",
+  components: {
+    navigation: Navigation,
+  },
   data() {
     return {
       book: {
@@ -194,44 +141,12 @@ export default {
   margin-top: 5%;
 }
 .books {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+ 
   justify-items: center;
   text-align: center;
   margin-right: 25%;
   margin-top: 5%;
-  grid-template-rows: 250px  250px 250px  250px;
+ 
 }
-.parentOptions {
-  display: grid;
-  grid-template-columns: 1fr;
-  justify-items: center;
-  align-items: start;
-  position: absolute;
-  top: 25%;
-  font-size: 25px;
-  border: 2px solid rgb(139, 203, 232);
-  border-radius: 15px;
-  padding-top: 15px;
-  width: 200px;
-  height: 500px;
-  margin-top: 0%;
-  margin-left: 2%;
-}
-.childOptions {
-  display: grid;
-  grid-template-columns: 1fr;
-  justify-items: center;
-  align-items: start;
-  position: absolute;
-  top: 25%;
-  font-size: 25px;
-  border: 2px solid rgb(139, 203, 232);
-  border-radius: 15px;
-  padding-top: 15px;
-  width: 200px;
-  height: 500px;
-  margin-top: 0%;
-  margin-left: 2%;
-}
+
 </style>
