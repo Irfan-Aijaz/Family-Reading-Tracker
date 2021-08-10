@@ -1,13 +1,12 @@
 
     <template>
-    <div class ="navigation">
-    
+  <div class="navigation">
     <div
       v-if="this.$store.state.user.authorities[0].name == 'ROLE_ADMIN'"
       id="register-family"
       class="text-center"
     >
-      <div class="parentOptions">
+      <div class="parent-options">
         <button v-on:click="$router.push({ name: 'register' })">
           Add Family Member
         </button>
@@ -56,5 +55,12 @@
         <button v-on:click="$router.push({ name: 'prizes' })">Prizes</button>
       </div>
     </div>
-    </div>
-    </template>
+  </div>
+</template>
+
+<style scoped>
+.parent-options{
+  width: 90%;
+  margin: 0 auto;
+}
+</style>

@@ -70,19 +70,14 @@
         <button>Remove</button>
       </div>
     </div>
-    <navigation></navigation>
   </div>
 </template>
 
 <script>
 import bookService from "../services/BookService";
-import Navigation from "../components/Navigation.vue";
 
 export default {
   name: "newBook",
-  components: {
-    navigation: Navigation,
-  },
   data() {
     return {
       book: {

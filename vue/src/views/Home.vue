@@ -29,28 +29,6 @@
         >{{ name }}
       </label>
       </div>
-      <!--start app button choices here -->
-      <div class="parentOptions">
-        <button v-on:click="$router.push({ name: 'register' })">
-          Add Family Member
-        </button>
-        <button v-on:click="$router.push({ name: 'newBook' })">
-          Add Book</button>
-        <button v-on:click="$router.push({ name: 'newSession' })">
-          Record Session
-        </button>
-        <button v-on:click="$router.push({ name: 'inProgress', params: {id: $store.state.user.id} })">
-          In Progress
-        </button>
-        <button v-on:click="$router.push({ name: 'completed' })">
-          Completed
-        </button>
-        <button v-on:click="$router.push({ name: 'viewSessionsHistory' })">
-          Track Family Progress
-        </button>
-        <button v-on:click="$router.push({ name: 'prizes' })">
-          Prizes</button>
-      </div>
     </div>
     <!--End parent/admin code, start child user code -->
     <div
