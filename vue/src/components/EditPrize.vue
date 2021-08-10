@@ -1,8 +1,24 @@
 <template>
     <div class="form">
-        <!-- The form labels for adding a new book-->
-        <form class="form-add-prize" @submit.prevent="updatePrize">
-            <h2 class="new-prize-title">Add Prize to Prizes</h2>
+        <!-- The form labels for updating a prize-->
+        <form class="form-edit-prize" @submit.prevent="updatePrize">
+            <h2 class="edit-prize-header">Select a Prize to Update:</h2>
+            <div>
+                <label for="prize-id" class="sr-only">Prize Name: </label>
+                <select
+                    id="family-members"
+                    name="family-members"
+                    v-model="prize.prizeId"
+                >
+                <option
+                    v-for="object in prizeList"
+                    v-bind:key="object.prizeId"
+                    v-bind:value="object.prizeId"
+                >
+                    {{ object.prizeName }}
+                </option>
+                </select>
+            </div>
             <div>
                 <label for="prize-name" class="sr-only">Prize Name: </label>
                 <input
@@ -81,20 +97,24 @@
             </div>
 
             <button class="btn btn-lg btn-primary btn-block" type="submit">
-            Add Prize
+            Update Prize
             </button>
         </form>
+        <navigation></navigation>
     </div>
 </template>
 
 <script>
 import prizeService from "@/services/PrizeService";
+import Navigation from '../components/Navigation.vue';
 
 export default {
+    components: { Navigation },
     name: "updated-prize",
     data() {
         return {
             prize: {
+                prizeId: '',
                 prizeName: '',
                 prizeDescription: '',
                 milestoneMinutes: '',
@@ -103,6 +123,7 @@ export default {
                 dateStart: '',
                 dateEnd: ''
             },
+            prizeList: [],
             prizeCreationErrors: false,
             prizeCreationErrorMsg: "There were problems creating a prize.",
         };

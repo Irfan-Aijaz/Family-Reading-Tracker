@@ -1,5 +1,4 @@
-<!--Add navigation buttons -->
-    <!--Add parent navigation buttons -->
+
     <template>
     <div class ="navigation">
     
@@ -35,7 +34,7 @@
         <button v-on:click="$router.push({ name: 'prizes' })">Prizes</button>
       </div>
     </div>
-    <!--Add child navigation buttons -->
+
     <div
       v-if="this.$store.state.user.authorities[0].name == 'ROLE_USER'"
       class="text-center"
