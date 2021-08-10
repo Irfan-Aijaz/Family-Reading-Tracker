@@ -12,11 +12,12 @@ public class Prize {
     private Long maxPrizes;
     private LocalDate dateStart;
     private LocalDate dateEnd;
+    private Long familyId;
 
     public Prize() {
     }
 
-    public Prize(Long prizeId, String prizeName, String prizeDescription, Long milestoneMinutes, String userGroup, Long maxPrizes, LocalDate dateStart, LocalDate dateEnd) {
+    public Prize(Long prizeId, String prizeName, String prizeDescription, Long milestoneMinutes, String userGroup, Long maxPrizes, LocalDate dateStart, LocalDate dateEnd, Long familyId) {
         this.prizeId = prizeId;
         this.prizeName = prizeName;
         this.prizeDescription = prizeDescription;
@@ -25,6 +26,15 @@ public class Prize {
         this.maxPrizes = maxPrizes;
         this.dateStart = dateStart;
         this.dateEnd = dateEnd;
+        this.familyId = familyId;
+    }
+
+    public Long getFamilyId() {
+        return familyId;
+    }
+
+    public void setFamilyId(Long familyId) {
+        this.familyId = familyId;
     }
 
     public Long getPrizeId() {
