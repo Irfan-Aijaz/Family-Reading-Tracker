@@ -8,14 +8,16 @@
             Update Prize
     </button>
     <navigation></navigation>
+    <family-prize-list></family-prize-list>
     
   </div>
 </template>
 
 <script>
 import Navigation from '../components/Navigation.vue';
+import FamilyPrizeList from '../components/FamilyPrizeList.vue';
 export default {
-  components: { Navigation },
+  components: { Navigation, FamilyPrizeList },
 
 };
 </script>

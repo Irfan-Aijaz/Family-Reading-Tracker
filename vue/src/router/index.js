@@ -13,6 +13,7 @@ import InProgress from '../views/InProgress'
 import Prizes from '../views/Prizes'
 import CreatePrize from '../components/NewPrize'
 import UpdatePrize from '../components/EditPrize'
+// import FamilyPrizeList from '../components/FamilyPrizeList'
 
 Vue.use(Router)
 

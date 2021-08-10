@@ -1,6 +1,6 @@
 <template>
     <div class="form">
-        <!-- The form labels for adding a new book-->
+        <!-- The form labels for adding a new prize-->
         <form class="form-add-prize" @submit.prevent="createPrize">
             <h2 class="new-prize-title">Add Prize to Prizes</h2>
             <div>
@@ -39,9 +39,9 @@
             <div>
                 <label for="group" class="sr-only">User-Group: </label>
                 <select id="group" name="group" v-model="prize.userGroup">
-                    <option value="Parent">Parent</option>
-                    <option value="Child">Child</option>
-                    <option value="Both">Both</option>
+                    <option value="PARENT">Parent</option>
+                    <option value="CHILD">Child</option>
+                    <option value="BOTH">Both</option>
                 </select>
             </div>
             <div>
@@ -84,13 +84,18 @@
             Add Prize
             </button>
         </form>
+        
+        <navigation></navigation>
     </div>
 </template>
 
 <script>
 import prizeService from "@/services/PrizeService";
+import Navigation from '@/components/Navigation.vue';
 
 export default {
+    
+    components: { Navigation },
     name: "new-prize",
     data() {
         return {
@@ -101,7 +106,8 @@ export default {
                 userGroup: '',
                 maxPrizes: '',
                 dateStart: '',
-                dateEnd: ''
+                dateEnd: '',
+                familyId: ''
             },
             prizeCreationErrors: false,
             prizeCreationErrorMsg: "There were problems creating a prize.",
@@ -109,6 +115,7 @@ export default {
     },
     methods: {
         createPrize() {
+            this.prize.familyId = this.$store.state.user.familyId;
             prizeService
                 .createPrize(this.prize)
                 .then((response) => {

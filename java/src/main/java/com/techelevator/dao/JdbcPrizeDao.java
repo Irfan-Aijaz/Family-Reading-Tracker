@@ -80,7 +80,7 @@ public class JdbcPrizeDao implements PrizeDao {
         prize.setUserGroup(rowSet.getString("user_group"));
         prize.setMaxPrizes(rowSet.getLong("max_prizes"));
         prize.setDateStart(rowSet.getDate("date_start").toLocalDate());
-        prize.setDateStart(rowSet.getDate("date_end").toLocalDate());
+        prize.setDateEnd(rowSet.getDate("date_end").toLocalDate());
         prize.setFamilyId(rowSet.getLong("family_id"));
 
         return prize;

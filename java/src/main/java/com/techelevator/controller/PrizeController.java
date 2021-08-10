@@ -31,8 +31,8 @@ public class PrizeController {
         prizeDao.updatePrize(prizeToUpdate.getPrizeId(), prizeToUpdate.getPrizeName(), prizeToUpdate.getPrizeDescription(), prizeToUpdate.getMilestoneMinutes(), prizeToUpdate.getUserGroup(), prizeToUpdate.getMaxPrizes(), prizeToUpdate.getDateStart(), prizeToUpdate.getDateEnd());
     }
 
-    @RequestMapping(value = "/get_prizes_for_user_group", method = RequestMethod.GET)
-    public List<Prize> getPrizesForUserGroup(@RequestParam String userGroup, @RequestParam Long familyId) {
+    @RequestMapping(value = "/get_prizes_for_family_and_user_group", method = RequestMethod.GET)
+    public List<Prize> getPrizesForUserGroup(@RequestParam Long familyId, @RequestParam String userGroup) {
         return prizeDao.getPrizesForFamilyAndUserGroup(familyId, userGroup);
     }
 }
