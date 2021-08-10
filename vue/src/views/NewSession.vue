@@ -1,6 +1,10 @@
 <template>
   <div id="session" class="text-center">
-    <form class="form-session" @submit.prevent="newSession">
+    
+    <div class = "form-session">
+      <navigation></navigation>
+      <div>
+    <form @submit.prevent="newSession">
       <h1 class="h3 mb-3 font-weight-normal">
         New Session For: {{ this.$store.state.user.username }}
       </h1>
@@ -52,7 +56,7 @@
       <div>
         <label for="pages" class="sr-only">Pages Read: </label>
         <input
-          type="text"
+          type="number"
           id="pages"
           class="form-control"
           placeholder="Pages Read"
@@ -110,9 +114,14 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">
           Submit
         </button>
-      <navigation></navigation>
+      
       </div>
-    </form>
+       </form>
+      </div>
+      <div>
+        <img src = "https://y.yarn.co/8c0a1869-c221-4910-bc0d-2b3f42815897_text.gif" width="350px" height="300px">
+      </div>
+       </div>
   </div>
 </template>
 
@@ -220,10 +229,13 @@ export default {
 <style>
 .form-session {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: repeat(3, 1fr);
   gap: 5px;
   justify-items: center;
   align-items: start;
+}
+div.img{
+  padding: 10px;
 }
 
 </style>
