@@ -13,6 +13,8 @@ import InProgress from '../views/InProgress'
 import Prizes from '../views/Prizes'
 import CreatePrize from '../components/NewPrize'
 import UpdatePrize from '../components/EditPrize'
+import Completed from '../views/Completed'
+
 // import FamilyPrizeList from '../components/FamilyPrizeList'
 
 Vue.use(Router)
@@ -106,6 +108,14 @@ const router = new Router({
       path: "/retrieve_books_progress/:id",
       name: "inProgress",
       component: InProgress,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/completed",
+      name: "completed",
+      component: Completed,
       meta: {
         requiresAuth: true
       }

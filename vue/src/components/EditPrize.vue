@@ -1,26 +1,26 @@
 <template>
     <div class="form">
         <!-- The form labels for updating a prize-->
-        <form class="form-edit-prize" @submit.prevent="updatePrize">
+        <form class="form-edit-prize" @submit.prevent="updatePrizeSelection">
             <h2 class="edit-prize-header">Select a Prize to Update:</h2>
             <div>
                 <label for="prize-id" class="sr-only">Prize Name: </label>
                 <select
-                    id="family-members"
-                    name="family-members"
+                    id="prize-id"
+                    name="prize-id"
                     v-model="prize.prizeId"
                 >
                 <option
-                    v-for="object in prizeList"
-                    v-bind:key="object.prizeId"
-                    v-bind:value="object.prizeId"
+                    v-for="prizeObject in prizeList"
+                    v-bind:key="prizeObject.prizeId"
+                    v-bind:value="prizeObject.prizeId"
                 >
-                    {{ object.prizeName }}
+                    {{ prizeObject.prizeName }}
                 </option>
                 </select>
             </div>
             <div>
-                <label for="prize-name" class="sr-only">Prize Name: </label>
+                <label for="prize-name" class="sr-only">Rename Prize To: </label>
                 <input
                 type="text"
                 id="prize-name"
@@ -55,9 +55,9 @@
             <div>
                 <label for="group" class="sr-only">User-Group: </label>
                 <select id="group" name="group" v-model="prize.userGroup">
-                    <option value="Parent">Parent</option>
-                    <option value="Child">Child</option>
-                    <option value="Both">Both</option>
+                    <option value="PARENT">Parent</option>
+                    <option value="CHILD">Child</option>
+                    <option value="BOTH">Both</option>
                 </select>
             </div>
             <div>
@@ -124,16 +124,16 @@ export default {
                 dateEnd: ''
             },
             prizeList: [],
-            prizeCreationErrors: false,
-            prizeCreationErrorMsg: "There were problems creating a prize.",
+            prizeRequestErrors: false,
+            prizeRequestErrorMsg: "There were problems retrieving the prizes.",
         };
     },
     methods: {
-        updatePrize() {
+        updatePrizeSelection() {
             prizeService
                 .updatePrize(this.prize)
                 .then((response) => {
-                    if (response.status == 201) {
+                    if (response.status == 200) {
                         this.$router.push({
                         path: "/prizes",
                         query: { updatePrize: "success" },
@@ -147,7 +147,35 @@ export default {
                         this.prizeCreationErrorMsg = "Bad Request: Prize Creation Validation Errors";
                     }
                 });
+        },
+        loadFamilyPrizes() {
+            prizeService
+                .getPrizesForFamilyUserGroup(this.$store.state.user.familyId, this.assignUserGroup)
+                .then((response) => {
+                    if (response.status == 200) {
+                        this.prizeList = response.data;
+                    }
+                })
+                .catch((error) => {
+                    const response = error.response;
+                    this.prizeRequestErrors = true;
+                    if (response.status === 400) {
+                        this.prizeRequestErrorMsg = "Bad Request: Prize Request Validation Errors";
+                    }
+                })
         }
+    },
+    computed: {
+        assignUserGroup() {
+            if (this.$store.state.user.authorities[0].name == 'ROLE_ADMIN') {
+                return 'PARENT';
+            } else {
+                return 'CHILD';
+            }
+        } 
+    },
+    created() {
+        this.loadFamilyPrizes();
     }
 }
 </script>
