@@ -1,5 +1,9 @@
 <template>
   <div id="register" class="text-center">
+    <div class = "blah">
+      <navigation>
+      </navigation>
+    <div>
     <form class="form-register" @submit.prevent="register">
       <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
       <div class="alert alert-danger" role="alert" v-if="registrationErrors">
@@ -74,14 +78,23 @@
       <router-link :to="{ name: 'login' }" v-if="this.$store.state.token == ''"
         >Have an account?</router-link
       >
-    </form>
+    </form> 
+
+    </div>
+    <div>
+    <img src = "https://static.independent.co.uk/s3fs-public/thumbnails/image/2019/01/30/15/family-guy.jpg?width=1200" width="300" height="300">
+    </div>
+    </div>
   </div>
+ 
 </template>
 
 <script>
+import Navigation from '../components/Navigation.vue';
 import authService from "../services/AuthService";
 
 export default {
+  components: { Navigation },
   name: "register",
   data() {
     return {
@@ -159,10 +172,17 @@ export default {
 }
 
 div {
-  background-color: lightgreen;
+  background-color: grey;
   text-align: center;
 }
 .confirmPassword {
   align-content: center;
 }
+div.blah{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-column-gap: 25px;
+  grid-row-gap: 25px;
+}
+
 </style>

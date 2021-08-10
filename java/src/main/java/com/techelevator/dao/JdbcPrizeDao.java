@@ -62,7 +62,7 @@ public class JdbcPrizeDao implements PrizeDao {
         List<Prize> prizes = new ArrayList<>();
         String sql = "SELECT * " +
                      "FROM prizes " +
-                     "WHERE family_id = ? AND user_group = ?;";
+                     "WHERE family_id = ? AND (user_group = ? OR user_group = 'BOTH');";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, familyId, userGroup);
         while (results.next()) {
             prizes.add(mapRowToPrize(results));

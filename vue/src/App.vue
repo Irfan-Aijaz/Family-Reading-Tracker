@@ -35,10 +35,10 @@ export default {
 <style>
 body {
   text-align: center;
-  background-color: lightgreen;
+  background-color: grey;
 }
 h1 {
-  color: white;
+  color: black;
   display: flex;
   justify-content: center;
   align-items: center;

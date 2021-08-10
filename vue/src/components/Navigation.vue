@@ -59,8 +59,5 @@
 </template>
 
 <style scoped>
-.parent-options{
-  width: 90%;
-  margin: 0 auto;
-}
+
 </style>

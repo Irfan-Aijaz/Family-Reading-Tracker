@@ -29,6 +29,31 @@
         >{{ name }}
       </label>
       </div>
+      <div class = "something">
+      <img src="https://www.media1.hw-static.com/wp-content/uploads/family-guy_56734748-2400x1350-2400x1350.jpeg" alt="Reading Time" width="230px" height="200px">
+      </div>
+      <!--start app button choices here -->
+      <div class="parentOptions">
+        <button v-on:click="$router.push({ name: 'register' })">
+          Add Family Member
+        </button>
+        <button v-on:click="$router.push({ name: 'newBook' })">
+          Add Book</button>
+        <button v-on:click="$router.push({ name: 'newSession' })">
+          Record Session
+        </button>
+        <button v-on:click="$router.push({ name: 'inProgress', params: {id: $store.state.user.id} })">
+          In Progress
+        </button>
+        <button v-on:click="$router.push({ name: 'completed' })">
+          Completed
+        </button>
+        <button v-on:click="$router.push({ name: 'viewSessionsHistory' })">
+          Track Family Progress
+        </button>
+        <button v-on:click="$router.push({ name: 'prizes' })">
+          Prizes</button>
+      </div>
     </div>
     <!--End parent/admin code, start child user code -->
     <div
@@ -118,7 +143,7 @@ export default {
   top: 10px;
   left: 0px;
   font-size: 25px;
-  border: 2px solid rgb(139, 203, 232);;
+  border: 2px solid rgb(0, 0, 0);;
   border-radius: 15px;
   padding-top:15px;
   width: 200px;
@@ -145,24 +170,29 @@ export default {
   margin-bottom: 10%;
 }
 .family-name{
-  color: rgb(139, 187, 232);;
+  color: rgb(0, 0, 0);;
   font-size: 50px;
   margin-bottom: 5%;
 
 }
 .child-welcome{
-  color: rgb(139, 187, 232);;
+  color: rgb(0, 0, 0);;
   font-size: 50px;
   margin-bottom: 5%;
 
 }
 .family-members{
-  color: rgb(139, 182, 232);;
-  font-size: 30px;
+  color: rgb(132, 181, 236);;
+  font-size: 50px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   flex-wrap: wrap;
 
+}
+div.something{
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
 }
 </style>

@@ -14,12 +14,12 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr v-for="prize in prizeList"  :key="prize">
+                  <tr v-for="prize in prizeList"  v-bind:key="prize.prizeId">
                       <td>
                           {{ prize.prizeName }}
                       </td>
                       <td>
-                          {{ prize.description }}
+                          {{ prize.prizeDescription }}
                       </td>
                       <td>
                           {{ prize.milestoneMinutes }}
