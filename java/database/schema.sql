@@ -88,6 +88,7 @@ CREATE TABLE prizes (
 	max_prizes int NOT NULL,
 	date_start date NOT NULL,
 	date_end date NOT NULL,
+	family_id int NOT NULL,
 	CONSTRAINT PK_prize_id PRIMARY KEY (prize_id)
 	
 );
@@ -107,7 +108,6 @@ INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULi
 INSERT INTO users (username,password_hash,role) VALUES ('admin','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_ADMIN');
 
 
-INSERT INTO books (isbn,title,author,pages_total) VALUES ('9780060254926','Where the Wild Things Are','Maurice Sendak','40');
 
 
 COMMIT TRANSACTION;
