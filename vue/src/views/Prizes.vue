@@ -7,8 +7,8 @@
     <button v-on:click="$router.push({ name: 'updatePrize' })">
             Update Prize
     </button>
-    <navigation></navigation>
     <family-prize-list></family-prize-list>
+    <navigation></navigation>
     
   </div>
 </template>

@@ -14,7 +14,7 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr v-for="prize in prizeList"  :key="prize">
+                  <tr v-for="prize in prizeList"  v-bind:key="prize">
                       <td>
                           {{ prize.prizeName }}
                       </td>
