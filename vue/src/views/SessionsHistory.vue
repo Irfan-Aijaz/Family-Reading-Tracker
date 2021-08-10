@@ -36,7 +36,7 @@
       </thead>
       <tbody>
         <tr
-        
+          class="session-rows"
           v-for="session in filteredSessions"
           v-bind:key="session.sessionId"
           v-on:click="
@@ -123,27 +123,8 @@ export default {
   name: "sessions",
   data() {
     return {
-      sessions: [
-        //   {
-        //       id: 1,
-        //       title: "harry potter",
-        //       time: 10,
-        //       dayOfSession: "8/7/2021"
-        //   },
-        //   {
-        //       id: 2,
-        //       title: "harry potter 2",
-        //       time: 11,
-        //       dayOfSession: "8/6/2021"
-        //   }
-      ],
+      sessions: [],
       usersInFamily: [],
-
-      //      daySession:"2021-08-02"
-      // minutesRead:180
-      // sessionId:1
-      // title:"test"
-      // username:"test1child"
       filter: {
         daySession: "",
         minutesRead: "",
@@ -229,12 +210,9 @@ export default {
 .show-all {
   left: 5%;
 }
-tbody tr:hover {
-  background-color: #f5f5f5;
+.session-rows:hover,.session-detail-rows:hover {
+  background-color: #ffffff;
   cursor: pointer;
-}
-tbody th:hover{
-  background-color:none;
 }
 .parentOptions {
   display: grid;

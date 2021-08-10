@@ -13,35 +13,35 @@ userId:4 -->
   <div class="container">
     <div class="table">
       <table id="tblSessionDetails">
-        <tr>
+        <tr class="session-detail-rows">
           <th>Title:</th>
           <td>{{ sessionDetails.title }}</td>
         </tr>
-        <tr>
+        <tr class="session-detail-rows">
           <th>ISBN:</th>
           <td>{{ sessionDetails.isbn }}</td>
         </tr>
-        <tr>
+        <tr class="session-detail-rows">
           <th>Time Spent Reading:</th>
           <td>{{ sessionDetails.minutesRead }} minutes</td>
         </tr>
-        <tr>
+        <tr class="session-detail-rows">
           <th>Time Started:</th>
           <td>{{ sessionDetails.timeStart }}</td>
         </tr>
-        <tr>
+        <tr class="session-detail-rows">
           <th>Time Ended:</th>
           <td>{{ sessionDetails.timeEnd }}</td>
         </tr>
-        <tr>
+        <tr class="session-detail-rows">
           <th>Date:</th>
           <td>{{ sessionDetails.daySession }}</td>
         </tr>
-        <tr>
+        <tr class="session-detail-rows">
           <th>Format:</th>
           <td>{{ sessionDetails.format }}</td>
         </tr>
-        <tr>
+        <tr class="session-detail-rows">
           <th>Notes:</th>
           <td>{{ sessionDetails.notes }}</td>
         </tr>
@@ -147,10 +147,6 @@ export default {
   padding: 15px;
   text-align: left;
   margin-left: 20%;
-}
-tr:hover {
-  background-color: #f5f5f5;
-  cursor: pointer;
 }
 .parentOptions {
   display: grid;
