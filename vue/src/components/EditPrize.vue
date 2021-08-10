@@ -126,6 +126,8 @@ export default {
             prizeList: [],
             prizeRequestErrors: false,
             prizeRequestErrorMsg: "There were problems retrieving the prizes.",
+            prizeEditingErrors: false,
+            prizeEditingErrorMsg: "There were problems editing the prize.",
         };
     },
     methods: {
@@ -142,9 +144,9 @@ export default {
                 })
                 .catch((error) => {
                     const response = error.response;
-                    this.prizeCreationErrors = true;
+                    this.prizeEditingErrors = true;
                     if (response.status === 400) {
-                        this.prizeCreationErrorMsg = "Bad Request: Prize Creation Validation Errors";
+                        this.prizeEditingErrorMsg = "Bad Request: Prize Editing Validation Errors";
                     }
                 });
         },

@@ -14,6 +14,7 @@ import Prizes from '../views/Prizes'
 import CreatePrize from '../components/NewPrize'
 import UpdatePrize from '../components/EditPrize'
 import Completed from '../views/Completed'
+import DeletePrize from '../components/DeletePrize'
 
 // import FamilyPrizeList from '../components/FamilyPrizeList'
 
@@ -129,7 +130,7 @@ const router = new Router({
       }
     },
     {
-      path: "/new_prize/",
+      path: "/new_prize",
       name: "newPrize",
       component: CreatePrize,
       meta: {
@@ -137,9 +138,17 @@ const router = new Router({
       }
     },
     {
-      path: "/update_prize/",
+      path: "/update_prize",
       name: "updatePrize",
       component: UpdatePrize,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/delete_prize",
+      name: "deletePrize",
+      component: DeletePrize,
       meta: {
         requiresAuth: true
       }

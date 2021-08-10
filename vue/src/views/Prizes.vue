@@ -9,6 +9,9 @@
       <button v-on:click="$router.push({ name: 'updatePrize' })">
               Update Prize
       </button>
+      <button v-on:click="$router.push({ name: 'deletePrize' })">
+              Delete Inactive Prize
+      </button>
       <family-prize-list></family-prize-list>
     </div>
   </div>

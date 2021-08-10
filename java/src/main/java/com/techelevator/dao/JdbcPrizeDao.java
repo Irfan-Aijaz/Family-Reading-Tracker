@@ -57,6 +57,7 @@ public class JdbcPrizeDao implements PrizeDao {
 
         return prizeUpdated;
     }
+
     @Override
     public List<Prize> getPrizesForFamilyAndUserGroup(Long familyId, String userGroup){
         List<Prize> prizes = new ArrayList<>();
@@ -69,6 +70,21 @@ public class JdbcPrizeDao implements PrizeDao {
         }
         return prizes;
 
+    }
+
+    @Override
+    public boolean removeInactivePrize(Long prizeId) {
+        boolean prizeRemoved = false;
+
+        String sql = "DELETE FROM prizes " +
+                "WHERE prize_id = ?;";
+        int result = jdbcTemplate.update(sql,prizeId);
+
+        if (result==1) {
+            prizeRemoved = true;
+        }
+
+        return prizeRemoved;
     }
 
     private Prize mapRowToPrize(SqlRowSet rowSet) {

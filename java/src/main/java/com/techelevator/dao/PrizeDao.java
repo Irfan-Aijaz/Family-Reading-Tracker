@@ -13,5 +13,6 @@ public interface PrizeDao {
 
     List<Prize> getPrizesForFamilyAndUserGroup(Long familyId, String userGroup);
 
+    boolean removeInactivePrize(Long prizeId);
 
 }

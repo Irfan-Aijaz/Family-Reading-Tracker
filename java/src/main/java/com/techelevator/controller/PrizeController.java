@@ -35,4 +35,9 @@ public class PrizeController {
     public List<Prize> getPrizesForUserGroup(@RequestParam Long familyId, @RequestParam String userGroup) {
         return prizeDao.getPrizesForFamilyAndUserGroup(familyId, userGroup);
     }
+
+    @RequestMapping(value = "/delete_inactive_prize", method = RequestMethod.DELETE)
+    public void deleteInactivePrize(@RequestParam Long prizeId) {
+        prizeDao.removeInactivePrize(prizeId);
+    }
 }
