@@ -1,8 +1,8 @@
 <!--Add navigation buttons -->
     <!--Add parent navigation buttons -->
     <template>
-        <div class ="navigation">
-    </template>
+    <div class ="navigation">
+    
     <div
       v-if="this.$store.state.user.authorities[0].name == 'ROLE_ADMIN'"
       id="register-family"
