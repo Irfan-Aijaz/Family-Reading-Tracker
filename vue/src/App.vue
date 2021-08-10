@@ -14,9 +14,23 @@
         <li><h1>Family Reading Book Tracker</h1></li>
       </ul>
     </div>
+    <navigation
+      v-if="$store.state.token != ''"
+    />
     <router-view />
   </div>
 </template>
+
+<script>
+import Navigation from "./components/Navigation.vue";
+
+export default {
+  name: "App",
+  components: {
+    'navigation': Navigation
+  }
+};
+</script>
 
 <style>
 body {
