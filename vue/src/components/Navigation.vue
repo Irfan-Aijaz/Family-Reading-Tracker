@@ -30,7 +30,12 @@
         <button v-on:click="$router.push({ name: 'viewSessionsHistory' })">
           Track Family Progress
         </button>
-        <button v-on:click="$router.push({ name: 'prizes' })">Prizes</button>
+        <button v-on:click="$router.push({ name: 'prizes' })">
+          View Available Prizes
+          </button>
+          <button>
+            View Claim Prize Requests 
+            </button>
       </div>
     </div>
 
@@ -52,7 +57,10 @@
         <button v-on:click="$router.push({ name: 'completed' })">
           Completed
         </button>
-        <button v-on:click="$router.push({ name: 'prizes' })">Prizes</button>
+        <button v-on:click="$router.push({ name: 'prizes' })">
+          View Available Prizes
+          </button>
+
       </div>
     </div>
   </div>

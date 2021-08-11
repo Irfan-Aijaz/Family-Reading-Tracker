@@ -4,25 +4,25 @@
     <navigation></navigation>
     <div class="prize-view">
       <button v-on:click="$router.push({ name: 'newPrize' })">
-              Create a New Prize
+        Create a New Prize
       </button>
       <button v-on:click="$router.push({ name: 'updatePrize' })">
-              Update Prize
+        Update Prize
       </button>
       <button v-on:click="$router.push({ name: 'deletePrize' })">
-              Delete Inactive Prize
+        Delete Inactive Prize
       </button>
+      <button>Claim Prize</button>
       <family-prize-list></family-prize-list>
     </div>
   </div>
 </template>
 
 <script>
-import Navigation from '../components/Navigation.vue';
-import FamilyPrizeList from '../components/FamilyPrizeList.vue';
+import Navigation from "../components/Navigation.vue";
+import FamilyPrizeList from "../components/FamilyPrizeList.vue";
 export default {
   components: { Navigation, FamilyPrizeList },
-
 };
 </script>
 
