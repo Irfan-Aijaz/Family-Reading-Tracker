@@ -22,7 +22,7 @@
                     Delete
                 </button>
         </form>
-        <navigation></navigation>
+        
     </div>
 </template>
 

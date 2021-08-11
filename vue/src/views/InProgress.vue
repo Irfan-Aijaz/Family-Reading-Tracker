@@ -3,14 +3,16 @@
     <div class="books">
       <div v-for="(userBooks, index) in userBooks" :key="index">
         {{ userBooks.title }}
-        <img
-          v-if="userBooks.title"
-          v-bind:src="
-            'http://covers.openlibrary.org/b/title/' +
-            userBooks.title +
-            '-M.jpg'
-          "
-        />
+        <div class="img">
+          <img
+            v-if="userBooks.title"
+            v-bind:src="
+              'http://covers.openlibrary.org/b/title/' +
+              userBooks.title +
+              '-M.jpg'
+            "
+          />
+        </div>
         <div>
           {{ userBooks.pagesRead }} Pages Read of
           {{ userBooks.pagesTotal }} Total Pages
@@ -25,6 +27,7 @@
 
 <script>
 import bookService from "../services/BookService";
+
 
 export default {
   name: "userBook",

@@ -120,10 +120,10 @@ export default {
 
 <style>
 .form {
-  border: 2px solid black;
+  border: 4px solid black;
   border-radius: 10px;
   width: 90%;
-  height: 100px;
+  height: 150px;
   margin: 0 auto;
   background-color: rgb(194, 191, 191);
   margin-bottom: 3%;
