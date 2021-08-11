@@ -15,6 +15,10 @@ export default {
 
     deleteInactivePrize(prizeId) {
         return axios.delete('/delete_inactive_prize/' + prizeId)
+    },
+
+    claimPrizeRequestChild(prizeId, childId) {
+        return axios.put('/claim_prize_request_child', null, {params: {prizeId: prizeId, childId: childId}});
     }
 
 }
