@@ -24,7 +24,13 @@
         >
           In Progress
         </button>
-        <button v-on:click="$router.push({ name: 'completed' })">
+        <button v-on:click="
+            $router.push({
+              name: 'completed',
+              params: { id: $store.state.user.id },
+            })
+          "
+        >
           Completed
         </button>
         <button v-on:click="$router.push({ name: 'viewSessionsHistory' })">
@@ -45,8 +51,21 @@
     >
       <div class="child-options">
         <button v-on:click="$router.push({ name: 'newBook' })">Add Book</button>
-        <button v-on:click="$router.push({ name: 'inProgress' })">
+        <button v-on:click="
+            $router.push({
+              name: 'inProgress',
+              params: { id: $store.state.user.id },
+            })
+          ">
           In Progress
+        </button>
+        <button v-on:click="
+            $router.push({
+              name: 'completed',
+              params: { id: $store.state.user.id },
+            })
+          ">
+          Completed
         </button>
         <button v-on:click="$router.push({ name: 'newSession' })">
           Record Session
@@ -54,9 +73,7 @@
         <button v-on:click="$router.push({ name: 'viewSessionsHistory' })">
           View Reading Activity
         </button>
-        <button v-on:click="$router.push({ name: 'completed' })">
-          Completed
-        </button>
+        
         <button v-on:click="$router.push({ name: 'prizes' })">
           View Available Prizes
         </button>
