@@ -8,7 +8,6 @@
     >
       Book added successfully
     </div>
-    <navigation></navigation>
     <!--code for parent account starts here -->
     <div
       v-if="this.$store.state.user.authorities[0].name == 'ROLE_ADMIN'"
@@ -57,10 +56,8 @@
 
 <script>
 import authService from "../services/AuthService";
-import Navigation from "../components/Navigation.vue";
 
 export default {
-  components: { Navigation },
   name: "home",
   data() {
     return {

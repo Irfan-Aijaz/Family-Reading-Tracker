@@ -173,7 +173,6 @@ export default {
 }
 
 div {
-  background-color: grey;
   text-align: center;
 }
 .confirmPassword {

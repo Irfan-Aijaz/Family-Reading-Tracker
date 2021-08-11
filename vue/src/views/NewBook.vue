@@ -53,34 +53,25 @@
       <!-- Display Added Books -->
     </div>
     <div class="books">
-      <div v-for="(book, index) in books" :key="index">
-        {{ book.title }}
-
-        <img
-          v-if="book.title"
-          v-bind:src="
-            'http://covers.openlibrary.org/b/title/' + book.title + '-M.jpg'
-          "
-        />
-
-        <p>
-          {{ book.author }}
-        </p>
-
-        <button v-on:click="$router.push({ name: 'newSession' })">
-          Start Reading
-        </button>
-        <button>Remove</button>
-      </div>
+      <book
+        v-for="(b, index) in books"
+        :key="index"
+        :title="b.title"
+        :author="b.author"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import bookService from "../services/BookService";
+import Book from "../components/Book.vue"
 
 export default {
   name: "newBook",
+  components: {
+   'book': Book
+ },
   data() {
     return {
       book: {
@@ -133,25 +124,5 @@ export default {
   border-radius: 10px;
   width: 90%;
   margin: 0 auto;
-}
-.books {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 20px;
-  align-content: center;
-  text-align: center;
-  grid-template-rows: 100px 1fr 100px;
-  margin-top: 5%;
-}
-.books img {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 40px;
-  position: relative;
-  left: 20%;
-  align-content: center;
-  text-align: center;
-  grid-template-rows: 100px 100px 100px 100px;
-  margin-top: 3%;
 }
 </style>
