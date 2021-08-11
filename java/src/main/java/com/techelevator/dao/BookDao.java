@@ -15,6 +15,8 @@ public interface BookDao {
 
     List<UserBook> findAllUserBooksInProgress(Long id);
 
+    List<UserBook> findAllUserBooksCompleted(Long id);
+
     boolean deleteBook(String isbn);
 
 }

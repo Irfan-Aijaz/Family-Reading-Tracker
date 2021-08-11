@@ -44,9 +44,14 @@ public class BookController {
     }
 
 
-    @RequestMapping(value = "/retrieve_books_progress/{user_id}", method = RequestMethod.GET)
-    public List<UserBook> userBooks(@PathVariable("user_id") Long userId) {
+    @RequestMapping(value = "/retrieve_books_in_progress/{user_id}", method = RequestMethod.GET)
+    public List<UserBook> userBooksInProgress(@PathVariable("user_id") Long userId) {
         return bookDao.findAllUserBooksInProgress(userId);
+    }
+
+    @RequestMapping(value = "/retrieve_books_completed/{user_id}", method = RequestMethod.GET)
+    public List<UserBook> userBooksCompleted(@PathVariable("user_id") Long userId) {
+        return bookDao.findAllUserBooksCompleted(userId);
     }
 
 }

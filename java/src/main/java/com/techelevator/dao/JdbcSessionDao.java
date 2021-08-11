@@ -115,15 +115,22 @@ public class JdbcSessionDao implements SessionDao {
     @Override
     public boolean updateUserBook(Long userId, String isbn, Long pagesRead, Long minutesRead) {
         boolean updatedUserBook = false;
+
+        String checkPages = "SELECT pages_total FROM books WHERE isbn = ?;";
+        SqlRowSet totalPages = jdbcTemplate.queryForRowSet(checkPages, isbn);
+
+        boolean completedStatus = totalPages.getLong("pages_total") <= pagesRead;
+
         String checkReading = "SELECT user_id, isbn " +
                 "FROM user_book " +
                 "WHERE user_id = ? AND isbn = ?;";
-        SqlRowSet result = jdbcTemplate.queryForRowSet(checkReading, userId, isbn);
+        SqlRowSet userBookFound = jdbcTemplate.queryForRowSet(checkReading, userId, isbn);
 
-        if (result.next()) {
-            String updateAUserBook = "UPDATE user_book SET pages_read = pages_read + ?, minutes_read = minutes_read + ? " +
+        if (userBookFound.next()) {
+            String updateAUserBook = "UPDATE user_book SET pages_read = pages_read + ?, minutes_read = minutes_read + ?, completed = ? " +
                     "WHERE user_id = ? AND isbn = ?";
-            jdbcTemplate.update(updateAUserBook, pagesRead, minutesRead, userId, isbn);
+
+            jdbcTemplate.update(updateAUserBook, pagesRead, minutesRead, userId, isbn,completedStatus);
             updatedUserBook = true;
         } else {
             String insertUserBook = "INSERT INTO user_book (user_id, isbn, pages_read, minutes_read, completed) values (?,?,?,?,?)";
@@ -135,7 +142,7 @@ public class JdbcSessionDao implements SessionDao {
                 ps.setString(2,isbn);
                 ps.setLong(3,pagesRead);
                 ps.setLong(4,minutesRead);
-                ps.setBoolean(5,false);
+                ps.setBoolean(5,completedStatus);
                 return ps;
             }
             , keyHolder) == 1;
