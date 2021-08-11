@@ -1,23 +1,27 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <div class="logo">
+    <header class="header">
+      <div>
         <img
-          src="https://files.slack.com/files-pri/T0GNFLF6D-F02AX9HUZMH/image.png"
+          src="../src/images/logo.png"
         />
       </div>
-      <div>
-      <router-link v-bind:to="{ name: 'home' }" v-if="$store.state.token != ''"
-        >Home | </router-link
-      >&nbsp;&nbsp;
-      <router-link
-        v-bind:to="{ name: 'logout' }"
-        v-if="$store.state.token != ''"
-      >
-        Logout</router-link
-      >
+    
+      <div class="thing">
+        <router-link
+          v-bind:to="{ name: 'home' }"
+          v-if="$store.state.token != ''"
+          >Home | </router-link
+        >&nbsp;&nbsp;
+        <router-link
+          v-bind:to="{ name: 'logout' }"
+          v-if="$store.state.token != ''"
+        >
+          Logout</router-link
+        >
       </div>
-    </div>
+        <div></div>
+    </header>
     <h1>Oracle Reading Tracker</h1>
     <navigation v-if="$store.state.token != ''" />
     <router-view />
@@ -36,10 +40,21 @@ export default {
 </script>
 
 <style>
-div#nav {
+header.header {
   display: flex;
-  justify-content:flex-start;
+  justify-content: space-between;
 }
+
+header.header > * {
+  flex: 1
+}
+
+header.header  img {
+  max-width: 100px;
+  float: left
+}
+
+
 body {
   text-align: center;
   background-color: rgb(139, 139, 139);
