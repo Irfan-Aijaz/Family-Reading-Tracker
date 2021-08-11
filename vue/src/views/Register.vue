@@ -1,7 +1,6 @@
 <template>
   <div id="register" class="text-center">
     <div class="blah">
-      <navigation> </navigation>
       <div>
         <form class="form-register" @submit.prevent="register">
           <h1 class="h3 mb-3 font-weight-normal">Create Account</h1>
@@ -94,11 +93,9 @@
 </template>
 
 <script>
-import Navigation from "../components/Navigation.vue";
 import authService from "../services/AuthService";
 
 export default {
-  components: { Navigation },
   name: "register",
   data() {
     return {
@@ -173,10 +170,10 @@ export default {
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  background-color: grey;
 }
 
 div {
-  background-color: grey;
   text-align: center;
 }
 .confirmPassword {

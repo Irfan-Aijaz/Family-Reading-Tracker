@@ -1,7 +1,6 @@
 <template>
   <div id="session" class="text-center">
     <div class="form-session">
-      <navigation></navigation>
       <div>
         <form @submit.prevent="newSession">
           <h1 class="h3 mb-3 font-weight-normal">
@@ -33,11 +32,11 @@
           <div>
             <!--The form inputs for recording a session -->
             <label for="isbn" class="sr-only">Title: </label>
-            <select id="isbn" name="isbn" v-model="session.isbn">
+            <select id="isbn" name="isbn" v-model="bookIndex">
               <option
-                v-for="book in library"
+                v-for="(book, index) in library"
                 v-bind:key="book.isbn"
-                v-bind:value="book.isbn"
+                v-bind:value="index"
               >
                 {{ book.title }}
               </option>
@@ -60,6 +59,8 @@
             <label for="pages" class="sr-only">Pages Read: </label>
             <input
               type="number"
+              min="0"
+              :max="selectedBook.pagesTotal"
               id="pages"
               class="form-control"
               placeholder="Pages Read"
@@ -135,12 +136,8 @@
 import authService from "../services/AuthService";
 import bookService from "../services/BookService";
 import sessionService from "../services/SessionService";
-import Navigation from "../components/Navigation.vue";
 
 export default {
-  components: {
-    navigation: Navigation,
-  },
   // Saving a session object
   name: "session",
   data() {
@@ -157,6 +154,7 @@ export default {
         notes: "",
       },
       library: [],
+      bookIndex: 0,
       sessionErrors: false,
       sessionErrorMsg: "There were problems creating this session.",
     };
@@ -167,7 +165,13 @@ export default {
       this.library = response.data;
     });
   },
-
+  watch: {
+    bookIndex: function() {
+      if (this.session.pagesRead>this.selectedBook.pagesTotal) {
+        this.session.pagesRead = this.selectedBook.pagesTotal;
+      }
+    }
+  },
   methods: {
     family() {
       authService
@@ -190,6 +194,7 @@ export default {
       if (this.$store.state.user.authorities[0].name == "ROLE_USER") {
         this.session.userId = this.$store.state.user.id;
       }
+      this.session.isbn = this.selectedBook.isbn;
       sessionService
         .createSession(this.session)
         .then((response) => {
@@ -226,6 +231,11 @@ export default {
         });
     },
   },
+  computed: {
+    selectedBook() {
+      return this.library[this.bookIndex];
+    }
+  },
   created() {
     this.family();
   },
@@ -237,8 +247,5 @@ export default {
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
-}
-.picture img {
-  top: 25%;
 }
 </style>

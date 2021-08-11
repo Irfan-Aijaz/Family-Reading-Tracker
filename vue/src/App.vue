@@ -22,20 +22,24 @@
 </template>
 
 <script>
-//import Navigation from "./components/Navigation.vue";
+import Navigation from "./components/Navigation.vue";
 
-//export default {
-//  name: "App",
-//  components: {
-  //  'navigation': Navigation
- // }
-//};
+export default {
+ name: "App",
+ components: {
+   'navigation': Navigation
+ }
+};
 </script>
 
 <style>
+
 body {
   text-align: center;
   background-color: rgb(139, 139, 139);
+  background-image: url("https://c.tenor.com/vDtqjv47FsIAAAAC/book-school.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 h1 {
   color: black;

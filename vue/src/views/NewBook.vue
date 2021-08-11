@@ -1,7 +1,5 @@
 <template>
   <div>
-    <navigation></navigation>
-
     <div class="form">
       <!-- The form labels for adding a new book-->
       <form class="form-register-new-book" @submit.prevent="create">
@@ -55,34 +53,25 @@
       <!-- Display Added Books -->
     </div>
     <div class="books">
-      <div v-for="(book, index) in books" :key="index">
-        {{ book.title }}
-
-        <img
-          v-if="book.title"
-          v-bind:src="
-            'http://covers.openlibrary.org/b/title/' + book.title + '-M.jpg'
-          "
-        />
-
-        {{ book.author }}
-
-        <button v-on:click="$router.push({ name: 'newSession' })">
-          Start Reading
-        </button>
-        <button>Remove</button>
-      </div>
+      <book
+        v-for="(b, index) in books"
+        :key="index"
+        :title="b.title"
+        :author="b.author"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import bookService from "../services/BookService";
-import Navigation from "../components/Navigation.vue";
+import Book from "../components/Book.vue"
 
 export default {
-  components: { Navigation },
   name: "newBook",
+  components: {
+   'book': Book
+ },
   data() {
     return {
       book: {
@@ -133,34 +122,7 @@ export default {
 .form {
   border: 2px solid black;
   border-radius: 10px;
-  position: relative;
-  left: 20%;
-  width: 75%;
-}
-.books {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 20px;
-  position: relative;
-  left: 20%;
-  align-content: center;
-  text-align: center;
-  grid-template-rows: 100px 1fr 100px;
-  margin-top: 5%;
-}
-.books img {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 40px;
-  position: relative;
-  left: 20%;
-  align-content: center;
-  text-align: center;
-  grid-template-rows: 100px 100px 100px 100px;
-  margin-top: 3%;
-}
-.navigation {
-  position: absolute;
-  top: 5%;
+  width: 90%;
+  margin: 0 auto;
 }
 </style>

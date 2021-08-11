@@ -24,7 +24,13 @@
         >
           In Progress
         </button>
-        <button v-on:click="$router.push({ name: 'completed' })">
+        <button v-on:click="
+            $router.push({
+              name: 'completed',
+              params: { id: $store.state.user.id },
+            })
+          "
+        >
           Completed
         </button>
         <button v-on:click="$router.push({ name: 'viewSessionsHistory' })">
@@ -45,8 +51,21 @@
     >
       <div class="child-options">
         <button v-on:click="$router.push({ name: 'newBook' })">Add Book</button>
-        <button v-on:click="$router.push({ name: 'inProgress' })">
+        <button v-on:click="
+            $router.push({
+              name: 'inProgress',
+              params: { id: $store.state.user.id },
+            })
+          ">
           In Progress
+        </button>
+        <button v-on:click="
+            $router.push({
+              name: 'completed',
+              params: { id: $store.state.user.id },
+            })
+          ">
+          Completed
         </button>
         <button v-on:click="$router.push({ name: 'newSession' })">
           Record Session
@@ -54,12 +73,10 @@
         <button v-on:click="$router.push({ name: 'viewSessionsHistory' })">
           View Reading Activity
         </button>
-        <button v-on:click="$router.push({ name: 'completed' })">
-          Completed
-        </button>
+        
         <button v-on:click="$router.push({ name: 'prizes' })">
           View Available Prizes
-          </button>
+        </button>
 
       </div>
     </div>
@@ -67,7 +84,7 @@
 </template>
 
 <style scoped>
-.parent-options {
+/*.parent-options {
   border: 5px solid black;
   display: grid;
   grid-template-columns: 1fr;
@@ -88,5 +105,21 @@
   gap: 40px;
   position: absolute;
   top: 5%;
+}
+*/
+.navigation {
+  margin-bottom: 10px;
+}
+.parent-options, .child-options {
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 90%;
+  margin: 0 auto;
+  height: 50px;
+}
+button {
+  height: 50px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 </style>
