@@ -19,17 +19,17 @@
       </button>
     </form>
     <family-prize-list></family-prize-list>
-    <navigation></navigation>
+    
   </div>
 </template>
 
 <script>
 import FamilyPrizeList from "../components/FamilyPrizeList.vue";
 import prizeService from "@/services/PrizeService";
-import Navigation from "../components/Navigation.vue";
+
 
 export default {
-  components: { Navigation, FamilyPrizeList },
+  components: { FamilyPrizeList },
   name: "claim-prize",
   data() {
     return {
@@ -97,4 +97,11 @@ export default {
 </script>
 
 <style>
+.form-claim-prize{
+  background-color: rgb(194, 191, 191);
+  width: 275px;
+  height: 150px;
+  border: 3px solid black;
+  margin-left: 40%;
+}
 </style>

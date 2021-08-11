@@ -11,17 +11,18 @@
       <button v-on:click="$router.push({ name: 'deletePrize' })">
         Delete Inactive Prize
       </button>
-      <button v-on:click="$router.push({ name: 'claimPrize' })">Claim Prize</button>
+      <button v-on:click="$router.push({ name: 'claimPrize' })">
+        Claim Prize
+      </button>
       <family-prize-list></family-prize-list>
     </div>
   </div>
 </template>
 
 <script>
-import FamilyPrizeList from '../components/FamilyPrizeList.vue';
+import FamilyPrizeList from "../components/FamilyPrizeList.vue";
 export default {
   components: { FamilyPrizeList },
-
 };
 </script>
 
@@ -32,6 +33,8 @@ export default {
   gap: 1px;
   justify-items: center;
   align-items: start;
-  background-color: grey;
+  background-color: rgb(194, 191, 191);
+  border: 3px solid black;
+  
 }
 </style>

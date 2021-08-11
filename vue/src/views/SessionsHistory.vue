@@ -154,11 +154,11 @@ export default {
   padding: 15px;
   text-align: left;
   margin-left: 20%;
-  background-color: grey;
+  background-color: rgb(194, 191, 191);
 }
 .show-all {
   left: 5%;
-  background-color: grey;
+  background-color: rgb(194, 191, 191);
 }
 .session-rows:hover,
 .session-detail-rows:hover {
