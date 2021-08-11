@@ -32,11 +32,11 @@
           <div>
             <!--The form inputs for recording a session -->
             <label for="isbn" class="sr-only">Title: </label>
-            <select id="isbn" name="isbn" v-model="session.isbn">
+            <select id="isbn" name="isbn" v-model="bookIndex">
               <option
-                v-for="book in library"
+                v-for="(book, index) in library"
                 v-bind:key="book.isbn"
-                v-bind:value="book.isbn"
+                v-bind:value="index"
               >
                 {{ book.title }}
               </option>
@@ -60,6 +60,7 @@
             <input
               type="number"
               min="0"
+              :max="selectedBook.pagesTotal"
               id="pages"
               class="form-control"
               placeholder="Pages Read"
@@ -153,6 +154,7 @@ export default {
         notes: "",
       },
       library: [],
+      bookIndex: 0,
       sessionErrors: false,
       sessionErrorMsg: "There were problems creating this session.",
     };
@@ -163,7 +165,13 @@ export default {
       this.library = response.data;
     });
   },
-
+  watch: {
+    bookIndex: function() {
+      if (this.session.pagesRead>this.selectedBook.pagesTotal) {
+        this.session.pagesRead = this.selectedBook.pagesTotal;
+      }
+    }
+  },
   methods: {
     family() {
       authService
@@ -186,6 +194,7 @@ export default {
       if (this.$store.state.user.authorities[0].name == "ROLE_USER") {
         this.session.userId = this.$store.state.user.id;
       }
+      this.session.isbn = this.selectedBook.isbn;
       sessionService
         .createSession(this.session)
         .then((response) => {
@@ -221,6 +230,11 @@ export default {
           }
         });
     },
+  },
+  computed: {
+    selectedBook() {
+      return this.library[this.bookIndex];
+    }
   },
   created() {
     this.family();
