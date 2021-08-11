@@ -46,10 +46,12 @@ export default {
 <style scoped>
 
 .book {
+
   width: 200px;
   background-color: rgb(134, 134, 134, .7);
   border: 2px solid black;
-  height: 320px;
+  height: 300px;
+  
 }
 .book img {
   width: 50%;

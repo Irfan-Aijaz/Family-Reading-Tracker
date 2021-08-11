@@ -123,8 +123,14 @@ export default {
   border: 2px solid black;
   border-radius: 10px;
   width: 90%;
+  height: 150px;
   margin: 0 auto;
   background-color: grey;
+  margin-bottom: 3%;
 
+}
+.books{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
 }
 </style>
