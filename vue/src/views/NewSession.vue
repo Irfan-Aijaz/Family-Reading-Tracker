@@ -59,6 +59,7 @@
             <label for="pages" class="sr-only">Pages Read: </label>
             <input
               type="number"
+              min="0"
               id="pages"
               class="form-control"
               placeholder="Pages Read"
