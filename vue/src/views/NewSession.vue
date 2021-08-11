@@ -63,7 +63,7 @@
               :max="selectedBook.pagesTotal"
               id="pages"
               class="form-control"
-              placeholder="Pages Read"
+              :placeholder="selectedBook.pagesTotal"
               v-model="session.pagesRead"
               required
               autofocus
