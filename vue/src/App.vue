@@ -33,9 +33,13 @@ export default {
 </script>
 
 <style>
+
 body {
   text-align: center;
   background-color: rgb(139, 139, 139);
+  background-image: url("https://c.tenor.com/vDtqjv47FsIAAAAC/book-school.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 h1 {
   color: black;
