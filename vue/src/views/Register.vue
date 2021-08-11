@@ -170,6 +170,7 @@ export default {
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  background-color: grey;
 }
 
 div {
