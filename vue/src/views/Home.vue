@@ -30,7 +30,7 @@
           >{{ name }}
         </label>
       </div>
-      <div class="something">
+      <!-- <div class="something">
         <img
           src="https://www.media1.hw-static.com/wp-content/uploads/family-guy_56734748-2400x1350-2400x1350.jpeg"
           alt="Reading Time"
@@ -38,7 +38,7 @@
           height="200px"
          
         />
-      </div>
+      </div> -->
 
       <!--End parent/admin code, start child user code -->
       <div
