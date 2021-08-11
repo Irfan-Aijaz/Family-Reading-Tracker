@@ -1,7 +1,6 @@
 <!--begin form here to add prizes for books read -->
 <template>
   <div class="prize-grid">
-    <navigation></navigation>
     <div class="prize-view">
       <button v-on:click="$router.push({ name: 'newPrize' })">
               Create a New Prize
@@ -18,10 +17,9 @@
 </template>
 
 <script>
-import Navigation from '../components/Navigation.vue';
 import FamilyPrizeList from '../components/FamilyPrizeList.vue';
 export default {
-  components: { Navigation, FamilyPrizeList },
+  components: { FamilyPrizeList },
 
 };
 </script>

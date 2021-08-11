@@ -1,6 +1,5 @@
 <template>
   <div>
-    <navigation></navigation>
     <div class="books">
       <div v-for="(userBooks, index) in userBooks" :key="index">
         {{ userBooks.title }}
@@ -22,13 +21,9 @@
 </template>
 
 <script>
-import Navigation from "../components/Navigation.vue";
 import bookService from "../services/BookService";
 
 export default {
-  components: {
-    navigation: Navigation,
-  },
   name: "userBook",
   data() {
     return {

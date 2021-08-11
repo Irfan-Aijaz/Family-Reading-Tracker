@@ -1,7 +1,6 @@
 <template>
   <div id="session" class="text-center">
     <div class="form-session">
-      <navigation></navigation>
       <div>
         <form @submit.prevent="newSession">
           <h1 class="h3 mb-3 font-weight-normal">
@@ -120,13 +119,6 @@
           </div>
         </form>
       </div>
-      <div class="picture">
-        <img
-          src="https://y.yarn.co/8c0a1869-c221-4910-bc0d-2b3f42815897_text.gif"
-          width="350px"
-          height="300px"
-        />
-      </div>
     </div>
   </div>
 </template>
@@ -135,12 +127,8 @@
 import authService from "../services/AuthService";
 import bookService from "../services/BookService";
 import sessionService from "../services/SessionService";
-import Navigation from "../components/Navigation.vue";
 
 export default {
-  components: {
-    navigation: Navigation,
-  },
   // Saving a session object
   name: "session",
   data() {
@@ -237,8 +225,5 @@ export default {
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
-}
-.picture img {
-  top: 25%;
 }
 </style>

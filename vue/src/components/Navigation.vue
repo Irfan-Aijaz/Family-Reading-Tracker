@@ -59,7 +59,7 @@
 </template>
 
 <style scoped>
-.parent-options {
+/*.parent-options {
   border: 5px solid black;
   display: grid;
   grid-template-columns: 1fr;
@@ -80,5 +80,21 @@
   gap: 40px;
   position: absolute;
   top: 5%;
+}
+*/
+.navigation {
+  margin-bottom: 10px;
+}
+.parent-options, .child-options {
+  border: 2px solid black;
+  border-radius: 10px;
+  width: 80%;
+  margin: 0 auto;
+  height: 50px;
+}
+button {
+  height: 50px;
+  margin-left: 5px;
+  margin-right: 5px;
 }
 </style>

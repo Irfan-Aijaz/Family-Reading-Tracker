@@ -1,7 +1,5 @@
 <template>
   <div>
-    <navigation></navigation>
-
     <div class="form">
       <!-- The form labels for adding a new book-->
       <form class="form-register-new-book" @submit.prevent="create">
@@ -65,7 +63,9 @@
           "
         />
 
-        {{ book.author }}
+        <p>
+          {{ book.author }}
+        </p>
 
         <button v-on:click="$router.push({ name: 'newSession' })">
           Start Reading
@@ -78,10 +78,8 @@
 
 <script>
 import bookService from "../services/BookService";
-import Navigation from "../components/Navigation.vue";
 
 export default {
-  components: { Navigation },
   name: "newBook",
   data() {
     return {
@@ -133,16 +131,13 @@ export default {
 .form {
   border: 2px solid black;
   border-radius: 10px;
-  position: relative;
-  left: 20%;
-  width: 75%;
+  width: 80%;
+  margin: 0 auto;
 }
 .books {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 20px;
-  position: relative;
-  left: 20%;
   align-content: center;
   text-align: center;
   grid-template-rows: 100px 1fr 100px;
@@ -158,9 +153,5 @@ export default {
   text-align: center;
   grid-template-rows: 100px 100px 100px 100px;
   margin-top: 3%;
-}
-.navigation {
-  position: absolute;
-  top: 5%;
 }
 </style>
