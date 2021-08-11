@@ -63,10 +63,23 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 20px;
+  position: relative;
+  left: 20%;
   align-content: center;
   text-align: center;
   grid-template-rows: 100px 1fr 100px;
   margin-top: 5%;
   background-color: grey;
+}
+.books img {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 40px;
+  position: relative;
+  left: 20%;
+  align-content: center;
+  text-align: center;
+  grid-template-rows: 100px 100px 100px 100px;
+  margin-top: 3%;
 }
 </style>

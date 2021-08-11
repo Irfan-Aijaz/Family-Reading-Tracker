@@ -6,6 +6,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +48,33 @@ public class JdbcPrizeDao implements PrizeDao {
     }
 
     @Override
+    public boolean createClaimPrizeRequestForChild(Long prizeId, Long childId){
+        boolean claimCreated = false;
+        Prize prize = getPrizeByPrizeId(prizeId);
+        String sql = "INSERT INTO claimed_prizes (claimed_prize_id, claim_prize_request_status_id, user_id, description, milestone_minutes, date_claimed, family_id) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?);";
+        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+        String id_column = "claimed_prize_id";
+
+        claimCreated = jdbcTemplate.update(con -> {
+            PreparedStatement ps = con.prepareStatement(sql, new String[]{id_column});
+            ps.setLong(1, prizeId);
+            ps.setLong(2, 1);
+            ps.setLong(3, childId);
+            ps.setString(4, prize.getPrizeDescription());
+            ps.setLong(5, prize.getMilestoneMinutes());
+            ps.setDate(6, Date.valueOf(LocalDateTime.now().toLocalDate()));
+            ps.setLong(7, prize.getFamilyId());
+            return ps;
+
+        }
+        , keyHolder) == 1;
+
+        return claimCreated;
+
+    }
+
+    @Override
     public boolean updatePrize(Long prizeId, String prizeName, String prizeDescription, Long milestoneMinutes, String userGroup, Long maxPrizes, LocalDate dateStart, LocalDate dateEnd) {
         boolean prizeUpdated = false;
 
@@ -56,6 +84,19 @@ public class JdbcPrizeDao implements PrizeDao {
         prizeUpdated = true;
 
         return prizeUpdated;
+    }
+
+    @Override
+    public Prize getPrizeByPrizeId(Long prizeId){
+        Prize prize = new Prize();
+        String sql = "SELECT * " +
+                     "FROM prizes " +
+                     "WHERE prize_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, prizeId);
+        if (results.next()) {
+            prize = mapRowToPrize(results);
+        }
+        return prize;
     }
 
     @Override

@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users, books, user_book, sessions, family, prizes, user_prize;
+DROP TABLE IF EXISTS users, books, user_book, sessions, family, prizes, user_prize, claimed_prizes, claim_prize_request_statuses;
 DROP SEQUENCE IF EXISTS seq_user_id, seq_family_id, seq_session_id, seq_prize_id, seq_claimed_prize_id, seq_claim_prize_request_status_id;
 
 CREATE SEQUENCE seq_user_id
@@ -116,22 +116,26 @@ CREATE TABLE user_prize (
 
 );
 
-CREATE TABLE claimed_prizes (
-	claimed_prize_id int DEFAULT nextval('seq_claimed_prize_id'::regclass) NOT NULL,
-	user_id int NOT NULL,
-	description text NOT NULL,
-	milestone_minutes int NOT NULL,
-	date_claimed date NOT NULL,
-	family_id int NOT NULL,
-	CONSTRAINT PK_claimed_prizes PRIMARY KEY (claimed_prize_id)
-	
-);
-
 CREATE TABLE claim_prize_request_statuses (
 	claim_prize_request_status_id int DEFAULT nextval('seq_claim_prize_request_status_id'::regclass) NOT NULL,
 	claim_prize_request_status_desc varchar(10) NOT NULL,
 	CONSTRAINT PK_claim_prize_request_statuses PRIMARY KEY (claim_prize_request_status_id)
 );
+
+CREATE TABLE claimed_prizes (
+	claimed_prize_id int DEFAULT nextval('seq_claimed_prize_id'::regclass) NOT NULL,
+	claim_prize_request_status_id int NOT NULL,
+	user_id int NOT NULL,
+	description text NOT NULL,
+	milestone_minutes int NOT NULL,
+	date_claimed date NOT NULL,
+	family_id int NOT NULL,
+	CONSTRAINT PK_claimed_prizes PRIMARY KEY (claimed_prize_id),
+	CONSTRAINT FK_claimed_prizes_claim_prize_request_statuses FOREIGN KEY (claim_prize_request_status_id) REFERENCES claim_prize_request_statuses (claim_prize_request_status_id)
+	
+);
+
+
 
 
 INSERT INTO users (username,password_hash,role) VALUES ('user','$2a$08$UkVvwpULis18S19S5pZFn.YHPZt3oaqHZnDwqbCW9pft6uFtkXKDC','ROLE_USER');

@@ -15,4 +15,8 @@ public interface PrizeDao {
 
     boolean removeInactivePrize(Long prizeId);
 
+    boolean createClaimPrizeRequestForChild(Long prizeId, Long childId);
+
+    Prize getPrizeByPrizeId(Long prizeId);
+
 }

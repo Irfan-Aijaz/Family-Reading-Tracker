@@ -40,4 +40,9 @@ public class PrizeController {
     public void deleteInactivePrize(@PathVariable("prize_id") Long prizeId) {
         prizeDao.removeInactivePrize(prizeId);
     }
+
+    @RequestMapping(value = "/claim_prize_request_child", method = RequestMethod.PUT)
+    public void createClaimRequestForChild(@RequestParam Long prizeId, @RequestParam Long childId) {
+        prizeDao.createClaimPrizeRequestForChild(prizeId, childId);
+    }
 }
