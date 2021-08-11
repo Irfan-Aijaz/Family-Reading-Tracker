@@ -248,7 +248,7 @@ export default {
   flex-direction: column;
   align-items: center;
   gap: 15px;
-  background-color: rgb(158, 157, 157);
+  background-color: rgb(194, 191, 191);
   border: 2px solid black;
   width: 500px;
   height: 300px;

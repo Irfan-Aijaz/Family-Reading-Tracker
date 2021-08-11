@@ -97,5 +97,8 @@ export default {
 </script>
 
 <style>
-
+.form-edit-prize{
+background-color: rgb(194, 191, 191);
+border: 3px solid black;
+}
 </style>

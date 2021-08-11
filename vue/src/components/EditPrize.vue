@@ -187,8 +187,8 @@ export default {
 
 <style>
 .form {
-  display: grid;
-  grid-template-columns: 1fr;
-  align-items: center;
+ background-color: rgb(194, 191, 191);
+ height: 300px;
+
 }
 </style>

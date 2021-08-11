@@ -123,9 +123,9 @@ export default {
   border: 2px solid black;
   border-radius: 10px;
   width: 90%;
-  height: 150px;
+  height: 100px;
   margin: 0 auto;
-  background-color: grey;
+  background-color: rgb(194, 191, 191);
   margin-bottom: 3%;
 
 }
