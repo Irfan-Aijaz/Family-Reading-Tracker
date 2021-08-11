@@ -1,6 +1,12 @@
 <template>
   <div id="app">
     <div id="nav">
+      <div class="logo">
+        <img
+          src="https://files.slack.com/files-pri/T0GNFLF6D-F02AX9HUZMH/image.png"
+        />
+      </div>
+      <div>
       <router-link v-bind:to="{ name: 'home' }" v-if="$store.state.token != ''"
         >Home | </router-link
       >&nbsp;&nbsp;
@@ -10,13 +16,10 @@
       >
         Logout</router-link
       >
-      <ul>
-        <li><h1>Family Reading Book Tracker</h1></li>
-      </ul>
+      </div>
     </div>
-    <navigation
-      v-if="$store.state.token != ''"
-    />
+    <h1>Oracle Reading Tracker</h1>
+    <navigation v-if="$store.state.token != ''" />
     <router-view />
   </div>
 </template>
@@ -25,15 +28,18 @@
 import Navigation from "./components/Navigation.vue";
 
 export default {
- name: "App",
- components: {
-   'navigation': Navigation
- }
+  name: "App",
+  components: {
+    navigation: Navigation,
+  },
 };
 </script>
 
 <style>
-
+div#nav {
+  display: flex;
+  justify-content:flex-start;
+}
 body {
   text-align: center;
   background-color: rgb(139, 139, 139);
@@ -47,5 +53,9 @@ h1 {
   justify-content: center;
   align-items: center;
   text-align: center;
+}
+.logo img {
+  width: 100px;
+  height: 100px;
 }
 </style>
