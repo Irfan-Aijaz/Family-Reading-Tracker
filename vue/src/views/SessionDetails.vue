@@ -93,6 +93,7 @@ export default {
   padding: 15px;
   text-align: left;
   margin-left: 20%;
+  background-color: grey;
 }
 
 </style>

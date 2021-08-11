@@ -32,5 +32,6 @@ export default {
   gap: 1px;
   justify-items: center;
   align-items: start;
+  background-color: grey;
 }
 </style>

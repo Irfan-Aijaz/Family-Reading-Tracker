@@ -124,5 +124,7 @@ export default {
   border-radius: 10px;
   width: 90%;
   margin: 0 auto;
+  background-color: grey;
+
 }
 </style>

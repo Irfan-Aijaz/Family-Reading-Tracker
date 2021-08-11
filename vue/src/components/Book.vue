@@ -44,12 +44,14 @@ export default {
 </script>
 
 <style scoped>
-.books {
-}
+
 .book {
   width: 200px;
+  background-color: rgb(134, 134, 134, .7);
+  border: 2px solid black;
+  height: 320px;
 }
 .book img {
-  width: 100%;
+  width: 50%;
 }
 </style>

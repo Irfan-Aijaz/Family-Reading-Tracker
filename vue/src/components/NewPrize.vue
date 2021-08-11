@@ -1,7 +1,7 @@
 <template>
     <div class="new-prize-grid">
         <!-- The form labels for adding a new prize-->
-        <navigation></navigation>
+        
         <div class="form-div">
             <form class="form-add-prize" @submit.prevent="createPrize">
                 <h2 class="new-prize-title">Add Prize to Prizes</h2>
@@ -94,11 +94,11 @@
 
 <script>
 import prizeService from "@/services/PrizeService";
-import Navigation from '@/components/Navigation.vue';
+
 
 export default {
     
-    components: { Navigation },
+   
     name: "new-prize",
     data() {
         return {

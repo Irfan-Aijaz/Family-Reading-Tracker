@@ -67,5 +67,6 @@ export default {
   text-align: center;
   grid-template-rows: 100px 1fr 100px;
   margin-top: 5%;
+  background-color: grey;
 }
 </style>

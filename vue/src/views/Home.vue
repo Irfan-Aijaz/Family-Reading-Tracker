@@ -88,29 +88,26 @@ export default {
 };
 </script>
 <style scoped>
-
-
 .family-name {
   color: rgb(0, 0, 0);
   font-size: 50px;
   top: 25%;
+  background-color: grey;
 }
 .child-welcome {
   color: rgb(0, 0, 0);
   font-size: 50px;
-  margin-bottom: 5%;
+  top: 25%;
+  background-color: grey;
 }
 .family-members {
   display: grid;
   display: 1fr;
   color: rgb(132, 181, 236);
   font-size: 50px;
-
+  background-color: ivory;
 }
 .something {
- 
- align-content: center;
-
-
+  align-content: center;
 }
 </style>

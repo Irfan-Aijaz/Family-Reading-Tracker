@@ -171,6 +171,10 @@ export default {
   align-items: center;
   gap: 10px;
   background-color: grey;
+  border: 2px solid black;
+  width: 350px;
+  height: 300px;
+  margin-left: 35%;
 }
 
 div {

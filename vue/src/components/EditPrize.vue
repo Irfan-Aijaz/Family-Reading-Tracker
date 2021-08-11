@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- The form labels for updating a prize-->
-    <navigation></navigation>
+ 
     <div class="form">
       <form class="form-edit-prize" @submit.prevent="updatePrizeSelection">
         <h2 class="edit-prize-header">Select a Prize to Update:</h2>
@@ -104,10 +104,10 @@
 
 <script>
 import prizeService from "@/services/PrizeService";
-import Navigation from "../components/Navigation.vue";
+
 
 export default {
-  components: { Navigation },
+  
   name: "updated-prize",
   data() {
     return {

@@ -28,10 +28,10 @@
 
 <script>
 import prizeService from "@/services/PrizeService";
-import Navigation from '../components/Navigation.vue';
+
 
 export default {
-    components: { Navigation },
+   
     name: "deleted-prize",
     data() {
         return {

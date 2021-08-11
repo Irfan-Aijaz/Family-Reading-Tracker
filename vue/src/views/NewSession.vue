@@ -229,8 +229,15 @@ export default {
 
 <style>
 .form-session {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 15px;
+  background-color: rgb(158, 157, 157);
+  border: 2px solid black;
+  width: 500px;
+  height: 300px;
+  margin-left: 30%;
+  
 }
 </style>
