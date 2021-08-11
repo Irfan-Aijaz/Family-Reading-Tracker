@@ -22,20 +22,20 @@
 </template>
 
 <script>
-import Navigation from "./components/Navigation.vue";
+//import Navigation from "./components/Navigation.vue";
 
-export default {
-  name: "App",
-  components: {
-    'navigation': Navigation
-  }
-};
+//export default {
+//  name: "App",
+//  components: {
+  //  'navigation': Navigation
+ // }
+//};
 </script>
 
 <style>
 body {
   text-align: center;
-  background-color: grey;
+  background-color: rgb(139, 139, 139);
 }
 h1 {
   color: black;

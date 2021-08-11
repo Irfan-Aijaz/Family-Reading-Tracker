@@ -1,5 +1,5 @@
 
-    <template>
+<template>
   <div class="navigation">
     <div
       v-if="this.$store.state.user.authorities[0].name == 'ROLE_ADMIN'"
@@ -38,7 +38,7 @@
       v-if="this.$store.state.user.authorities[0].name == 'ROLE_USER'"
       class="text-center"
     >
-      <div class="childOptions">
+      <div class="child-options">
         <button v-on:click="$router.push({ name: 'newBook' })">Add Book</button>
         <button v-on:click="$router.push({ name: 'inProgress' })">
           In Progress
@@ -59,5 +59,26 @@
 </template>
 
 <style scoped>
-
+.parent-options {
+  border: 5px solid black;
+  display: grid;
+  grid-template-columns: 1fr;
+  height: 500px;
+  width: 175px;
+  margin-left: 10%;
+  gap: 40px;
+  position: absolute;
+  top: 5%;
+}
+.child-options {
+  border: 2px solid black;
+  display: grid;
+  grid-template-columns: 1fr;
+  height: 500px;
+  width: 175px;
+  margin-left: 10%px;
+  gap: 40px;
+  position: absolute;
+  top: 5%;
+}
 </style>

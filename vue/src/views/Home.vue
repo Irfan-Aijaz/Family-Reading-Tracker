@@ -8,81 +8,48 @@
     >
       Book added successfully
     </div>
+    <navigation></navigation>
     <!--code for parent account starts here -->
     <div
       v-if="this.$store.state.user.authorities[0].name == 'ROLE_ADMIN'"
       id="register-family"
       class="text-center"
     >
-    <div class="family-name">
-      <label for="family-name" class="sr-only"
-        >Welcome {{ this.$store.state.user.familyName }} Family!
-      </label>
+      <div class="family-name">
+        <label for="family-name" class="sr-only"
+          >Welcome {{ this.$store.state.user.familyName }} Family!
+        </label>
       </div>
       <!-- Add list of family member usernames here -->
       <div class="family-members">
-      <label
-        for="family-members"
-        class="sp-only"
-        v-for="name in familyMembers"
-        v-bind:key="name"
-        >{{ name }}
-      </label>
+        <label
+          for="family-members"
+          class="sp-only"
+          v-for="name in familyMembers"
+          v-bind:key="name"
+          >{{ name }}
+        </label>
       </div>
-      <div class = "something">
-      <img src="https://www.media1.hw-static.com/wp-content/uploads/family-guy_56734748-2400x1350-2400x1350.jpeg" alt="Reading Time" width="230px" height="200px">
+      <div class="something">
+        <img
+          src="https://www.media1.hw-static.com/wp-content/uploads/family-guy_56734748-2400x1350-2400x1350.jpeg"
+          alt="Reading Time"
+          width="230px"
+          height="200px"
+         
+        />
       </div>
-      <!--start app button choices here -->
-      <div class="parentOptions">
-        <button v-on:click="$router.push({ name: 'register' })">
-          Add Family Member
-        </button>
-        <button v-on:click="$router.push({ name: 'newBook' })">
-          Add Book</button>
-        <button v-on:click="$router.push({ name: 'newSession' })">
-          Record Session
-        </button>
-        <button v-on:click="$router.push({ name: 'inProgress', params: {id: $store.state.user.id} })">
-          In Progress
-        </button>
-        <button v-on:click="$router.push({ name: 'completed' })">
-          Completed
-        </button>
-        <button v-on:click="$router.push({ name: 'viewSessionsHistory' })">
-          Track Family Progress
-        </button>
-        <button v-on:click="$router.push({ name: 'prizes' })">
-          Prizes</button>
-      </div>
-    </div>
-    <!--End parent/admin code, start child user code -->
-    <div
-      v-if="this.$store.state.user.authorities[0].name == 'ROLE_USER'"
-      class="text-center"
-    >
-    <div class="child-welcome">
-      <label for="family-name" class="sr-only"
-        > Welcome {{ this.$store.state.user.username }}!
-      </label>
-     </div> 
-      <!--start app button choices here -->
-      <div class="childOptions">
-        <button v-on:click="$router.push({ name: 'newBook' })">
-          Add Book</button>
-        <button v-on:click="$router.push({ name: 'inProgress' })">
-          In Progress
-        </button>
-        <button v-on:click="$router.push({ name: 'newSession' })">
-          Record Session
-        </button>
-        <button v-on:click="$router.push({ name: 'viewSessionsHistory'})">
-          View Reading Activity
-        </button>
-        <button v-on:click="$router.push({ name: 'completed' })">
-          Completed
-        </button>
-        <button v-on:click="$router.push({ name: 'prizes' })">
-          Prizes</button>
+
+      <!--End parent/admin code, start child user code -->
+      <div
+        v-if="this.$store.state.user.authorities[0].name == 'ROLE_USER'"
+        class="text-center"
+      >
+        <div class="child-welcome">
+          <label for="family-name" class="sr-only">
+            Welcome {{ this.$store.state.user.username }}!
+          </label>
+        </div>
       </div>
     </div>
   </div>
@@ -90,8 +57,10 @@
 
 <script>
 import authService from "../services/AuthService";
+import Navigation from "../components/Navigation.vue";
 
 export default {
+  components: { Navigation },
   name: "home",
   data() {
     return {
@@ -122,77 +91,29 @@ export default {
 };
 </script>
 <style scoped>
-.text-center {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 10px;
-  justify-items: center;
-  align-items: start;
-  font-size: 25px;
-  color: cornsilk;
-  margin-bottom: 10%;
 
+
+.family-name {
+  color: rgb(0, 0, 0);
+  font-size: 50px;
+  top: 25%;
 }
-.parentOptions {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0px;
-  justify-items: center;
-  align-items: start;
-  position: absolute;
-  top: 10px;
-  left: 0px;
-  font-size: 25px;
-  border: 2px solid rgb(0, 0, 0);;
-  border-radius: 15px;
-  padding-top:15px;
-  width: 200px;
-  height: 500px;
-  margin: 10px;
-  margin-bottom: 10%;
-}
-.childOptions {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0px;
-  justify-items: center;
-  align-items: start;
-  position: absolute;
-  top: 10px;
-  left: 0px;
-  font-size: 25px;
-  border: 2px solid rgb(139, 203, 232);;
-  border-radius: 15px;
-  padding-top:15px;
-  width: 200px;
-  height: 500px;
-  margin: 10px;
-  margin-bottom: 10%;
-}
-.family-name{
-  color: rgb(0, 0, 0);;
+.child-welcome {
+  color: rgb(0, 0, 0);
   font-size: 50px;
   margin-bottom: 5%;
-
 }
-.child-welcome{
-  color: rgb(0, 0, 0);;
+.family-members {
+  display: grid;
+  display: 1fr;
+  color: rgb(132, 181, 236);
   font-size: 50px;
-  margin-bottom: 5%;
 
 }
-.family-members{
-  color: rgb(132, 181, 236);;
-  font-size: 50px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  flex-wrap: wrap;
+.something {
+ 
+ align-content: center;
 
-}
-div.something{
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
+
 }
 </style>

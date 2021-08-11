@@ -143,11 +143,9 @@ export default {
 </script>
 
 <style>
-.new-prize-grid {
+.form-div {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 5px;
-  justify-items: center;
-  align-items: start;
+  grid-template-columns: 1fr;
+  align-items: center;
 }
 </style>

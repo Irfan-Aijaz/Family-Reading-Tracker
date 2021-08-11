@@ -1,19 +1,26 @@
 <template>
-  <div class="books">
-    <div v-for="(userBooks, index) in userBooks" :key="index">
-      {{ userBooks.title }}
-      <img
-        v-if="userBooks.title"
-        v-bind:src="
-          'http://covers.openlibrary.org/b/title/' + userBooks.title + '-M.jpg'
-        "
-      />
-      <div>{{ userBooks.pagesRead }} Pages Read of {{userBooks.pagesTotal}} Total Pages</div>
-      <button v-on:click="$router.push({ name: 'newSession' })">
-        Create New Session
-      </button>
-    </div>
+  <div>
     <navigation></navigation>
+    <div class="books">
+      <div v-for="(userBooks, index) in userBooks" :key="index">
+        {{ userBooks.title }}
+        <img
+          v-if="userBooks.title"
+          v-bind:src="
+            'http://covers.openlibrary.org/b/title/' +
+            userBooks.title +
+            '-M.jpg'
+          "
+        />
+        <div>
+          {{ userBooks.pagesRead }} Pages Read of
+          {{ userBooks.pagesTotal }} Total Pages
+        </div>
+        <button v-on:click="$router.push({ name: 'newSession' })">
+          Create New Session
+        </button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -25,7 +32,7 @@ export default {
   components: {
     navigation: Navigation,
   },
- 
+
   name: "userBook",
   data() {
     return {
@@ -61,12 +68,26 @@ export default {
 </script>
 
 <style>
-
 .books {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 15%;
-  padding-right: 25%;
-  padding-left: 25%;
+  gap: 20px;
+  position: relative;
+  left: 20%;
+  align-content: center;
+  text-align: center;
+  grid-template-rows: 100px 1fr 100px;
+  margin-top: 5%;
+}
+.books img {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 40px;
+  position: relative;
+  left: 20%;
+  align-content: center;
+  text-align: center;
+  grid-template-rows: 100px 100px 100px 100px;
+  margin-top: 3%;
 }
 </style>

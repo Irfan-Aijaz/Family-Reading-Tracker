@@ -1,5 +1,7 @@
 <template>
   <div>
+    <navigation></navigation>
+
     <div class="form">
       <!-- The form labels for adding a new book-->
       <form class="form-register-new-book" @submit.prevent="create">
@@ -49,6 +51,7 @@
           Add Book
         </button>
       </form>
+
       <!-- Display Added Books -->
     </div>
     <div class="books">
@@ -75,8 +78,10 @@
 
 <script>
 import bookService from "../services/BookService";
+import Navigation from "../components/Navigation.vue";
 
 export default {
+  components: { Navigation },
   name: "newBook",
   data() {
     return {
@@ -128,20 +133,34 @@ export default {
 .form {
   border: 2px solid black;
   border-radius: 10px;
+  position: relative;
+  left: 20%;
   width: 75%;
-  height: 125px;
-  margin-left: 20%;
-  align-content: right;
-  margin-bottom: 10px;
-  margin-top: 5%;
 }
 .books {
- 
-  justify-items: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 20px;
+  position: relative;
+  left: 20%;
+  align-content: center;
   text-align: center;
-  margin-right: 25%;
+  grid-template-rows: 100px 1fr 100px;
   margin-top: 5%;
- 
 }
-
+.books img {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 40px;
+  position: relative;
+  left: 20%;
+  align-content: center;
+  text-align: center;
+  grid-template-rows: 100px 100px 100px 100px;
+  margin-top: 3%;
+}
+.navigation {
+  position: absolute;
+  top: 5%;
+}
 </style>

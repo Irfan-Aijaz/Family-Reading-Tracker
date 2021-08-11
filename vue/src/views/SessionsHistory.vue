@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <navigation></navigation>
     <table id="tblSessions">
       <thead>
         <!--  -->
@@ -66,7 +67,12 @@
 <script>
 import sessionService from "../services/SessionService";
 import authService from "../services/AuthService";
+import Navigation from "../components/Navigation.vue";
+
 export default {
+  components: {
+    navigation: Navigation,
+  },
   name: "sessions",
   data() {
     return {

@@ -93,7 +93,7 @@ export default {
   gap: 7px;
   justify-items: center;
   text-align: center;
-  background-color: grey;
+  background-color: rgb(139, 139, 139);
 }
 h2 {
   color: rgb(0, 0, 0);
