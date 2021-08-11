@@ -131,7 +131,7 @@ export default {
 .form {
   border: 2px solid black;
   border-radius: 10px;
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
 }
 .books {

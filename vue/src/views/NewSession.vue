@@ -119,6 +119,13 @@
           </div>
         </form>
       </div>
+      <!-- <div class="picture">
+        <img
+          src="https://y.yarn.co/8c0a1869-c221-4910-bc0d-2b3f42815897_text.gif"
+          width="350px"
+          height="300px"
+        />
+      </div> -->
     </div>
   </div>
 </template>

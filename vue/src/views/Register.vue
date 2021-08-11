@@ -83,6 +83,11 @@
           >
         </form>
       </div>
+      <!-- <div class="picture">
+        <img
+          src="https://static.independent.co.uk/s3fs-public/thumbnails/image/2019/01/30/15/family-guy.jpg?width=1200"
+        />
+      </div> -->
     </div>
   </div>
 </template>

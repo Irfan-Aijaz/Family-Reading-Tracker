@@ -67,6 +67,23 @@ public class JdbcBookDao implements BookDao {
     }
 
     @Override
+    public List<UserBook> findAllUserBooksCompleted(Long userId) {
+        List<UserBook> listOfUserBooks = new ArrayList<>();
+        String sql = "SELECT books.title, user_id, user_book.isbn, pages_read, completed " +
+                "FROM user_book " +
+                "INNER JOIN books ON user_book.isbn = books.isbn " +
+                "WHERE user_id = ? AND completed = true";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        while(results.next()) {
+            UserBook userBook = mapRowToUserBook(results);
+            listOfUserBooks.add(userBook);
+        }
+
+
+        return listOfUserBooks;
+    }
+
+    @Override
     public List<Book> findAll() {
         List<Book> books = new ArrayList<>();
         String sql = "SELECT * FROM books";

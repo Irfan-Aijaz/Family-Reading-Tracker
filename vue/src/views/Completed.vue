@@ -36,7 +36,7 @@ export default {
   methods: {
     retrieveUserBooksProgress() {
       bookService
-        .getUserBooksProgress(this.$store.state.user.id)
+        .getUserBooksCompleted(this.$store.state.user.id)
         .then((response) => {
           if (response.status == 200) {
             this.userBooks = response.data;

@@ -36,8 +36,8 @@ public class PrizeController {
         return prizeDao.getPrizesForFamilyAndUserGroup(familyId, userGroup);
     }
 
-    @RequestMapping(value = "/delete_inactive_prize", method = RequestMethod.DELETE)
-    public void deleteInactivePrize(@RequestParam Long prizeId) {
+    @RequestMapping(value = "/delete_inactive_prize/{prize_id}", method = RequestMethod.DELETE)
+    public void deleteInactivePrize(@PathVariable("prize_id") Long prizeId) {
         prizeDao.removeInactivePrize(prizeId);
     }
 }

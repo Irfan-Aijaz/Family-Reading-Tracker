@@ -1,7 +1,7 @@
 BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS users, books, user_book, sessions, family, prizes, user_prize;
-DROP SEQUENCE IF EXISTS seq_user_id, seq_family_id, seq_session_id, seq_prize_id;
+DROP SEQUENCE IF EXISTS seq_user_id, seq_family_id, seq_session_id, seq_prize_id, seq_claimed_prize_id, seq_claim_prize_request_status_id;
 
 CREATE SEQUENCE seq_user_id
   INCREMENT BY 1
@@ -26,6 +26,19 @@ CREATE SEQUENCE seq_prize_id
   NO MAXVALUE
   NO MINVALUE
   CACHE 1;
+  
+CREATE SEQUENCE seq_claimed_prize_id
+  INCREMENT BY 1
+  NO MAXVALUE
+  NO MINVALUE
+  CACHE 1;
+  
+CREATE SEQUENCE seq_claim_prize_request_status_id
+  INCREMENT BY 1
+  NO MAXVALUE
+  NO MINVALUE
+  CACHE 1;
+  
 
 CREATE TABLE family (
         family_id int DEFAULT nextval('seq_family_id'::regclass) NOT NULL,
@@ -101,6 +114,23 @@ CREATE TABLE user_prize (
 	CONSTRAINT FK_user_prize_prize FOREIGN KEY (prize_id) REFERENCES prizes (prize_id)
 
 
+);
+
+CREATE TABLE claimed_prizes (
+	claimed_prize_id int DEFAULT nextval('seq_claimed_prize_id'::regclass) NOT NULL,
+	user_id int NOT NULL,
+	description text NOT NULL,
+	milestone_minutes int NOT NULL,
+	date_claimed date NOT NULL,
+	family_id int NOT NULL,
+	CONSTRAINT PK_claimed_prizes PRIMARY KEY (claimed_prize_id)
+	
+);
+
+CREATE TABLE claim_prize_request_statuses (
+	claim_prize_request_status_id int DEFAULT nextval('seq_claim_prize_request_status_id'::regclass) NOT NULL,
+	claim_prize_request_status_desc varchar(10) NOT NULL,
+	CONSTRAINT PK_claim_prize_request_statuses PRIMARY KEY (claim_prize_request_status_id)
 );
 
 

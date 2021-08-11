@@ -3,14 +3,15 @@
   <div class="prize-grid">
     <div class="prize-view">
       <button v-on:click="$router.push({ name: 'newPrize' })">
-              Create a New Prize
+        Create a New Prize
       </button>
       <button v-on:click="$router.push({ name: 'updatePrize' })">
-              Update Prize
+        Update Prize
       </button>
       <button v-on:click="$router.push({ name: 'deletePrize' })">
-              Delete Inactive Prize
+        Delete Inactive Prize
       </button>
+      <button>Claim Prize</button>
       <family-prize-list></family-prize-list>
     </div>
   </div>

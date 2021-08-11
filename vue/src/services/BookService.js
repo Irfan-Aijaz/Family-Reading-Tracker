@@ -11,12 +11,17 @@ export default {
     },
 
     getUserBooksProgress(userId) {
-        return axios.get('/retrieve_books_progress/' + userId)
+        return axios.get('/retrieve_books_in_progress/' + userId)
+    },
+
+    getUserBooksCompleted(userId) {
+        return axios.get('/retrieve_books_completed/' + userId)
     },
 
     updateUserBook(session) {
         return axios.put('/update_user_book', session)
     },
+
 
 
 
