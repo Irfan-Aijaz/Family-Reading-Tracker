@@ -10,7 +10,7 @@
         <button v-on:click="$router.push({ name: 'register' })">
           Add Family Member
         </button>
-        <button v-on:click="$router.push({ name: 'newBook' })">Add Book</button>
+        <button v-on:click="$router.push({ name: 'newBook' })">View Library and Add Book</button>
         <button v-on:click="$router.push({ name: 'newSession' })">
           Record Session
         </button>
@@ -84,36 +84,14 @@
 </template>
 
 <style scoped>
-/*.parent-options {
-  border: 5px solid black;
-  display: grid;
-  grid-template-columns: 1fr;
-  height: 500px;
-  width: 175px;
-  margin-left: 10%;
-  gap: 40px;
-  position: absolute;
-  top: 5%;
-}
-.child-options {
-  border: 2px solid black;
-  display: grid;
-  grid-template-columns: 1fr;
-  height: 500px;
-  width: 175px;
-  margin-left: 10%px;
-  gap: 40px;
-  position: absolute;
-  top: 5%;
-}
-*/
+
 .navigation {
   margin-bottom: 10px;
 }
 .parent-options, .child-options {
   border: 2px solid black;
   border-radius: 10px;
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
   height: 50px;
 }

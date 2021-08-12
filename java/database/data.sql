@@ -18,3 +18,5 @@ INSERT INTO family (family_id, family_name) VALUES ('2', 'Simpson');
 INSERT INTO users (user_id, username, password_hash, role, family_id) VALUES('5','Homer','$2a$10$CwXiFJ9EpiNbJiM893xWP.FELWzq9IJ9MIAfchqb3TsSfgNab3qs.','ROLE_ADMIN', '2');
 INSERT INTO users (user_id, username, password_hash, role, family_id) VALUES('6','Bart','$2a$10$CwXiFJ9EpiNbJiM893xWP.FELWzq9IJ9MIAfchqb3TsSfgNab3qs.','ROLE_USER', '2');
 INSERT INTO users (user_id, username, password_hash, role, family_id) VALUES('7','Lisa','$2a$10$CwXiFJ9EpiNbJiM893xWP.FELWzq9IJ9MIAfchqb3TsSfgNab3qs.','ROLE_USER', '2');
+
+DELETE FROM books WHERE isbn='14894816';

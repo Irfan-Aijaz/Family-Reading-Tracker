@@ -13,10 +13,16 @@
       {{ author }}
     </p>
 
-    <button v-on:click="$router.push({ name: 'newSession' })">
-      Start Reading
+    <button
+      @click="$emit('button1-clicked')"
+    >
+      {{ buttonText1 }}
     </button>
-    <button>Remove</button>
+    <button
+      @click="$emit('button2-clicked')"
+    >
+      {{ buttonText2 }}
+    </button>
   </div>
 </template>
 
@@ -29,6 +35,14 @@ export default {
       required: true
     },
     author: {
+      type: String,
+      required: true
+    },
+    buttonText1: {
+      type: String,
+      required: true
+    },
+    buttonText2: {
       type: String,
       required: true
     }
@@ -46,12 +60,10 @@ export default {
 <style scoped>
 
 .book {
-
   width: 200px;
   background-color: rgb(134, 134, 134, .7);
   border: 2px solid black;
   height: 300px;
-  
 }
 .book img {
   width: 50%;

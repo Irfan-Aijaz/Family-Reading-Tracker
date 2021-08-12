@@ -99,9 +99,9 @@ export default {
 <style>
 .form-claim-prize{
   background-color: rgb(194, 191, 191);
-  width: 275px;
+  width: 600px;
   height: 150px;
   border: 3px solid black;
-  margin-left: 40%;
+  margin-left: 25%;
 }
 </style>

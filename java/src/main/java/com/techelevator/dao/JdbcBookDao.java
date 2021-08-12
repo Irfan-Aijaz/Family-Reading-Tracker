@@ -42,11 +42,16 @@ public class JdbcBookDao implements BookDao {
     }
 
     @Override
-    public boolean deleteBook(String isbn) {
-        boolean delete = false;
+    public boolean removeBook(String isbn) {
+        boolean removeBook = false;
+        String sql = "DELETE FROM books " +
+                "WHERE isbn = ?;";
+        int result = jdbcTemplate.update(sql,isbn);
 
-
-        return delete;
+        if (result==1) {
+            removeBook = true;
+        }
+        return removeBook;
     }
 
     @Override

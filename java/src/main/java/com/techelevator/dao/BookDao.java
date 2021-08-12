@@ -17,7 +17,7 @@ public interface BookDao {
 
     List<UserBook> findAllUserBooksCompleted(Long id);
 
-    boolean deleteBook(String isbn);
+    boolean removeBook(String isbn);
 
     boolean restartBook(UserBook userBook);
 

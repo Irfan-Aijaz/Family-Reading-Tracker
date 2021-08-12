@@ -94,5 +94,11 @@ export default {
 <style>
 .prizes{
   background-color: rgb(194, 191, 191);
+  
 }
+.prizes:hover {
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
 </style>

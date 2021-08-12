@@ -58,6 +58,10 @@
         :key="index"
         :title="b.title"
         :author="b.author"
+        button-text1="Start Reading"
+        button-text2="Remove"
+        @button1-clicked="$router.push({ name: 'newSession' })"
+        @button2-clicked="removeBook(index)"
       />
     </div>
   </div>
@@ -114,6 +118,10 @@ export default {
           }
         });
     },
+    removeBook (index) {
+      console.log('Removing this book')
+      console.log(this.books[index])
+    }
   },
 };
 </script>
@@ -122,15 +130,16 @@ export default {
 .form {
   border: 4px solid black;
   border-radius: 10px;
-  width: 90%;
-  height: 150px;
   margin: 0 auto;
   background-color: rgb(194, 191, 191);
+  margin-top: 5%;
   margin-bottom: 3%;
-
+  width: 90%;
+  
 }
 .books{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 5%;
 }
 </style>

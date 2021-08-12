@@ -37,9 +37,9 @@ public class BookController {
     }
 
 
-    @RequestMapping(value = "/delete_book", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete_book/{isbn}", method = RequestMethod.DELETE)
     public void deleteBook(@PathVariable String isbn) {
-
+        bookDao.removeBook(isbn);
     }
 
 

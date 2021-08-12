@@ -184,11 +184,3 @@ export default {
   },
 };
 </script>
-
-<style>
-.form {
- background-color: rgb(194, 191, 191);
- height: 300px;
-
-}
-</style>

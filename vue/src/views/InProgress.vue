@@ -1,36 +1,29 @@
 <template>
   <div>
     <div class="books">
-      <div v-for="(userBooks, index) in userBooks" :key="index">
-        {{ userBooks.title }}
-        <div class="img">
-          <img
-            v-if="userBooks.title"
-            v-bind:src="
-              'http://covers.openlibrary.org/b/title/' +
-              userBooks.title +
-              '-M.jpg'
-            "
-          />
-        </div>
-        <div>
-          {{ userBooks.pagesRead }} Pages Read of
-          {{ userBooks.pagesTotal }} Total Pages
-        </div>
-        <button v-on:click="$router.push({ name: 'newSession' })">
-          Create New Session
-        </button>
-      </div>
+      <book
+        v-for="(b, index) in userBooks"
+        :key="index"
+        :title="b.title"
+        :author="b.author"
+        button-text1="New Session"
+        button-text2="Completed"
+        @button1-clicked="$router.push({ name: 'newSession' })"
+        @button2-clicked="$router.push({ name: 'completed' })"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import bookService from "../services/BookService";
-
+import Book from "../components/Book.vue";
 
 export default {
   name: "userBook",
+  components: {
+    book: Book,
+  },
   data() {
     return {
       userBooks: [],
@@ -44,11 +37,14 @@ export default {
       bookService
         .getUserBooksProgress(this.$store.state.user.id)
         .then((response) => {
+          console.log("resquest success");
+          console.log(response);
           if (response.status == 200) {
             this.userBooks = response.data;
           }
         })
         .catch((error) => {
+          console.log("request error");
           const response = error.response;
           this.userBookRetrievalErrors = true;
           if (response.status === 400) {
@@ -65,5 +61,4 @@ export default {
 </script>
 
 <style>
-
 </style>

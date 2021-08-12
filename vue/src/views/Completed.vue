@@ -1,47 +1,43 @@
 <template>
   <div>
     <div class="books">
-      <div v-for="(userBooks, index) in userBooks" :key="index">
-        {{ userBooks.title }}
-        <img
-          v-if="userBooks.title"
-          v-bind:src="
-            'http://covers.openlibrary.org/b/title/' +
-            userBooks.title +
-            '-M.jpg'
-          "
-        />
-
-        <button v-on:click="restartBook" >
-          Read Again
-        </button>
-      </div>
+      <book
+        v-for="(b, index) in userBooks"
+        :key="index"
+        :title="b.title"
+        :author="b.author"
+        button-text1="Read Again"
+        @button1-clicked="$router.push({ name: 'newSession' })"
+      />
     </div>
   </div>
 </template>
 
 <script>
 import bookService from "../services/BookService";
+import Book from "../components/Book.vue";
 
 export default {
   name: "userBook",
+  components: {
+    book: Book,
+  },
   data() {
     return {
       userBooks: [],
       bookIndex: 0,
       updateUserBook: {
         userId: this.$store.state.user.id,
-        isbn: '',
-        pagesRead: '0',
-        minutesRead: '0',
-        completed: 'false'
+        isbn: "",
+        pagesRead: "0",
+        minutesRead: "0",
+        completed: "true",
       },
       userBookRetrievalErrors: false,
       userBookRetrievalErrorMsg:
         "There was a problem retrieving user books list.",
       restartBookErrors: false,
-      restartBookErrorMsg:
-        "There was a problem restarting the book.",
+      restartBookErrorMsg: "There was a problem restarting the book.",
     };
   },
   methods: {
@@ -65,14 +61,14 @@ export default {
     restartBook() {
       bookService
         .restartBook(this.updateUserBook)
-        .then((resonse => {
+        .then((resonse) => {
           if (resonse.status == 200) {
             this.$router.push({
               path: "/inProgress",
               query: { restartBook: "success" },
             });
           }
-        }))
+        })
         .catch((error) => {
           const response = error.response;
           this.restartBookErrors = true;
@@ -80,12 +76,12 @@ export default {
             this.restartBookErrorMsg = "Bad Request: Restart Book Errors";
           }
         });
-    }
+    },
   },
   computed: {
     selectedBook() {
       return this.userBooks[this.bookIndex];
-    }
+    },
   },
   created() {
     this.retrieveUserBooksProgress();
@@ -94,5 +90,4 @@ export default {
 </script>
 
 <style>
-
 </style>

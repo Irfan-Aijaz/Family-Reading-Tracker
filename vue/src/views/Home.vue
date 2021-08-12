@@ -29,24 +29,14 @@
           >{{ name }}
         </label>
       </div>
-      <!-- <div class="something">
-        <img
-          src="https://www.media1.hw-static.com/wp-content/uploads/family-guy_56734748-2400x1350-2400x1350.jpeg"
-          alt="Reading Time"
-          width="230px"
-          height="200px"
-         
-        />
-      </div> -->
-
       <!--End parent/admin code, start child user code -->
       <div
         v-if="this.$store.state.user.authorities[0].name == 'ROLE_USER'"
         class="text-center"
       >
         <div class="child-welcome">
-          <label for="family-name" class="sr-only">
-            Welcome {{ this.$store.state.user.username }}!
+          <label for="family-name" class="sr-only"
+            >Welcome {{ this.$store.state.user.user}}!
           </label>
         </div>
       </div>
