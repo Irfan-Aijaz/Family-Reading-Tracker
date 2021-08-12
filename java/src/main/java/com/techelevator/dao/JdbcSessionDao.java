@@ -142,18 +142,25 @@ public class JdbcSessionDao implements SessionDao {
         if (userBookFound.next()) {
             String updateAUserBook = "UPDATE user_book SET pages_read = pages_read + ?, minutes_read = minutes_read + ?, completed = ? " +
                     "WHERE user_id = ? AND isbn = ?";
-
+            if (totalPages.next()) {
+                if (userBookPages.next()) {
+                    if (pagesRead+userBookPages.getLong("pages_read")>= totalPages.getLong("pages_total")) {
+                        pagesRead = totalPages.getLong("pages_total");
+                    }
+                }
+            }
             jdbcTemplate.update(updateAUserBook, pagesRead, minutesRead, completedStatus, userId, isbn);
             updatedUserBook = true;
         } else {
             String insertUserBook = "INSERT INTO user_book (user_id, isbn, pages_read, minutes_read, completed) values (?,?,?,?,?)";
             String id_column = "user_id";
             GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+            Long finalPagesRead = pagesRead;
             updatedUserBook = jdbcTemplate.update(con -> {
                 PreparedStatement ps = con.prepareStatement(insertUserBook, new String[]{id_column});
                 ps.setLong(1,userId);
                 ps.setString(2,isbn);
-                ps.setLong(3,pagesRead);
+                ps.setLong(3, finalPagesRead);
                 ps.setLong(4,minutesRead);
                 ps.setBoolean(5,completedStatus);
                 return ps;
