@@ -47,9 +47,9 @@
             <label for="date" class="sr-only">Date: </label>
             <input
               type="date"
-              id="date"
+              id="datefield"
               class="form-control"
-              placeholder="Date"
+              :max="maxDate"
               v-model="session.daySession"
               required
               autofocus
@@ -245,7 +245,37 @@ export default {
       else {
         return this.library[this.bookIndex];
       }
-    }
+    },
+    maxDate() {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1; //January is 0!
+      var yyyy = today.getFullYear();
+      if(dd<10){
+          dd='0'+dd
+      } 
+      if(mm<10){
+          mm='0'+mm
+      } 
+
+      today = yyyy+'-'+mm+'-'+dd;
+      return today;
+    },
+    // mixDate() {
+    //   var minimumDay = new Date();
+    //   var dd = minimumDay.getDate();
+    //   var mm = minimumDay.getMonth()+1; //January is 0!
+    //   var yyyy = minimumDay.getFullYear();
+    //   if(dd<10){
+    //       dd='0'+dd
+    //   } 
+    //   if(mm<10){
+    //       mm='0'+mm
+    //   } 
+
+    //   minimumDay = yyyy+'-'+mm+'-'+dd;
+    //   return minimumDay;
+    // }
   },
   created() {
     this.family();

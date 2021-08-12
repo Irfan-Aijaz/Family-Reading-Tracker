@@ -73,6 +73,7 @@
             type="date"
             id="date-start"
             class="form-control"
+            :min="minDate"
             name="datefilter"
             value=""
             v-model="prize.dateStart"
@@ -177,6 +178,21 @@ export default {
       } else {
         return "CHILD";
       }
+    },
+    minDate() {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1; //January is 0!
+      var yyyy = today.getFullYear();
+      if(dd<10){
+          dd='0'+dd
+      } 
+      if(mm<10){
+          mm='0'+mm
+      } 
+
+      today = yyyy+'-'+mm+'-'+dd;
+      return today;
     },
   },
   created() {
