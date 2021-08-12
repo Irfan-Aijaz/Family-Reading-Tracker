@@ -37,7 +37,7 @@
       >
         <div class="child-welcome">
           <label for="family-name" class="sr-only"
-            >Welcome {{ this.$store.state.user.user }}!
+            >Welcome {{ this.$store.state.user.username }}!
           </label>
         </div>
       </div>
@@ -91,7 +91,7 @@ export default {
   color: rgb(0, 0, 0);
   font-size: 50px;
   top: 25%;
-  background-color: grey;
+  background-color: hsl(0, 0%, 50%, .7);
   width: 90%;
   margin: 0 auto;
 }
@@ -100,7 +100,7 @@ export default {
   display: 1fr;
   color: rgb(132, 181, 236);
   font-size: 50px;
-  background-color: ivory;
+  background-color: hsl(60, 100%, 97%, .7);
   font-size: 50px;
   top: 25%;
   width: 90%;

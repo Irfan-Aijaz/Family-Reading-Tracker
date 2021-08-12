@@ -92,7 +92,7 @@ display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  background-color: rgb(160, 153, 153);
+  background-color: rgb(160, 153, 153, .7);
   border: 2px solid black;
   width: 350px;
   height: 300px;

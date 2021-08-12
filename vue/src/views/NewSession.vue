@@ -61,6 +61,7 @@
               type="number"
               min="0"
               :max="selectedBook.pagesTotal"
+              :placeholder="selectedBook.pagesTotal"
               id="pages"
               class="form-control"
               v-model="session.pagesRead"
@@ -165,11 +166,11 @@ export default {
     });
   },
   watch: {
-    bookIndex: function() {
+    bookIndex: function () {
       if (this.session.pagesRead > this.selectedBook.pagesTotal) {
         this.session.pagesRead = this.selectedBook.pagesTotal;
       }
-    }
+    },
   },
   methods: {
     family() {
@@ -233,32 +234,31 @@ export default {
   computed: {
     selectedBook() {
       if (this.library.length === 0) {
-        return { 
-          author: '',
-          isbn: '',
-          title: '',
-          genre: '',
-          summary: '',
-          pagesTotal: 0
-        }
-      }
-      else {
+        return {
+          author: "",
+          isbn: "",
+          title: "",
+          genre: "",
+          summary: "",
+          pagesTotal: 0,
+        };
+      } else {
         return this.library[this.bookIndex];
       }
     },
     maxDate() {
       var today = new Date();
       var dd = today.getDate();
-      var mm = today.getMonth()+1; //January is 0!
+      var mm = today.getMonth() + 1; //January is 0!
       var yyyy = today.getFullYear();
-      if(dd<10){
-          dd='0'+dd
-      } 
-      if(mm<10){
-          mm='0'+mm
-      } 
+      if (dd < 10) {
+        dd = "0" + dd;
+      }
+      if (mm < 10) {
+        mm = "0" + mm;
+      }
 
-      today = yyyy+'-'+mm+'-'+dd;
+      today = yyyy + "-" + mm + "-" + dd;
       return today;
     },
     // mixDate() {
@@ -268,10 +268,10 @@ export default {
     //   var yyyy = minimumDay.getFullYear();
     //   if(dd<10){
     //       dd='0'+dd
-    //   } 
+    //   }
     //   if(mm<10){
     //       mm='0'+mm
-    //   } 
+    //   }
 
     //   minimumDay = yyyy+'-'+mm+'-'+dd;
     //   return minimumDay;
@@ -286,14 +286,13 @@ export default {
 <style scoped>
 .form-session {
   display: block;
-  
+
   align-items: center;
   gap: 15px;
-  background-color: rgb(194, 191, 191,.7);
+  background-color: rgb(194, 191, 191, 0.7);
   border: 2px solid black;
   width: 500px;
   height: 300px;
   margin-left: 30%;
-  
 }
 </style>
