@@ -18,18 +18,15 @@
         Claim Prize
       </button>
     </form>
-    <family-prize-list></family-prize-list>
     
   </div>
 </template>
 
 <script>
-import FamilyPrizeList from "../components/FamilyPrizeList.vue";
 import prizeService from "@/services/PrizeService";
 
 
 export default {
-  components: { FamilyPrizeList },
   name: "claim-prize",
   data() {
     return {

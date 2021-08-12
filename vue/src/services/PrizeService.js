@@ -27,6 +27,14 @@ export default {
 
     updateClaimsStatus(claimIds, statusId) {
         return axios.post('/update_claim_requests', claimIds, {params: {claimStatusId: statusId}})
+    }, 
+
+    updateClaimStatus(claimId, statusId) {
+        return axios.post('/update_claim_request', null, {params: {claimId: claimId, claimStatusId: statusId}})
+    },
+
+    getPrizeClaimCounters(familyId) {
+        return axios.get('/get_prize_claim_counters/' + familyId)
     }
 
 

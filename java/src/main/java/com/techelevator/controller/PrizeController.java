@@ -4,6 +4,7 @@ package com.techelevator.controller;
 import com.techelevator.dao.PrizeDao;
 import com.techelevator.model.ClaimedPrize;
 import com.techelevator.model.Prize;
+import com.techelevator.model.PrizeClaimCounterDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -53,7 +54,18 @@ public class PrizeController {
     }
 
     @RequestMapping(value = "/update_claim_requests", method=RequestMethod.POST)
-    public void updateClaimRequest(@RequestBody Long[] claimIds, @RequestParam Long claimStatusId) {
+    public void updateClaimRequests(@RequestBody Long[] claimIds, @RequestParam Long claimStatusId) {
         prizeDao.updateClaimRequests(claimIds, claimStatusId);
     }
+
+    @RequestMapping(value = "/get_prize_claim_counters/{family_id}", method = RequestMethod.GET)
+    public List<PrizeClaimCounterDTO> getPrizeClaimCounters(@PathVariable("family_id") Long familyId) {
+        return prizeDao.getPrizeClaimCounterDTOs(familyId);
+    }
+
+    @RequestMapping(value = "/update_claim_request", method=RequestMethod.POST)
+    public void updateClaimRequest(@RequestParam Long claimId, @RequestParam Long claimStatusId) {
+        prizeDao.updateClaimRequest(claimId, claimStatusId);
+    }
+
 }

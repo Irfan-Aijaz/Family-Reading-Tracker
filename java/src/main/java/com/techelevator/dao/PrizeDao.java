@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.model.ClaimedPrize;
 import com.techelevator.model.Prize;
+import com.techelevator.model.PrizeClaimCounterDTO;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -25,5 +26,11 @@ public interface PrizeDao {
     boolean updateClaimRequest(Long claimId, Long requestStatus);
 
     boolean updateClaimRequests(Long[] claimIds, Long requestStatus);
+
+    Long getPrizeIdFromClaimId(Long claimId);
+
+    List<PrizeClaimCounterDTO> getPrizeClaimCounterDTOs(Long familyId);
+
+
 
 }

@@ -2,6 +2,7 @@ package com.techelevator.dao;
 
 import com.techelevator.model.ClaimedPrize;
 import com.techelevator.model.Prize;
+import com.techelevator.model.PrizeClaimCounterDTO;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 
 import java.sql.Date;
@@ -53,24 +54,67 @@ public class JdbcPrizeDao implements PrizeDao {
     }
 
     @Override
+    public Long getPrizeIdFromClaimId(Long claimId) {
+        Long prizeId = Long.valueOf(-1);
+        String sql = "SELECT prizes.prize_id FROM prizes " +
+                     "INNER JOIN claimed_prizes ON claimed_prizes.prize_id = prizes.prize_id " +
+                     "WHERE claimed_prizes.prize_claim_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, claimId);
+        if (results.next()) {
+            prizeId = results.getLong("prize_id");
+        }
+        return prizeId;
+    }
+
+    @Override
     public boolean updateClaimRequest(Long claimId, Long requestStatus) {
         boolean claimUpdated = false;
-        String sql = "UPDATE claimed_prizes " +
-                     "SET claim_prize_request_status_id = ? " +
+        String sql = "";
+        LocalDate dateApprovedRejected = LocalDate.now();
+        if (requestStatus == 2) {
+            Long prizeId = getPrizeIdFromClaimId(claimId);
+            sql = "UPDATE prizes SET max_prizes = max_prizes - 1 WHERE prize_id = ?;";
+            jdbcTemplate.update(sql, prizeId);
+        }
+
+        sql = "UPDATE claimed_prizes " +
+                     "SET claim_prize_request_status_id = ?, date_approved_rejected = ? " +
                      "WHERE prize_claim_id = ?;";
-        jdbcTemplate.update(sql, requestStatus, claimId);
+        jdbcTemplate.update(sql, requestStatus, dateApprovedRejected, claimId);
         claimUpdated = true;
         return claimUpdated;
     }
 
+
+
     @Override
     public boolean updateClaimRequests(Long[] claimIds, Long requestStatus) {
+
         boolean claimsUpdated = false;
         for (Long claimId : claimIds) {
+
             updateClaimRequest(claimId, requestStatus);
         }
         claimsUpdated = true;
         return claimsUpdated;
+    }
+
+    @Override
+    public List<PrizeClaimCounterDTO> getPrizeClaimCounterDTOs(Long familyId){
+        List<PrizeClaimCounterDTO> prizeClaimCounterDTOs = new ArrayList<>();
+        String sql = "SELECT claimed_prizes.prize_id, prizes.max_prizes " +
+                     "FROM claimed_prizes " +
+                     "INNER JOIN prizes ON prizes.prize_id = claimed_prizes.prize_id " +
+                     "WHERE claimed_prizes.family_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, familyId);
+        while (results.next()) {
+            PrizeClaimCounterDTO prizeClaimCounterDTO = new PrizeClaimCounterDTO();
+            prizeClaimCounterDTO.setPrizeId(results.getLong("prize_id"));
+            //prizeClaimCounterDTO.setClaimId(results.getLong("prize_claim_id"));
+            prizeClaimCounterDTO.setAmountAvailable(results.getLong("max_prizes"));
+            prizeClaimCounterDTOs.add(prizeClaimCounterDTO);
+        }
+        return prizeClaimCounterDTOs;
     }
 
     @Override
@@ -145,7 +189,8 @@ public class JdbcPrizeDao implements PrizeDao {
         List<ClaimedPrize> claims = new ArrayList<>();
         String sql = "SELECT * " +
                      "FROM claimed_prizes " +
-                     "WHERE family_id = ?;";
+                     "WHERE family_id = ? " +
+                     "ORDER BY prize_claim_id;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, familyId);
         while (results.next()) {
             claims.add(mapRowToClaim(results));
