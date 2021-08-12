@@ -91,7 +91,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .prizes{
   background-color: rgb(194, 191, 191);
   

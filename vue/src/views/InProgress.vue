@@ -5,7 +5,6 @@
         v-for="(b, index) in userBooks"
         :key="index"
         :title="b.title"
-        :author="b.author"
         button-text1="New Session"
         button-text2="Completed"
         @button1-clicked="$router.push({ name: 'newSession' })"
@@ -60,5 +59,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 </style>

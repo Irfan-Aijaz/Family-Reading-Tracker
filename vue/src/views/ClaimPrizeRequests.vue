@@ -13,7 +13,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .claim-grid {
   display: grid;
   grid-template-columns: (3, 1fr);

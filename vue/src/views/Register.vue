@@ -164,13 +164,13 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .form-register {
-  display: flex;
+display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  background-color: grey;
+  background-color: rgb(160, 153, 153);
   border: 2px solid black;
   width: 350px;
   height: 300px;

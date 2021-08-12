@@ -63,7 +63,6 @@
               :max="selectedBook.pagesTotal"
               id="pages"
               class="form-control"
-              :placeholder="selectedBook.pagesTotal"
               v-model="session.pagesRead"
               required
               autofocus
@@ -167,7 +166,7 @@ export default {
   },
   watch: {
     bookIndex: function() {
-      if (this.session.pagesRead>this.selectedBook.pagesTotal) {
+      if (this.session.pagesRead > this.selectedBook.pagesTotal) {
         this.session.pagesRead = this.selectedBook.pagesTotal;
       }
     }
@@ -233,7 +232,19 @@ export default {
   },
   computed: {
     selectedBook() {
-      return this.library[this.bookIndex];
+      if (this.library.length === 0) {
+        return { 
+          author: '',
+          isbn: '',
+          title: '',
+          genre: '',
+          summary: '',
+          pagesTotal: 0
+        }
+      }
+      else {
+        return this.library[this.bookIndex];
+      }
     }
   },
   created() {
@@ -242,10 +253,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .form-session {
-  display: flex;
-  flex-direction: column;
+  display: block;
+  
   align-items: center;
   gap: 15px;
   background-color: rgb(194, 191, 191);

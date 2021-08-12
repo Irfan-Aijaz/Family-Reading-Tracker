@@ -96,7 +96,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .form-claim-prize{
   background-color: rgb(194, 191, 191);
   width: 600px;

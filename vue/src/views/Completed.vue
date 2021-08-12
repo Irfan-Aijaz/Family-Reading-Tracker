@@ -7,7 +7,7 @@
         :title="b.title"
         :author="b.author"
         button-text1="Read Again"
-        @button1-clicked="$router.push({ name: 'newSession' })"
+        @button1-clicked="restartBook(index)"
       />
     </div>
   </div>
@@ -28,9 +28,9 @@ export default {
       bookIndex: 0,
       updateUserBook: {
         userId: this.$store.state.user.id,
-        isbn: "",
-        pagesRead: "0",
-        minutesRead: "0",
+        isbn: '',
+        pagesRead: 0,
+        minutesRead: 0,
         completed: "true",
       },
       userBookRetrievalErrors: false,
@@ -58,8 +58,9 @@ export default {
           }
         });
     },
-    restartBook() {
-      bookService
+    restartBook(index) {
+      this.updateUserBook.isbn = this.userBooks[index].isbn
+      bookService  
         .restartBook(this.updateUserBook)
         .then((resonse) => {
           if (resonse.status == 200) {
@@ -89,5 +90,5 @@ export default {
 };
 </script>
 
-<style>
+<style scoped >
 </style>

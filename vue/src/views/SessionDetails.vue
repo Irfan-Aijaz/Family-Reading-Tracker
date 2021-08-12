@@ -88,7 +88,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #tblSessionDetails {
   padding: 15px;
   text-align: left;

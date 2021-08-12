@@ -86,14 +86,17 @@ export default {
 };
 </script>
 
-<style>
+<style >
 .form-signin {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 7px;
-  justify-items: center;
-  text-align: center;
-  background-color: rgb(139, 139, 139);
+display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background-color: rgb(160, 153, 153);
+  border: 2px solid black;
+  width: 350px;
+  height: 300px;
+  margin-left: 35%;
 }
 h2 {
   color: rgb(0, 0, 0);

@@ -20,6 +20,7 @@
     </button>
     <button
       @click="$emit('button2-clicked')"
+      v-if="buttonText2===null"
     >
       {{ buttonText2 }}
     </button>
@@ -36,7 +37,7 @@ export default {
     },
     author: {
       type: String,
-      required: true
+      required: false
     },
     buttonText1: {
       type: String,
@@ -44,7 +45,7 @@ export default {
     },
     buttonText2: {
       type: String,
-      required: true
+      required: false
     }
   },
   methods: {

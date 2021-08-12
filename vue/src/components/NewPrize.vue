@@ -137,7 +137,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .form-div {
   display: grid;
   grid-template-columns: 1fr;

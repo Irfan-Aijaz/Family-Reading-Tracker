@@ -93,11 +93,15 @@
   border-radius: 10px;
   width: 95%;
   margin: 0 auto;
-  height: 50px;
+  height: 75%;
 }
 button {
-  height: 50px;
-  margin-left: 5px;
-  margin-right: 5px;
+  height: 100%;
+  margin-top: 1%;
+  margin-bottom: 1%;
+  margin-left: 3%;
+  background-color: #347536; /* Green */
+  color: white;
+  font-size: 16px;
 }
 </style>
