@@ -184,3 +184,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.edit-prize-header, .sr-only {
+background-color: rgb(194, 191, 191);
+border: 3px solid black;
+}
+</style>

@@ -31,7 +31,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .prize-grid {
   display: grid;
   grid-template-columns: (3, 1fr);

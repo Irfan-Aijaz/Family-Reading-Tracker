@@ -149,7 +149,7 @@ export default {
 };
 </script>
    
-<style>
+<style scoped>
 #tblSessions {
   padding: 15px;
   text-align: left;

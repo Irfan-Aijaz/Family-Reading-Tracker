@@ -242,10 +242,10 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .form-session {
-  display: flex;
-  flex-direction: column;
+  display: block;
+  
   align-items: center;
   gap: 15px;
   background-color: rgb(194, 191, 191);
