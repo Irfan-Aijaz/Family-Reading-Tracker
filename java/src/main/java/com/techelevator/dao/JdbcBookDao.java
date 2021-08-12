@@ -107,6 +107,27 @@ public class JdbcBookDao implements BookDao {
         throw new BookAlreadyExistsException("Book " + isbn + " already exists.");
     }
 
+    @Override
+    public boolean restartBook(UserBook userBook) {
+        boolean bookRestarted = false;
+
+        String checkUserBookIdIsbn = "SELECT user_id, isbn " +
+                "FROM user_book " +
+                "WHERE user_id = ? AND isbn = ?;";
+        SqlRowSet userBookFound = jdbcTemplate.queryForRowSet(checkUserBookIdIsbn, userBook.getUserId(), userBook.getIsbn());
+
+        if (userBookFound.next()) {
+            String updateAUserBook = "UPDATE user_book SET pages_read = 0, minutes_read = 0, completed = false " +
+                    "WHERE user_id = ? AND isbn = ?";
+
+            jdbcTemplate.update(updateAUserBook, userBook.getUserId(), userBook.getIsbn());
+            bookRestarted = true;
+        }
+
+
+        return bookRestarted;
+    }
+
     private Book mapRowToBook(SqlRowSet bk) {
         Book book = new Book();
         book.setIsbn(bk.getString("isbn"));

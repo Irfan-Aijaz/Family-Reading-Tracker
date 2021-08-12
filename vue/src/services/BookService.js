@@ -22,6 +22,10 @@ export default {
         return axios.put('/update_user_book', session)
     },
 
+    restartBook(userBook) {
+        return axios.put('/restart_book', userBook)
+    }
+
 
 
 

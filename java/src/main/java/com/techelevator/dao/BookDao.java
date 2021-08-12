@@ -19,4 +19,6 @@ public interface BookDao {
 
     boolean deleteBook(String isbn);
 
+    boolean restartBook(UserBook userBook);
+
 }

@@ -31,7 +31,6 @@ public class BookController {
         }
     }
 
-
     @RequestMapping(value = "/get_all_books", method = RequestMethod.GET)
     public List<Book> getAllBooks() {
         return bookDao.findAll();
@@ -52,6 +51,11 @@ public class BookController {
     @RequestMapping(value = "/retrieve_books_completed/{user_id}", method = RequestMethod.GET)
     public List<UserBook> userBooksCompleted(@PathVariable("user_id") Long userId) {
         return bookDao.findAllUserBooksCompleted(userId);
+    }
+
+    @RequestMapping(value = "/restart_book", method = RequestMethod.PUT)
+    public boolean restartBook(@RequestBody UserBook userBook) {
+        return bookDao.restartBook(userBook);
     }
 
 }

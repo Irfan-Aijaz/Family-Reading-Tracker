@@ -12,7 +12,7 @@
           "
         />
 
-        <button v-on:click="$router.push({ name: 'newSession' })">
+        <button v-on:click="restartBook" >
           Read Again
         </button>
       </div>
@@ -28,9 +28,20 @@ export default {
   data() {
     return {
       userBooks: [],
+      bookIndex: 0,
+      updateUserBook: {
+        userId: this.$store.state.user.id,
+        isbn: '',
+        pagesRead: '0',
+        minutesRead: '0',
+        completed: 'false'
+      },
       userBookRetrievalErrors: false,
       userBookRetrievalErrorMsg:
         "There was a problem retrieving user books list.",
+      restartBookErrors: false,
+      restartBookErrorMsg:
+        "There was a problem restarting the book.",
     };
   },
   methods: {
@@ -51,6 +62,30 @@ export default {
           }
         });
     },
+    restartBook() {
+      bookService
+        .restartBook(this.updateUserBook)
+        .then((resonse => {
+          if (resonse.status == 200) {
+            this.$router.push({
+              path: "/inProgress",
+              query: { restartBook: "success" },
+            });
+          }
+        }))
+        .catch((error) => {
+          const response = error.response;
+          this.restartBookErrors = true;
+          if (response.status === 400) {
+            this.restartBookErrorMsg = "Bad Request: Restart Book Errors";
+          }
+        });
+    }
+  },
+  computed: {
+    selectedBook() {
+      return this.userBooks[this.bookIndex];
+    }
   },
   created() {
     this.retrieveUserBooksProgress();
