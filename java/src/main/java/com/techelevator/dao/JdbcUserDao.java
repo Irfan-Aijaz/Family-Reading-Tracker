@@ -181,6 +181,20 @@ public class JdbcUserDao implements UserDao {
         return userCreated;
     }
 
+    @Override
+    public UserDTO getUserDTOByUserId(Long userId) {
+        UserDTO userDTO = new UserDTO();
+        String sql = "SELECT username, user_id, family_id FROM users WHERE user_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        if (results.next()) {
+            userDTO.setUserId(results.getLong("user_id"));
+            userDTO.setFamilyId(results.getLong("family_id"));
+            userDTO.setUsername(results.getString("username"));
+        }
+        return userDTO;
+
+    }
+
     private User mapRowToUser(SqlRowSet rs) {
         User user = new User();
         user.setId(rs.getLong("user_id"));

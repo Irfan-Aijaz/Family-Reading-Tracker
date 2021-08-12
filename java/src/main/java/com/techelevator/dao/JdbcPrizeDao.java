@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.ClaimedPrize;
 import com.techelevator.model.Prize;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 
@@ -18,8 +19,12 @@ import org.springframework.stereotype.Service;
 public class JdbcPrizeDao implements PrizeDao {
 
     private JdbcTemplate jdbcTemplate;
+    private JdbcUserDao jdbcUserDao;
 
-    public JdbcPrizeDao(JdbcTemplate jdbcTemplate) {this.jdbcTemplate = jdbcTemplate; }
+    public JdbcPrizeDao(JdbcTemplate jdbcTemplate, JdbcUserDao jdbcUserDao) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.jdbcUserDao = jdbcUserDao;
+    }
 
 
     @Override
@@ -51,10 +56,10 @@ public class JdbcPrizeDao implements PrizeDao {
     public boolean createClaimPrizeRequestForChild(Long prizeId, Long childId){
         boolean claimCreated = false;
         Prize prize = getPrizeByPrizeId(prizeId);
-        String sql = "INSERT INTO claimed_prizes (claimed_prize_id, claim_prize_request_status_id, user_id, description, milestone_minutes, date_claimed, family_id) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?);";
+        String sql = "INSERT INTO claimed_prizes (prize_id, claim_prize_request_status_id, user_id, description, milestone_minutes, date_claimed, family_id, username) " +
+                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
-        String id_column = "claimed_prize_id";
+        String id_column = "prize_claim_id";
 
         claimCreated = jdbcTemplate.update(con -> {
             PreparedStatement ps = con.prepareStatement(sql, new String[]{id_column});
@@ -65,6 +70,7 @@ public class JdbcPrizeDao implements PrizeDao {
             ps.setLong(5, prize.getMilestoneMinutes());
             ps.setDate(6, Date.valueOf(LocalDateTime.now().toLocalDate()));
             ps.setLong(7, prize.getFamilyId());
+            ps.setString(8, jdbcUserDao.getUserDTOByUserId(childId).getUsername());
             return ps;
 
         }
@@ -114,6 +120,19 @@ public class JdbcPrizeDao implements PrizeDao {
     }
 
     @Override
+    public List<ClaimedPrize> getPrizeClaimsByFamilyId(Long familyId){
+        List<ClaimedPrize> claims = new ArrayList<>();
+        String sql = "SELECT * " +
+                     "FROM claimed_prizes " +
+                     "WHERE family_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, familyId);
+        while (results.next()) {
+            claims.add(mapRowToClaim(results));
+        }
+        return claims;
+    }
+
+    @Override
     public boolean removeInactivePrize(Long prizeId) {
         boolean prizeRemoved = false;
 
@@ -140,6 +159,25 @@ public class JdbcPrizeDao implements PrizeDao {
         prize.setDateEnd(rowSet.getDate("date_end").toLocalDate());
         prize.setFamilyId(rowSet.getLong("family_id"));
 
+
         return prize;
+    }
+
+    private ClaimedPrize mapRowToClaim(SqlRowSet rowSet) {
+        ClaimedPrize claim = new ClaimedPrize();
+        claim.setClaimedPrizeId(rowSet.getLong("prize_claim_id"));
+        claim.setPrizeId(rowSet.getLong("prize_id"));
+        claim.setClaimPrizeRequestStatusId(rowSet.getLong("claim_prize_request_status_id"));
+        claim.setUserId(rowSet.getLong("user_id"));
+        claim.setDescription(rowSet.getString("description"));
+        claim.setMilestoneMinutes(rowSet.getLong("milestone_minutes"));
+        claim.setDateClaimed(rowSet.getDate("date_claimed").toLocalDate());
+        claim.setFamilyId(rowSet.getLong("family_id"));
+        claim.setUsername(rowSet.getString("username"));
+        if (rowSet.getDate("date_approved_rejected") != null ) {
+            claim.setDateApprovedRejected(rowSet.getDate("date_approved_rejected").toLocalDate());
+
+        }
+        return claim;
     }
 }

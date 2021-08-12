@@ -26,5 +26,9 @@ export default {
     return axios.get('/retrieve_user_dtos/' + familyId)
   },
 
+  getUserDTObyUserId(userId) {
+    return axios.get('/retrieve_user_dto_for_user/' + userId)
+  }
+
 
 }

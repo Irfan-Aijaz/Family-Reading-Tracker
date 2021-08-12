@@ -2,6 +2,7 @@ package com.techelevator.controller;
 
 
 import com.techelevator.dao.PrizeDao;
+import com.techelevator.model.ClaimedPrize;
 import com.techelevator.model.Prize;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -44,5 +45,10 @@ public class PrizeController {
     @RequestMapping(value = "/claim_prize_request_child", method = RequestMethod.PUT)
     public void createClaimRequestForChild(@RequestParam Long prizeId, @RequestParam Long childId) {
         prizeDao.createClaimPrizeRequestForChild(prizeId, childId);
+    }
+
+    @RequestMapping(value = "/get_claims_for_family/{family_id}", method = RequestMethod.GET)
+    public List<ClaimedPrize> getClaimsForFamilyId(@PathVariable("family_id") Long familyId) {
+        return prizeDao.getPrizeClaimsByFamilyId(familyId);
     }
 }

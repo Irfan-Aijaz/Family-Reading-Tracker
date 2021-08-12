@@ -123,15 +123,19 @@ CREATE TABLE claim_prize_request_statuses (
 );
 
 CREATE TABLE claimed_prizes (
-	claimed_prize_id int DEFAULT nextval('seq_claimed_prize_id'::regclass) NOT NULL,
+	prize_claim_id int DEFAULT nextval('seq_claimed_prize_id'::regclass) NOT NULL,
+	prize_id int,
 	claim_prize_request_status_id int NOT NULL,
 	user_id int NOT NULL,
+	username varchar(20) NOT NULL,
 	description text NOT NULL,
 	milestone_minutes int NOT NULL,
 	date_claimed date NOT NULL,
 	family_id int NOT NULL,
-	CONSTRAINT PK_claimed_prizes PRIMARY KEY (claimed_prize_id),
-	CONSTRAINT FK_claimed_prizes_claim_prize_request_statuses FOREIGN KEY (claim_prize_request_status_id) REFERENCES claim_prize_request_statuses (claim_prize_request_status_id)
+	date_approved_rejected date,
+	CONSTRAINT PK_claimed_prizes PRIMARY KEY (prize_claim_id),
+	CONSTRAINT FK_claimed_prizes_claim_prize_request_statuses FOREIGN KEY (claim_prize_request_status_id) REFERENCES claim_prize_request_statuses (claim_prize_request_status_id),
+	CONSTRAINT FK_claimed_prizes_prizes FOREIGN KEY (prize_id) REFERENCES prizes (prize_id)
 	
 );
 

@@ -19,6 +19,14 @@ export default {
 
     claimPrizeRequestChild(prizeId, childId) {
         return axios.put('/claim_prize_request_child', null, {params: {prizeId: prizeId, childId: childId}});
+    },
+
+    getClaimsForFamily(familyId) {
+        return axios.get('/get_claims_for_family/' + familyId)
+    },
+
+    rejectClaim(claimId) {
+        return axios.put('/reject_claim/' + claimId)
     }
 
 }

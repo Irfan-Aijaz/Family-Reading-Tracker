@@ -28,4 +28,6 @@ public interface UserDao {
     List<Long> getUserIdsByFamilyId(Long familyId);
 
     List<UserDTO> getUserDTOsByFamilyId(Long familyId);
+
+    UserDTO getUserDTOByUserId(Long userId);
 }

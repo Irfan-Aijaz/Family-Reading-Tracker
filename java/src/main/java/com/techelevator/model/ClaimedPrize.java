@@ -5,24 +5,54 @@ import java.time.LocalDate;
 public class ClaimedPrize {
 
     private Long claimedPrizeId;
+    private Long prizeId;
     private Long claimPrizeRequestStatusId;
     private Long userId;
     private String description;
     private Long milestoneMinutes;
     private LocalDate dateClaimed;
     private Long familyId;
+    private LocalDate dateApprovedRejected;
+    private String username;
 
     public ClaimedPrize() {
     }
 
-    public ClaimedPrize(Long claimedPrizeId, Long claimPrizeRequestStatusId, Long userId, String description, Long milestoneMinutes, LocalDate dateClaimed, Long familyId) {
+    public ClaimedPrize(Long claimedPrizeId, Long prizeId, Long claimPrizeRequestStatusId, Long userId, String description, Long milestoneMinutes, LocalDate dateClaimed, Long familyId, LocalDate dateApprovedRejected, String username) {
         this.claimedPrizeId = claimedPrizeId;
+        this.prizeId = prizeId;
         this.claimPrizeRequestStatusId = claimPrizeRequestStatusId;
         this.userId = userId;
         this.description = description;
         this.milestoneMinutes = milestoneMinutes;
         this.dateClaimed = dateClaimed;
         this.familyId = familyId;
+        this.dateApprovedRejected = dateApprovedRejected;
+        this.username = username;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Long getPrizeId() {
+        return prizeId;
+    }
+
+    public void setPrizeId(Long prizeId) {
+        this.prizeId = prizeId;
+    }
+
+    public LocalDate getDateApprovedRejected() {
+        return dateApprovedRejected;
+    }
+
+    public void setDateApprovedRejected(LocalDate dateApprovedRejected) {
+        this.dateApprovedRejected = dateApprovedRejected;
     }
 
     public Long getClaimedPrizeId() {

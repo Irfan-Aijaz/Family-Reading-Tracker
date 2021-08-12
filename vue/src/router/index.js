@@ -16,6 +16,7 @@ import UpdatePrize from '../components/EditPrize'
 import Completed from '../views/Completed'
 import DeletePrize from '../components/DeletePrize'
 import ClaimPrize from '../views/ClaimPrize'
+import ClaimPrizeRequests from '../views/ClaimPrizeRequests'
 
 // import FamilyPrizeList from '../components/FamilyPrizeList'
 
@@ -158,6 +159,14 @@ const router = new Router({
       path: "/claim_prize",
       name: "claimPrize",
       component: ClaimPrize,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/claims",
+      name: "claims",
+      component: ClaimPrizeRequests,
       meta: {
         requiresAuth: true
       }

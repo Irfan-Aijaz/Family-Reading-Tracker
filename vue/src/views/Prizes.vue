@@ -3,16 +3,16 @@
   <div>
     <div class="prize-grid">
       <div class="prize-view">
-        <button v-on:click="$router.push({ name: 'newPrize' })">
+        <button v-if="this.$store.state.user.authorities[0].name == 'ROLE_ADMIN'" v-on:click="$router.push({ name: 'newPrize' })">
           Create a New Prize
         </button>
-        <button v-on:click="$router.push({ name: 'updatePrize' })">
+        <button v-if="this.$store.state.user.authorities[0].name == 'ROLE_ADMIN'" v-on:click="$router.push({ name: 'updatePrize' })">
           Update Prize
         </button>
-        <button v-on:click="$router.push({ name: 'deletePrize' })">
+        <button v-if="this.$store.state.user.authorities[0].name == 'ROLE_ADMIN'" v-on:click="$router.push({ name: 'deletePrize' })">
           Delete Inactive Prize
         </button>
-        <button v-on:click="$router.push({ name: 'claimPrize' })">
+        <button  v-on:click="$router.push({ name: 'claimPrize' })">
           Claim Prize
         </button>
       </div>

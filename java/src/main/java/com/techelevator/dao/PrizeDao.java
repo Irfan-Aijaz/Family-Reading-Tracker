@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.ClaimedPrize;
 import com.techelevator.model.Prize;
 
 import java.time.LocalDate;
@@ -18,5 +19,7 @@ public interface PrizeDao {
     boolean createClaimPrizeRequestForChild(Long prizeId, Long childId);
 
     Prize getPrizeByPrizeId(Long prizeId);
+
+    List<ClaimedPrize> getPrizeClaimsByFamilyId(Long familyId);
 
 }

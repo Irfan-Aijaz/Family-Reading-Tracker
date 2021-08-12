@@ -39,7 +39,7 @@
         <button v-on:click="$router.push({ name: 'prizes' })">
           View Available Prizes
           </button>
-          <button>
+          <button v-on:click="$router.push({ name: 'claims' })">
             View Claim Prize Requests 
             </button>
       </div>
