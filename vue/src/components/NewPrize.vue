@@ -34,6 +34,7 @@
           <input
             type="number"
             id="milestone"
+            min="1"
             class="form-control"
             v-model="prize.milestoneMinutes"
           />
@@ -51,6 +52,7 @@
           <input
             type="number"
             id="max-prizes"
+            min="1"
             class="form-control"
             v-model="prize.maxPrizes"
           />
@@ -61,8 +63,8 @@
             type="date"
             id="date-start"
             class="form-control"
+            :min="minDate"
             name="datefilter"
-            value=""
             v-model="prize.dateStart"
             required
             autofocus
@@ -132,6 +134,21 @@ export default {
               "Bad Request: Prize Creation Validation Errors";
           }
         });
+    },
+    minDate() {
+      var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth()+1; //January is 0!
+      var yyyy = today.getFullYear();
+      if(dd<10){
+          dd='0'+dd
+      } 
+      if(mm<10){
+          mm='0'+mm
+      } 
+
+      today = yyyy+'-'+mm+'-'+dd;
+      return today;
     },
   },
 };
