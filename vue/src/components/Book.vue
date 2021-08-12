@@ -4,26 +4,22 @@
       {{ title }}
     </p>
 
-    <img
-      v-if="title"
-      :src="imgSrc"
-    />
+    <img v-if="title" :src="imgSrc" />
 
     <p>
       {{ author }}
     </p>
 
-    <button
-      @click="$emit('button1-clicked')"
-    >
+  <!--  <p>
+     {{userBooks.pagesRead}}   Pages Read of  {{pagesTotal}} Total Pages
+    </p> -->
+
+    <button @click="$emit('button1-clicked')">
       {{ buttonText1 }}
     </button>
-    <button
-      @click="$emit('button2-clicked')"
-    >
+    <button @click="$emit('button2-clicked')">
       {{ buttonText2 }}
     </button>
- 
   </div>
 </template>
 
@@ -33,36 +29,42 @@ export default {
   props: {
     title: {
       type: String,
-      required: true
+      required: true,
     },
     author: {
       type: String,
-      required: false
+      required: false,
     },
+   // pagesRead: {
+     // type: number,
+    //  equired: true,
+    //},
+     //pagesTotal: {
+      //type: number,
+      //required: true,
+   // },
     buttonText1: {
       type: String,
-      required: true
+      required: true,
     },
     buttonText2: {
       type: String,
-      required: false
-    }
+      required: false,
+    },
   },
-  methods: {
-  },
+  methods: {},
   computed: {
     imgSrc() {
-      return 'http://covers.openlibrary.org/b/title/' + this.title + '-M.jpg'
+      return "http://covers.openlibrary.org/b/title/" + this.title + "-M.jpg";
     },
-  }
+  },
 };
 </script>
 
 <style scoped>
-
 .book {
   width: 200px;
-  background-color: rgb(134, 134, 134, .7);
+  background-color: rgb(134, 134, 134, 0.7);
   border: 2px solid black;
   height: 300px;
 }

@@ -6,9 +6,7 @@
         :key="index"
         :title="b.title"
         button-text1="New Session"
-        button-text2="Completed"
         @button1-clicked="$router.push({ name: 'newSession' })"
-        @button2-clicked="completedBook(index)"
       />
     </div>
   </div>
@@ -53,9 +51,9 @@ export default {
         });
     },
     completedBook(index) {
-      this.updateUserBook.isbn = this.userBooks[index].isbn
-      bookService  
-        .restartBook(this.updateUserBook)
+      this.updateUserBook.isbn = this.userBooks[index].isbn;
+      bookService
+        .completedBook(this.updateUserBook)
         .then((resonse) => {
           if (resonse.status == 200) {
             this.$router.push({
@@ -80,7 +78,7 @@ export default {
 </script>
 
 <style scoped>
-.books{
+.books {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 5%;
