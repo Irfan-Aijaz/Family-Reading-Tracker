@@ -34,6 +34,7 @@
           <input
             type="number"
             id="milestone"
+            min="1"
             class="form-control"
             v-model="prize.milestoneMinutes"
           />
@@ -51,6 +52,7 @@
           <input
             type="number"
             id="max-prizes"
+            min="1"
             class="form-control"
             v-model="prize.maxPrizes"
           />
@@ -60,10 +62,9 @@
           <input
             type="date"
             id="date-start"
-            :min="minDate"
             class="form-control"
+            :min="minDate"
             name="datefilter"
-            value=""
             v-model="prize.dateStart"
             required
             autofocus
