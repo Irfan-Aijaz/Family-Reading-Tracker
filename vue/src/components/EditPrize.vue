@@ -186,8 +186,11 @@ export default {
 </script>
 
 <style scoped>
-.edit-prize-header, .sr-only {
+.edit-prize-header, .form {
 background-color: rgb(194, 191, 191);
 border: 3px solid black;
+width: 75%;
+margin-left: 13%;
+height: 50%;
 }
 </style>

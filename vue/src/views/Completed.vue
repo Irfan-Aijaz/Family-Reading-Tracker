@@ -5,7 +5,6 @@
         v-for="(b, index) in userBooks"
         :key="index"
         :title="b.title"
-        :author="b.author"
         button-text1="Read Again"
         @button1-clicked="restartBook(index)"
       />
@@ -91,4 +90,9 @@ export default {
 </script>
 
 <style scoped >
+.books{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 5%;
+}
 </style>

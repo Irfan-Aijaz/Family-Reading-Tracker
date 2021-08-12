@@ -8,7 +8,7 @@
         button-text1="New Session"
         button-text2="Completed"
         @button1-clicked="$router.push({ name: 'newSession' })"
-        @button2-clicked="$router.push({ name: 'completed' })"
+        @button2-clicked="completedBook(index)"
       />
     </div>
   </div>
@@ -52,6 +52,26 @@ export default {
           }
         });
     },
+    completedBook(index) {
+      this.updateUserBook.isbn = this.userBooks[index].isbn
+      bookService  
+        .restartBook(this.updateUserBook)
+        .then((resonse) => {
+          if (resonse.status == 200) {
+            this.$router.push({
+              path: "/completed",
+              query: { completedBook: "success" },
+            });
+          }
+        })
+        .catch((error) => {
+          const response = error.response;
+          this.restartBookErrors = true;
+          if (response.status === 400) {
+            this.restartBookErrorMsg = "Bad Request: Restart Book Errors";
+          }
+        });
+    },
   },
   created() {
     this.retrieveUserBooksProgress();
@@ -60,4 +80,9 @@ export default {
 </script>
 
 <style scoped>
+.books{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 5%;
+}
 </style>

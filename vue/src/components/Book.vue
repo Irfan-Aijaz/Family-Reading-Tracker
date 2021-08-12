@@ -20,10 +20,10 @@
     </button>
     <button
       @click="$emit('button2-clicked')"
-      v-if="buttonText2===null"
     >
       {{ buttonText2 }}
     </button>
+ 
   </div>
 </template>
 

@@ -259,7 +259,7 @@ export default {
   
   align-items: center;
   gap: 15px;
-  background-color: rgb(194, 191, 191);
+  background-color: rgb(194, 191, 191,.7);
   border: 2px solid black;
   width: 500px;
   height: 300px;

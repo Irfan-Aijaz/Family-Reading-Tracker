@@ -32,6 +32,7 @@
       <!--End parent/admin code, start child user code -->
       <div
         v-if="this.$store.state.user.authorities[0].name == 'ROLE_USER'"
+        id="register-family"
         class="text-center"
       >
         <div class="child-welcome">

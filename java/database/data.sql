@@ -19,4 +19,4 @@ INSERT INTO users (user_id, username, password_hash, role, family_id) VALUES('5'
 INSERT INTO users (user_id, username, password_hash, role, family_id) VALUES('6','Bart','$2a$10$CwXiFJ9EpiNbJiM893xWP.FELWzq9IJ9MIAfchqb3TsSfgNab3qs.','ROLE_USER', '2');
 INSERT INTO users (user_id, username, password_hash, role, family_id) VALUES('7','Lisa','$2a$10$CwXiFJ9EpiNbJiM893xWP.FELWzq9IJ9MIAfchqb3TsSfgNab3qs.','ROLE_USER', '2');
 
-DELETE FROM books WHERE isbn='14894816';
+INSERT INTO user_book (user_id,isbn, pages_read, minutes_read, completed) VALUES ('7', '9780425232200','544', '300', 'true');
