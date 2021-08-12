@@ -22,4 +22,8 @@ public interface PrizeDao {
 
     List<ClaimedPrize> getPrizeClaimsByFamilyId(Long familyId);
 
+    boolean updateClaimRequest(Long claimId, Long requestStatus);
+
+    boolean updateClaimRequests(Long[] claimIds, Long requestStatus);
+
 }

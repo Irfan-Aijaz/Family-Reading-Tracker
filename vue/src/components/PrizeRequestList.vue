@@ -18,7 +18,11 @@
         <tbody>
           <tr v-for="claim in claimList" v-bind:key="claim.claimedPrizeId">
             <td>
-              <input type="checkbox" v-bind:value="claim.claimedPrizeId" v-model="checkedClaims" />
+              <input
+                type="checkbox"
+                v-bind:value="claim.claimedPrizeId"
+                v-model="checkedClaims"
+              />
             </td>
             <td>
               {{ claim.claimedPrizeId }}
@@ -49,8 +53,10 @@
       </table>
 
       <div class="all-actions">
-          <button>Approve Requests</button>
-          <button>Reject Requests</button>
+        <button v-on:click="updateClaims(checkedClaims, 2)">
+          Approve Requests
+        </button>
+        <button v-on:click="updateClaims(checkedClaims, 3)">Reject Requests</button>
       </div>
     </div>
   </div>
@@ -63,10 +69,20 @@ export default {
   data() {
     return {
       claimList: [],
-      checkedClaims: []
+      checkedClaims: [],
     };
   },
   methods: {
+    updateClaims(checkedClaims, status) {
+      prizeService
+        .updateClaimsStatus(checkedClaims, status)
+        .then((response) => {
+          if (response.status == 200) {
+            this.loadClaims();
+            console.log(response);
+          }
+        });
+    },
     loadClaims() {
       prizeService
         .getClaimsForFamily(this.$store.state.user.familyId)

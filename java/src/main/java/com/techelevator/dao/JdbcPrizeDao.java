@@ -53,6 +53,27 @@ public class JdbcPrizeDao implements PrizeDao {
     }
 
     @Override
+    public boolean updateClaimRequest(Long claimId, Long requestStatus) {
+        boolean claimUpdated = false;
+        String sql = "UPDATE claimed_prizes " +
+                     "SET claim_prize_request_status_id = ? " +
+                     "WHERE prize_claim_id = ?;";
+        jdbcTemplate.update(sql, requestStatus, claimId);
+        claimUpdated = true;
+        return claimUpdated;
+    }
+
+    @Override
+    public boolean updateClaimRequests(Long[] claimIds, Long requestStatus) {
+        boolean claimsUpdated = false;
+        for (Long claimId : claimIds) {
+            updateClaimRequest(claimId, requestStatus);
+        }
+        claimsUpdated = true;
+        return claimsUpdated;
+    }
+
+    @Override
     public boolean createClaimPrizeRequestForChild(Long prizeId, Long childId){
         boolean claimCreated = false;
         Prize prize = getPrizeByPrizeId(prizeId);

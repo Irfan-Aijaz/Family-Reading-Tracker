@@ -25,8 +25,10 @@ export default {
         return axios.get('/get_claims_for_family/' + familyId)
     },
 
-    rejectClaim(claimId) {
-        return axios.put('/reject_claim/' + claimId)
+    updateClaimsStatus(claimIds, statusId) {
+        return axios.post('/update_claim_requests', claimIds, {params: {claimStatusId: statusId}})
     }
+
+
 
 }

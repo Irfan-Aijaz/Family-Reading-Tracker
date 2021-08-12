@@ -51,4 +51,9 @@ public class PrizeController {
     public List<ClaimedPrize> getClaimsForFamilyId(@PathVariable("family_id") Long familyId) {
         return prizeDao.getPrizeClaimsByFamilyId(familyId);
     }
+
+    @RequestMapping(value = "/update_claim_requests", method=RequestMethod.POST)
+    public void updateClaimRequest(@RequestBody Long[] claimIds, @RequestParam Long claimStatusId) {
+        prizeDao.updateClaimRequests(claimIds, claimStatusId);
+    }
 }
