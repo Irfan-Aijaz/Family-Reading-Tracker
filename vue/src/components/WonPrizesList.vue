@@ -5,8 +5,10 @@
       <thead>
         <tr>
           <!-- <th>Prize Name</th> -->
+          
           <th>Description</th>
           <th>Date Won</th>
+          <th v-if="this.$store.state.user.authorities[0].name == 'ROLE_ADMIN'">Username </th>
         </tr>
       </thead>
       <tbody>
@@ -14,6 +16,7 @@
           <!-- <td>Name</td> -->
           <td>{{ prize.description }}</td>
           <td>{{ prize.dateApprovedRejected }}</td>
+          <td> {{prize.username}}</td>
         </tr>
       </tbody>
     </table>
