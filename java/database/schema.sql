@@ -134,8 +134,8 @@ CREATE TABLE claimed_prizes (
 	family_id int NOT NULL,
 	date_approved_rejected date,
 	CONSTRAINT PK_claimed_prizes PRIMARY KEY (prize_claim_id),
-	CONSTRAINT FK_claimed_prizes_claim_prize_request_statuses FOREIGN KEY (claim_prize_request_status_id) REFERENCES claim_prize_request_statuses (claim_prize_request_status_id),
-	CONSTRAINT FK_claimed_prizes_prizes FOREIGN KEY (prize_id) REFERENCES prizes (prize_id)
+	CONSTRAINT FK_claimed_prizes_claim_prize_request_statuses FOREIGN KEY (claim_prize_request_status_id) REFERENCES claim_prize_request_statuses (claim_prize_request_status_id)--,
+	--CONSTRAINT FK_claimed_prizes_prizes FOREIGN KEY (prize_id) REFERENCES prizes (prize_id)
 	
 );
 
