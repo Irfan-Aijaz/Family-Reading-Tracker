@@ -153,7 +153,7 @@ export default {
     },
     loadFamilyPrizes() {
       prizeService
-        .getPrizesForFamilyUserGroup(
+        .getPrizesForFamily(
           this.$store.state.user.familyId,
           this.assignUserGroup
         )

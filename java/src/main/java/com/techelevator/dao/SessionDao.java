@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.MinutesInDateRangeDTO;
 import com.techelevator.model.Session;
 import com.techelevator.model.SessionDetailsDTO;
 import com.techelevator.model.SessionListDTO;
@@ -22,5 +23,7 @@ public interface SessionDao {
     SessionDetailsDTO getSessionDetailsBySessionId(Long sessionId);
 
     List<SessionListDTO> getSessionsListByFamilyId(Long familyId);
+
+    MinutesInDateRangeDTO getMinutesInDateRangeDTO(LocalDate startDate, LocalDate endDate, Long userId);
 
 }

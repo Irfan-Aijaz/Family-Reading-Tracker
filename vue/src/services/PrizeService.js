@@ -25,6 +25,10 @@ export default {
         return axios.get('/get_claims_for_family/' + familyId)
     },
 
+    getClaimsForUser(userId) {
+        return axios.get ('/get_claims_for_user/' + userId)
+    },
+
     updateClaimsStatus(claimIds, statusId) {
         return axios.post('/update_claim_requests', claimIds, {params: {claimStatusId: statusId}})
     }, 
@@ -35,6 +39,23 @@ export default {
 
     getPrizeClaimCounters(familyId) {
         return axios.get('/get_prize_claim_counters/' + familyId)
+    },
+    getPrizesForFamily(familyId) {
+        return axios.get('/get_prizes_for_family/' + familyId)
+    },
+    claimPrizeForAdmin(prizeId, parentId) {
+        return axios.put('/admin_claim', null, {params: {prizeId: prizeId, parentId: parentId}})
+    },
+    getPrizesForFamilyUserGroupClaiming(familyId, userGroup) {
+        return axios.get('/get_prizes_for_family_and_user_group_claiming', { params: {familyId: familyId, userGroup: userGroup}})
+    },
+
+    getWonPrizesForUser(userId) {
+        return axios.get('/get_won_prizes_for_user/'+userId)
+    },
+
+    getWonPrizesForFamily(familyId) {
+        return axios.get('/get_won_prizes_for_family/'+ familyId)
     }
 
 

@@ -1,5 +1,6 @@
 package com.techelevator.dao;
 
+import com.techelevator.model.MinutesInDateRangeDTO;
 import com.techelevator.model.Session;
 import com.techelevator.model.SessionDetailsDTO;
 import com.techelevator.model.SessionListDTO;
@@ -14,6 +15,7 @@ import java.sql.Time;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -67,6 +69,25 @@ public class JdbcSessionDao implements SessionDao {
             sessionDetailsDTO = mapRowToSessionDetailsDTO(results);
         }
         return sessionDetailsDTO;
+    }
+
+    @Override
+    public MinutesInDateRangeDTO getMinutesInDateRangeDTO(LocalDate startDate, LocalDate endDate, Long userId){
+        MinutesInDateRangeDTO minutesInDateRangeDTO = new MinutesInDateRangeDTO();
+        Long minutesRead = Long.valueOf(0);
+        String sql = "SELECT time_end, time_start " +
+                     "FROM sessions " +
+                     "WHERE user_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        while (results.next()) {
+            Long minutesInSession = results.getTime("time_end").toLocalTime().until(results.getTime("time_start").toLocalTime(), MINUTES);
+            minutesRead -= minutesInSession;
+        }
+        minutesInDateRangeDTO.setEndDate(endDate);
+        minutesInDateRangeDTO.setStartDate(startDate);
+        minutesInDateRangeDTO.setMinutes(minutesRead);
+
+        return minutesInDateRangeDTO;
     }
 
     @Override

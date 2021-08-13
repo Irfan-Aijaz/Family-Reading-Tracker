@@ -1,6 +1,7 @@
 package com.techelevator.dao;
 
 import com.techelevator.model.ClaimedPrize;
+import com.techelevator.model.MinutesInDateRangeDTO;
 import com.techelevator.model.Prize;
 import com.techelevator.model.PrizeClaimCounterDTO;
 
@@ -30,6 +31,24 @@ public interface PrizeDao {
     Long getPrizeIdFromClaimId(Long claimId);
 
     List<PrizeClaimCounterDTO> getPrizeClaimCounterDTOs(Long familyId);
+
+    List<Prize>getPrizesForFamily(Long familyId);
+
+    boolean createClaimRequestForAdmin(Long prizeId, Long parentId);
+
+    List<Prize> getPrizesForClaiming(Long familyId, String userGroup);
+
+    List<ClaimedPrize> viewWonPrizesForUser(Long userId);
+
+    List<ClaimedPrize> viewWonPrizesInFamily(Long familyId);
+
+    List<ClaimedPrize> getPrizeClaimsByUserId(Long userId);
+
+
+
+
+
+
 
 
 

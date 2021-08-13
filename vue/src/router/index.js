@@ -17,6 +17,7 @@ import Completed from '../views/Completed.vue'
 import DeletePrize from '../components/DeletePrize'
 import ClaimPrize from '../views/ClaimPrize'
 import ClaimPrizeRequests from '../views/ClaimPrizeRequests'
+import ViewWonPrizes from '../views/ViewWonPrizes'
 
 // import FamilyPrizeList from '../components/FamilyPrizeList'
 
@@ -167,6 +168,14 @@ const router = new Router({
       path: "/claims",
       name: "claims",
       component: ClaimPrizeRequests,
+      meta: {
+        requiresAuth: true
+      }
+    },
+    {
+      path: "/won-prizes",
+      name: "wonPrizes",
+      component: ViewWonPrizes,
       meta: {
         requiresAuth: true
       }

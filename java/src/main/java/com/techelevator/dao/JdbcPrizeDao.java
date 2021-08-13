@@ -27,9 +27,46 @@ public class JdbcPrizeDao implements PrizeDao {
         this.jdbcUserDao = jdbcUserDao;
     }
 
+    @Override
+    public List<ClaimedPrize> getPrizeClaimsByUserId(Long userId) {
+        List<ClaimedPrize> claims = new ArrayList<>();
+        String sql = "SELECT * " +
+                "FROM claimed_prizes " +
+                "WHERE user_id = ? " +
+                "ORDER BY prize_claim_id;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        while (results.next()) {
+            claims.add(mapRowToClaim(results));
+        }
+        return claims;
+    }
 
     @Override
-    public boolean createPrize(String prizeName, String prizeDescription, Long milestoneMinutes, String userGroup, Long maxPrizes, LocalDate dateStart, LocalDate dateEnd, Long familyId) {
+    public List<ClaimedPrize> viewWonPrizesInFamily(Long familyId) {
+
+        List<ClaimedPrize> prizes = new ArrayList<>();
+        String sql = "SELECT * FROM claimed_prizes WHERE family_id = ? AND claim_prize_request_status_id = 2;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, familyId);
+        while (results.next()) {
+            prizes.add(mapRowToClaim(results));
+        }
+        return prizes;
+    }
+
+    @Override
+    public List<ClaimedPrize> viewWonPrizesForUser(Long userId) {
+        List<ClaimedPrize> prizes = new ArrayList<>();
+        String sql = "SELECT * FROM claimed_prizes WHERE user_id = ? AND claim_prize_request_status_id = 2;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
+        while (results.next()) {
+            prizes.add(mapRowToClaim(results));
+        }
+        return prizes;
+    }
+
+    @Override
+    public boolean createPrize(String prizeName, String prizeDescription, Long milestoneMinutes, String
+            userGroup, Long maxPrizes, LocalDate dateStart, LocalDate dateEnd, Long familyId) {
         boolean prizeCreated = false;
         String insertPrize = "INSERT INTO prizes (prize_name, description, milestone_minutes, user_group, max_prizes, date_start, date_end, family_id) " +
                 "VALUES (?,?,?,?,?,?,?,?);";
@@ -41,8 +78,8 @@ public class JdbcPrizeDao implements PrizeDao {
                     ps.setString(1, prizeName);
                     ps.setString(2, prizeDescription);
                     ps.setLong(3, milestoneMinutes);
-                    ps.setString(4,userGroup);
-                    ps.setLong(5,maxPrizes);
+                    ps.setString(4, userGroup);
+                    ps.setLong(5, maxPrizes);
                     ps.setDate(6, Date.valueOf(dateStart));
                     ps.setDate(7, Date.valueOf(dateEnd));
                     ps.setLong(8, familyId);
@@ -57,8 +94,8 @@ public class JdbcPrizeDao implements PrizeDao {
     public Long getPrizeIdFromClaimId(Long claimId) {
         Long prizeId = Long.valueOf(-1);
         String sql = "SELECT prizes.prize_id FROM prizes " +
-                     "INNER JOIN claimed_prizes ON claimed_prizes.prize_id = prizes.prize_id " +
-                     "WHERE claimed_prizes.prize_claim_id = ?;";
+                "INNER JOIN claimed_prizes ON claimed_prizes.prize_id = prizes.prize_id " +
+                "WHERE claimed_prizes.prize_claim_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, claimId);
         if (results.next()) {
             prizeId = results.getLong("prize_id");
@@ -78,13 +115,12 @@ public class JdbcPrizeDao implements PrizeDao {
         }
 
         sql = "UPDATE claimed_prizes " +
-                     "SET claim_prize_request_status_id = ?, date_approved_rejected = ? " +
-                     "WHERE prize_claim_id = ?;";
+                "SET claim_prize_request_status_id = ?, date_approved_rejected = ? " +
+                "WHERE prize_claim_id = ?;";
         jdbcTemplate.update(sql, requestStatus, dateApprovedRejected, claimId);
         claimUpdated = true;
         return claimUpdated;
     }
-
 
 
     @Override
@@ -100,12 +136,12 @@ public class JdbcPrizeDao implements PrizeDao {
     }
 
     @Override
-    public List<PrizeClaimCounterDTO> getPrizeClaimCounterDTOs(Long familyId){
+    public List<PrizeClaimCounterDTO> getPrizeClaimCounterDTOs(Long familyId) {
         List<PrizeClaimCounterDTO> prizeClaimCounterDTOs = new ArrayList<>();
         String sql = "SELECT claimed_prizes.prize_id, prizes.max_prizes " +
-                     "FROM claimed_prizes " +
-                     "INNER JOIN prizes ON prizes.prize_id = claimed_prizes.prize_id " +
-                     "WHERE claimed_prizes.family_id = ?;";
+                "FROM claimed_prizes " +
+                "INNER JOIN prizes ON prizes.prize_id = claimed_prizes.prize_id " +
+                "WHERE claimed_prizes.family_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, familyId);
         while (results.next()) {
             PrizeClaimCounterDTO prizeClaimCounterDTO = new PrizeClaimCounterDTO();
@@ -118,35 +154,36 @@ public class JdbcPrizeDao implements PrizeDao {
     }
 
     @Override
-    public boolean createClaimPrizeRequestForChild(Long prizeId, Long childId){
+    public boolean createClaimPrizeRequestForChild(Long prizeId, Long childId) {
         boolean claimCreated = false;
         Prize prize = getPrizeByPrizeId(prizeId);
         String sql = "INSERT INTO claimed_prizes (prize_id, claim_prize_request_status_id, user_id, description, milestone_minutes, date_claimed, family_id, username) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
         GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
         String id_column = "prize_claim_id";
 
         claimCreated = jdbcTemplate.update(con -> {
-            PreparedStatement ps = con.prepareStatement(sql, new String[]{id_column});
-            ps.setLong(1, prizeId);
-            ps.setLong(2, 1);
-            ps.setLong(3, childId);
-            ps.setString(4, prize.getPrizeDescription());
-            ps.setLong(5, prize.getMilestoneMinutes());
-            ps.setDate(6, Date.valueOf(LocalDateTime.now().toLocalDate()));
-            ps.setLong(7, prize.getFamilyId());
-            ps.setString(8, jdbcUserDao.getUserDTOByUserId(childId).getUsername());
-            return ps;
+                    PreparedStatement ps = con.prepareStatement(sql, new String[]{id_column});
+                    ps.setLong(1, prizeId);
+                    ps.setLong(2, 1);
+                    ps.setLong(3, childId);
+                    ps.setString(4, prize.getPrizeDescription());
+                    ps.setLong(5, prize.getMilestoneMinutes());
+                    ps.setDate(6, Date.valueOf(LocalDateTime.now().toLocalDate()));
+                    ps.setLong(7, prize.getFamilyId());
+                    ps.setString(8, jdbcUserDao.getUserDTOByUserId(childId).getUsername());
+                    return ps;
 
-        }
-        , keyHolder) == 1;
+                }
+                , keyHolder) == 1;
 
         return claimCreated;
 
     }
 
     @Override
-    public boolean updatePrize(Long prizeId, String prizeName, String prizeDescription, Long milestoneMinutes, String userGroup, Long maxPrizes, LocalDate dateStart, LocalDate dateEnd) {
+    public boolean updatePrize(Long prizeId, String prizeName, String prizeDescription, Long
+            milestoneMinutes, String userGroup, Long maxPrizes, LocalDate dateStart, LocalDate dateEnd) {
         boolean prizeUpdated = false;
 
         String sql = "UPDATE prizes SET prize_name = ?, description = ?, milestone_minutes = ?, user_group = ?, max_prizes = ?, date_start = ?, date_end = ? " +
@@ -158,11 +195,11 @@ public class JdbcPrizeDao implements PrizeDao {
     }
 
     @Override
-    public Prize getPrizeByPrizeId(Long prizeId){
+    public Prize getPrizeByPrizeId(Long prizeId) {
         Prize prize = new Prize();
         String sql = "SELECT * " +
-                     "FROM prizes " +
-                     "WHERE prize_id = ?;";
+                "FROM prizes " +
+                "WHERE prize_id = ?;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, prizeId);
         if (results.next()) {
             prize = mapRowToPrize(results);
@@ -171,11 +208,11 @@ public class JdbcPrizeDao implements PrizeDao {
     }
 
     @Override
-    public List<Prize> getPrizesForFamilyAndUserGroup(Long familyId, String userGroup){
+    public List<Prize> getPrizesForFamilyAndUserGroup(Long familyId, String userGroup) {
         List<Prize> prizes = new ArrayList<>();
         String sql = "SELECT * " +
-                     "FROM prizes " +
-                     "WHERE family_id = ? AND (user_group = ? OR user_group = 'BOTH');";
+                "FROM prizes " +
+                "WHERE family_id = ? AND (user_group = ? OR user_group = 'BOTH') AND max_prizes > 0;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, familyId, userGroup);
         while (results.next()) {
             prizes.add(mapRowToPrize(results));
@@ -185,12 +222,12 @@ public class JdbcPrizeDao implements PrizeDao {
     }
 
     @Override
-    public List<ClaimedPrize> getPrizeClaimsByFamilyId(Long familyId){
+    public List<ClaimedPrize> getPrizeClaimsByFamilyId(Long familyId) {
         List<ClaimedPrize> claims = new ArrayList<>();
         String sql = "SELECT * " +
-                     "FROM claimed_prizes " +
-                     "WHERE family_id = ? " +
-                     "ORDER BY prize_claim_id;";
+                "FROM claimed_prizes " +
+                "WHERE family_id = ? " +
+                "ORDER BY prize_claim_id;";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, familyId);
         while (results.next()) {
             claims.add(mapRowToClaim(results));
@@ -199,14 +236,71 @@ public class JdbcPrizeDao implements PrizeDao {
     }
 
     @Override
+    public boolean createClaimRequestForAdmin(Long prizeId, Long parentId) {
+        boolean claimCreated = false;
+        Prize prize = getPrizeByPrizeId(prizeId);
+        String sql = "INSERT INTO claimed_prizes (prize_id, claim_prize_request_status_id, user_id, description, milestone_minutes, date_claimed, family_id, username, date_approved_rejected) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);";
+        GeneratedKeyHolder keyHolder = new GeneratedKeyHolder();
+        String id_column = "prize_claim_id";
+
+        claimCreated = jdbcTemplate.update(con -> {
+                    PreparedStatement ps = con.prepareStatement(sql, new String[]{id_column});
+                    ps.setLong(1, prizeId);
+                    ps.setLong(2, 2);
+                    ps.setLong(3, parentId);
+                    ps.setString(4, prize.getPrizeDescription());
+                    ps.setLong(5, prize.getMilestoneMinutes());
+                    ps.setDate(6, Date.valueOf(LocalDateTime.now().toLocalDate()));
+                    ps.setLong(7, prize.getFamilyId());
+                    ps.setString(8, jdbcUserDao.getUserDTOByUserId(parentId).getUsername());
+                    ps.setDate(9, Date.valueOf(LocalDate.now()));
+                    return ps;
+
+                }
+                , keyHolder) == 1;
+
+        String sql2 = "UPDATE prizes SET max_prizes = max_prizes - 1 WHERE prize_id = ?;";
+        jdbcTemplate.update(sql2, prizeId);
+
+        return claimCreated;
+    }
+
+    @Override
+    public List<Prize> getPrizesForClaiming(Long familyId, String userGroup) {
+        List<Prize> prizes = new ArrayList<>();
+        String sql = "SELECT * " +
+                "FROM prizes " +
+                "WHERE family_id = ? AND (user_group = ? OR user_group = 'BOTH') AND max_prizes > 0 ;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, familyId, userGroup);
+        while (results.next()) {
+            prizes.add(mapRowToPrize(results));
+        }
+        return prizes;
+    }
+
+    @Override
+    public List<Prize> getPrizesForFamily(Long familyId) {
+        List<Prize> prizes = new ArrayList<>();
+        String sql = "SELECT * " +
+                "FROM prizes " +
+                "WHERE family_id = ?;";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, familyId);
+        while (results.next()) {
+            prizes.add(mapRowToPrize(results));
+        }
+        return prizes;
+    }
+
+    @Override
     public boolean removeInactivePrize(Long prizeId) {
         boolean prizeRemoved = false;
 
         String sql = "DELETE FROM prizes " +
                 "WHERE prize_id = ?;";
-        int result = jdbcTemplate.update(sql,prizeId);
+        int result = jdbcTemplate.update(sql, prizeId);
 
-        if (result==1) {
+        if (result == 1) {
             prizeRemoved = true;
         }
 
@@ -240,7 +334,7 @@ public class JdbcPrizeDao implements PrizeDao {
         claim.setDateClaimed(rowSet.getDate("date_claimed").toLocalDate());
         claim.setFamilyId(rowSet.getLong("family_id"));
         claim.setUsername(rowSet.getString("username"));
-        if (rowSet.getDate("date_approved_rejected") != null ) {
+        if (rowSet.getDate("date_approved_rejected") != null) {
             claim.setDateApprovedRejected(rowSet.getDate("date_approved_rejected").toLocalDate());
 
         }

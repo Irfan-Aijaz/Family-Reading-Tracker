@@ -10,7 +10,7 @@
             <th>Username</th>
             <th>Status</th>
             <th>Description</th>
-            <th>Minutes Completed</th>
+            <!-- <th>Minutes Completed</th> -->
             <th>Date Claimed</th>
             <th>Date Approved/Rejected</th>
           </tr>
@@ -49,9 +49,9 @@
             <td>
               {{ claim.description }}
             </td>
-            <td>
+            <!-- <td>
               {{ claim.milestoneMinutes }}
-            </td>
+            </td> -->
             <td>
               {{ claim.dateClaimed }}
             </td>
@@ -93,21 +93,30 @@ export default {
         }
       }
     },
+    searchClaimList(list, id) {
+      for (var i = 0; i < list.length; i++) {
+        if (list[i].claimedPrizeId == id) {
+          return list[i].claimPrizeRequestStatusId;
+        }
+      }
+    },
     updateClaim(claimId, status, id) {
-      if (status == 2) {
-        if (this.search(this.prizeList, id) > 0) {
+      if (this.searchClaimList(this.claimList, claimId) == 1) {
+        if (status == 2) {
+          if (this.search(this.prizeList, id) > 0) {
+            prizeService.updateClaimStatus(claimId, status).then((response) => {
+              this.loadClaims();
+              this.loadPrizes();
+              console.log(response);
+            });
+          }
+        } else {
           prizeService.updateClaimStatus(claimId, status).then((response) => {
             this.loadClaims();
             this.loadPrizes();
             console.log(response);
           });
         }
-      } else {
-          prizeService.updateClaimStatus(claimId, status).then((response) => {
-            this.loadClaims();
-            this.loadPrizes();
-            console.log(response);
-          });
       }
     },
     updateClaims(checkedClaims, status) {
@@ -150,11 +159,15 @@ export default {
   },
   computed: {},
   created() {
-    this.loadClaims();
+
+      this.loadClaims();
+   
+   
+    
     this.loadPrizes();
   },
 };
 </script>
 
-<style scoped>
+<style>
 </style>

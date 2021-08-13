@@ -2,11 +2,9 @@
   <div id="app">
     <header class="header">
       <div>
-        <img
-          src="../src/images/logo.png"
-        />
+        <img src="../src/images/logo.png" />
       </div>
-    
+
       <div class="thing">
         <router-link
           v-bind:to="{ name: 'home' }"
@@ -20,7 +18,7 @@
           Logout</router-link
         >
       </div>
-        <div></div>
+      <div></div>
     </header>
     <h1>Oracle Reading Tracker</h1>
     <navigation v-if="$store.state.token != ''" />
@@ -46,14 +44,13 @@ header.header {
 }
 
 header.header > * {
-  flex: 1
+  flex: 1;
 }
 
-header.header  img {
+header.header img {
   max-width: 100px;
-  float: left
+  float: left;
 }
-
 
 body {
   text-align: center;

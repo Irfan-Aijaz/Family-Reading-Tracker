@@ -42,6 +42,9 @@
           <button v-on:click="$router.push({ name: 'claims' })">
             View Claim Prize Requests 
             </button>
+            <button v-on:click="$router.push({ name: 'wonPrizes' })">
+              View Won Prizes
+            </button>
       </div>
     </div>
 
@@ -77,6 +80,15 @@
         <button v-on:click="$router.push({ name: 'prizes' })">
           View Available Prizes
         </button>
+        <!-- <button v-on:click="$router.push({ name: 'claims' })">
+            View Claim Prize Requests 
+            </button> -->
+        <button v-on:click="$router.push({ name: 'wonPrizes' })">
+          View Won Prizes
+        </button>
+        <!-- <button v-on:click="$router.push({ name: 'claims' }) ">
+          View Sent Requests
+          </button> -->
 
       </div>
     </div>

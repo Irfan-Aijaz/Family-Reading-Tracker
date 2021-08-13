@@ -65,7 +65,7 @@ export default {
         },
         loadFamilyPrizes() {
             prizeService
-                .getPrizesForFamilyUserGroup(this.$store.state.user.familyId, this.assignUserGroup)
+                .getPrizesForFamily(this.$store.state.user.familyId)
                 .then((response) => {
                     if (response.status == 200) {
                         this.prizeList = response.data;

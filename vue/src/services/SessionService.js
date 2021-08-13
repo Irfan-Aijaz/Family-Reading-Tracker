@@ -16,6 +16,10 @@ export default {
 
     getSessionsByFamilyId(familyId) {
       return axios.get('/get_sessions_by_family_id/' + familyId)
+    },
+
+    getMinutesReadForClaim(startDate, endDate, userId) {
+      return axios.get('/get_minutes_read_for_book_in_date_range', {params: {startDate: startDate, endDate: endDate, userId: userId}})
     }
     
 

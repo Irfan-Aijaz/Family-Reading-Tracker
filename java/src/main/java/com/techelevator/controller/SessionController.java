@@ -1,15 +1,13 @@
 package com.techelevator.controller;
 
 import com.techelevator.dao.SessionDao;
-import com.techelevator.model.Session;
-import com.techelevator.model.SessionDTO;
-import com.techelevator.model.SessionDetailsDTO;
-import com.techelevator.model.SessionListDTO;
+import com.techelevator.model.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
@@ -51,5 +49,10 @@ public class SessionController {
     @RequestMapping(value = "/get_sessions_by_family_id/{family_id}", method=RequestMethod.GET)
     public List<SessionListDTO> getSessionsByFamilyId(@PathVariable("family_id") Long familyId) {
         return sessionDao.getSessionsListByFamilyId(familyId);
+    }
+
+    @RequestMapping(value = "/get_minutes_read_for_book_in_date_range", method=RequestMethod.GET)
+    public MinutesInDateRangeDTO getMinutesReadInDateRange(@RequestParam String startDate, @RequestParam String endDate,  @RequestParam Long userId){
+        return sessionDao.getMinutesInDateRangeDTO(LocalDate.parse(startDate), LocalDate.parse(endDate), userId);
     }
 }

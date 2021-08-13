@@ -1,5 +1,6 @@
 <template>
   <div id="login" class="text-center">
+   
     <form class="form-signin" @submit.prevent="login">
     
           <h2 class="h3 mb-3 font-weight-normal">Please Sign In</h2>
@@ -44,6 +45,7 @@
           <router-link :to="{ name: 'register' }">Need an account?</router-link>
         
     </form>
+    
   </div>
 </template>
 
@@ -87,8 +89,10 @@ export default {
 </script>
 
 <style >
+
+
 .form-signin {
-display: flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
@@ -97,6 +101,8 @@ display: flex;
   width: 350px;
   height: 300px;
   margin-left: 35%;
+  margin-right: 35%
+  
 }
 h2 {
   color: rgb(0, 0, 0);
